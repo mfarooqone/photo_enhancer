@@ -17,51 +17,51 @@ class SessionController {
   /*                                 banner ads                                 */
   /* -------------------------------------------------------------------------- */
 
-  bool admob_banner_save_screen_ios = false;
-  bool admob_banner_save_screen_android = false;
+  bool admob_banner_save_screen_ios = true;
+  bool admob_banner_save_screen_android = true;
 
-  bool admob_banner_filter_screen_ios = false;
-  bool admob_banner_filter_screen_android = false;
+  bool admob_banner_filter_screen_ios = true;
+  bool admob_banner_filter_screen_android = true;
 
   /* -------------------------------------------------------------------------- */
   /*                              interstetial ads                              */
   /* -------------------------------------------------------------------------- */
 
-  bool admob_interstetial_home_screen_ios = false;
-  bool admob_interstetial_home_screen_android = false;
+  bool admob_interstetial_home_screen_ios = true;
+  bool admob_interstetial_home_screen_android = true;
 
-  bool admob_interstetial_save_screen_ios = false;
-  bool admob_interstetial_save_screen_android = false;
+  bool admob_interstetial_save_screen_ios = true;
+  bool admob_interstetial_save_screen_android = true;
 
-  bool admob_interstetial_select_screen_ios = false;
-  bool admob_interstetial_select_screen_android = false;
+  bool admob_interstetial_select_screen_ios = true;
+  bool admob_interstetial_select_screen_android = true;
 
   /* -------------------------------------------------------------------------- */
   /*                                ad mob reward                               */
   /* -------------------------------------------------------------------------- */
 
-  bool admob_reward_ios = false;
-  bool admob_reward_android = false;
+  bool admob_reward_ios = true;
+  bool admob_reward_android = true;
 
   /* -------------------------------------------------------------------------- */
   /*                          applovin interstetial ads                         */
   /* -------------------------------------------------------------------------- */
 
-  bool applovin_interstetial_home_screen_ios = false;
-  bool applovin_interstetial_home_screen_android = false;
+  bool applovin_interstetial_home_screen_ios = true;
+  bool applovin_interstetial_home_screen_android = true;
 
-  bool applovin_interstetial_save_screen_ios = false;
-  bool applovin_interstetial_save_screen_android = false;
+  bool applovin_interstetial_save_screen_ios = true;
+  bool applovin_interstetial_save_screen_android = true;
 
-  bool applovin_interstetial_select_screen_ios = false;
-  bool applovin_interstetial_select_screen_android = false;
+  bool applovin_interstetial_select_screen_ios = true;
+  bool applovin_interstetial_select_screen_android = true;
 
   /* -------------------------------------------------------------------------- */
   /*                               applovin reward                              */
   /* -------------------------------------------------------------------------- */
 
-  bool applovin_reward_ios = false;
-  bool applovin_reward_android = false;
+  bool applovin_reward_ios = true;
+  bool applovin_reward_android = true;
 
   factory SessionController() {
     return _session;

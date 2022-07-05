@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -17,8 +16,7 @@ import '../ads_controller/load_ads_helper.dart';
 import '../purchase/subscriptions_page.dart';
 import '../selected_image/selected_image.dart';
 import '../widgets/gradient_container_design.dart';
-import 'carousel_slider_design.dart';
-import 'gridview_design.dart';
+import 'listview_design.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -159,28 +157,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(
                       height: 13,
                     ),
-                    CarouselSliderDesign(),
-                    GridViewDesign(),
+                    ListViewDesign(),
                     SizedBox(
                       height: 84,
                     ),
                   ],
                 ),
-              ),
-              if (isBotomSheet)
-                const Padding(
-                  padding: EdgeInsets.only(bottom: 70),
-                  child: BlurryContainer(
-                    blur: 5,
-                    width: double.infinity,
-                    height: double.infinity,
-                    child: SizedBox(),
-                  ),
-                ),
-              if (isBotomSheet) bottomSheetDesign(),
-              Align(
-                alignment: Alignment.bottomCenter,
-                child: showActions(),
               ),
             ],
           ),
