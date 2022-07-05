@@ -1,7 +1,22 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.image_enhancer">
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <queries>
+    <intent>
+      <action android:name="android.intent.action.VIEW" />
+      <data android:scheme="https" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.DIAL" />
+      <data android:scheme="tel" />
+    </intent>
+    <intent>
+      <action android:name="android.intent.action.SENDTO" />
+      <data android:scheme="smsto" />
+    </intent>
+  </queries>
    <application
-        android:label="image_enhancer"
+        android:label="Photo Enhancer - PhotoShoot"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
@@ -30,5 +45,15 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+            <activity
+            android:exported="true"
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-6627817022425407~7789740315"/>
+            <meta-data android:name="applovin.sdk.key"
+            android:value="y2s0LfLMHISQOOLHcI6EPSTC8lTvisvRXIn_7z5gvyhm2RnUQyrruf3PcBbHaM_hrVmJhp-I95M8Q1fL-uL1mL"/>
     </application>
 </manifest>

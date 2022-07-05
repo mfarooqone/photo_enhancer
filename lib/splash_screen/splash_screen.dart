@@ -42,9 +42,13 @@ class _SplashScreenState extends State<SplashScreen> {
             BounceInDown(
               from: 400,
               delay: const Duration(milliseconds: 1000),
-              child: SizedBox(
+              child: Container(
                 width: 162,
                 height: 162,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                ),
+                clipBehavior: Clip.hardEdge,
                 child: Image.asset(
                   "assets/appicon.png",
                   fit: BoxFit.contain,
@@ -55,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
               height: 20,
             ),
             const Text(
-              "PhotoText - Photo Enhancer AI",
+              "Photo Enhancer - PhotoShoot",
               style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,

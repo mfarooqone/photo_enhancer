@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              "Photo Enhancer AI",
+              "Photo Enhancer",
               style: TextStyle(
                 color: AppColors.blackColor,
                 fontSize: 16,
