@@ -8,7 +8,6 @@ import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/drawer_design/drawer_design.dart';
 import 'package:image_enhancer/purchase/purchase_api_controller.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
-import 'package:image_enhancer/utils/app_images.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
 import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
 
@@ -145,7 +144,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 onPressed: () {
                   Get.to(() => const SubscriptionsPage());
                 },
-                icon: Image.asset(AppImagesPath.premium),
+                icon: Icon(
+                  Icons.workspace_premium_rounded,
+                  size: 25,
+                  color: AppColors.blackColor,
+                ),
               )
             ],
           ),

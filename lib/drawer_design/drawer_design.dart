@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
-import 'package:image_enhancer/utils/app_images.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:share_plus/share_plus.dart';
@@ -21,18 +20,6 @@ class DrawerDesign extends StatefulWidget {
 }
 
 class _DrawerDesignState extends State<DrawerDesign> {
-  List<String> appsList = [
-    AppImagesPath.weddingApp,
-    AppImagesPath.gpsApp,
-    AppImagesPath.bgRemover,
-  ];
-
-  List<String> urlList = [
-    "https://play.google.com/store/apps/details?id=com.mywedding.countdown.big.day.counter.guide",
-    "https://play.google.com/store/apps/details?id=com.maps.navigations.gpsdirections",
-    "https://play.google.com/store/apps/details?id=com.eraser.photobackground.automatic.changer",
-  ];
-
   void _launchUrl(url) async {
     if (!await launchUrl(url)) throw 'Could not launch $url';
   }
@@ -58,22 +45,21 @@ class _DrawerDesignState extends State<DrawerDesign> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                InkWell(
-                  onTap: () {
+                ListTile(
+                  onTap: () async {
                     Get.to(() => const SubscriptionsPage());
                   },
-                  child: SizedBox(
-                    width: 267,
-                    height: 145,
-                    child: Image.asset(
-                      AppImagesPath.draweImage,
-                      fit: BoxFit.fill,
-                    ),
+                  leading: Icon(
+                    Icons.workspace_premium_rounded,
+                    size: 20,
+                    color: AppColors.blackColor,
+                  ),
+                  title: Text(
+                    "Go Premium",
+                    style: AppTextStyle.black16,
                   ),
                 ),
-                const SizedBox(
-                  height: 5,
-                ),
+
                 /* -------------------------------------------------------------------------- */
                 /*                              restore purchase                              */
                 /* -------------------------------------------------------------------------- */
@@ -99,6 +85,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                     style: AppTextStyle.black16,
                   ),
                 ),
+                Divider(),
                 /* -------------------------------------------------------------------------- */
                 /*                                   Rate us                                  */
                 /* -------------------------------------------------------------------------- */
@@ -124,24 +111,23 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 /* -------------------------------------------------------------------------- */
                 /*                                    Share                                   */
                 /* -------------------------------------------------------------------------- */
-                if (Platform.isAndroid) const Divider(),
-                if (Platform.isAndroid)
-                  ListTile(
-                    onTap: () {
-                      Share.share(
-                          'https://play.google.com/store/apps/details?id=com.hdphoto.photoshoot.ai.enhance.image.hdr',
-                          subject: 'check out this app');
-                    },
-                    leading: Icon(
-                      Icons.share,
-                      size: 20,
-                      color: AppColors.blackColor,
-                    ),
-                    title: Text(
-                      "Share",
-                      style: AppTextStyle.black16,
-                    ),
+                const Divider(),
+                ListTile(
+                  onTap: () {
+                    Share.share(
+                        'https://play.google.com/store/apps/details?id=com.hdphoto.photoshoot.ai.enhance.image.hdr',
+                        subject: 'check out this app');
+                  },
+                  leading: Icon(
+                    Icons.share,
+                    size: 20,
+                    color: AppColors.blackColor,
                   ),
+                  title: Text(
+                    "Share",
+                    style: AppTextStyle.black16,
+                  ),
+                ),
                 /* -------------------------------------------------------------------------- */
                 /*                               Privacy Policy                               */
                 /* -------------------------------------------------------------------------- */
@@ -184,42 +170,6 @@ class _DrawerDesignState extends State<DrawerDesign> {
                     style: AppTextStyle.black16,
                   ),
                 ),
-
-                /* -------------------------------------------------------------------------- */
-                /*                                  More Apps                                 */
-                /* -------------------------------------------------------------------------- */
-                const Divider(),
-                if (Platform.isAndroid)
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Text(
-                      "More Apps",
-                      style: AppTextStyle.black16,
-                    ),
-                  ),
-                if (Platform.isAndroid)
-                  Expanded(
-                    child: ListView.builder(
-                      itemCount: appsList.length,
-                      shrinkWrap: true,
-                      padding: const EdgeInsets.symmetric(horizontal: 20),
-                      itemBuilder: (BuildContext context, int index) {
-                        return InkWell(
-                          onTap: () {
-                            Uri url = Uri.parse(urlList[index]);
-
-                            _launchUrl(url);
-                          },
-                          child: Image.asset(
-                            appsList[index],
-                            fit: BoxFit.fill,
-                            width: 150,
-                            height: 120,
-                          ),
-                        );
-                      },
-                    ),
-                  ),
               ],
             ),
           ),
