@@ -1,0 +1,691 @@
+import 'dart:io';
+import 'dart:typed_data';
+
+import 'package:blur/blur.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_applovin_max/flutter_applovin_max.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:gallery_saver/gallery_saver.dart';
+import 'package:get/get.dart';
+// ignore: depend_on_referenced_packages
+import 'package:image/image.dart' as imagelib;
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:image_enhancer/ads_controller/ads_controller.dart';
+import 'package:image_enhancer/edit_screen/edit_screen.dart';
+import 'package:image_enhancer/home_screen/home_screen.dart';
+import 'package:image_enhancer/utils/app_images.dart';
+import 'package:image_enhancer/widgets/before_after/custom_widget.dart';
+import 'package:photofilters/filters/preset_filters.dart';
+import 'package:share_plus/share_plus.dart';
+
+import '../ads_controller/load_ads_helper.dart';
+import '../photo_filter/photo_filter_screen.dart';
+import '../purchase/purchase_api_controller.dart';
+import '../text_editor/text_editor.dart';
+import '../utils/app_colors.dart';
+import '../utils/app_textstyle.dart';
+import '../utils/session_controller.dart';
+import '../widgets/banner_ad_widget.dart';
+import '../widgets/gradient_container_design.dart';
+
+class SaveScreen extends StatefulWidget {
+  const SaveScreen(
+      {Key? key,
+      required this.buttonText,
+      required this.userImage,
+      required this.index,
+      this.bytes,
+      this.filteredImage})
+      : super(key: key);
+  final String buttonText;
+  final File? userImage;
+  final File? filteredImage;
+  final int index;
+  final List<int>? bytes;
+  @override
+  State<SaveScreen> createState() => _SaveScreenState();
+}
+
+class _SaveScreenState extends State<SaveScreen> {
+  String? fileName;
+  File? imageFile;
+  var date = DateTime.now();
+  AdsController ads = Get.find();
+  PurchaseApiController purchaseApiController = Get.find();
+  bool isSaved = false;
+
+  @override
+  void initState() {
+    if (LoadAdsHelper.admobSaveScreenBannerAd &&
+        !purchaseApiController.isPurchased.value) {
+      ads.saveScreenBannerAdLoad();
+    }
+    if (LoadAdsHelper.admobSaveScreeninterstitialAd &&
+        !purchaseApiController.isPurchased.value) {
+      ads.loadInterstitialAd();
+    }
+    saveFilteredImage();
+    super.initState();
+  }
+
+  Future<bool> _onWillPop() async {
+    return (await Get.offAll(() => const HomeScreen())) ?? false;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return WillPopScope(
+      onWillPop: _onWillPop,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text(
+            "${widget.buttonText} Photo",
+            style: AppTextStyle.black16,
+          ),
+          leading: InkWell(
+            onTap: () {
+              Get.offAll(() => const HomeScreen());
+            },
+            child: Icon(
+              Icons.close,
+              color: AppColors.blackColor,
+              size: 30,
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 15),
+              child: InkWell(
+                onTap: () {
+                  Share.shareFiles([(tempImagePath!.path)],
+                      text: 'Great picture');
+                },
+                child: Icon(
+                  Icons.share,
+                  size: 25,
+                  color: AppColors.blackColor,
+                ),
+              ),
+            ),
+          ],
+        ),
+        body: bodyWidget(context),
+      ),
+    );
+  }
+
+  Column bodyWidget(BuildContext context) {
+    return Column(
+      children: [
+        if (LoadAdsHelper.admobSaveScreenBannerAd &&
+            !purchaseApiController.isPurchased.value)
+          BannerAdWidget(
+            sessionBool: Platform.isAndroid
+                ? SessionController().admob_banner_save_screen_android
+                : SessionController().admob_banner_save_screen_ios,
+            adName: ads.saveScreenBanner!,
+            isPurchased: purchaseApiController.isPurchased.value,
+          ),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 23),
+            child: Center(
+              child: Container(
+                  alignment: Alignment.topCenter,
+                  child: showImageWidget(widget.index)),
+            ),
+          ),
+        ),
+        /* -------------------------------------------------------------------------- */
+        /*                           GradientContainerDesign                          */
+        /* -------------------------------------------------------------------------- */
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Stack(
+                children: [
+                  isSaved
+                      ? Opacity(
+                          opacity: 0.5,
+                          child: GradientContainerDesign(
+                            height: 48,
+                            width: 177,
+                            title: "Save Image",
+                            onPressed: () {},
+                            showTrailingIcon: false,
+                            showLeadingWidget: true,
+                            leading: Icon(
+                              Icons.save_alt,
+                              size: 20,
+                              color: AppColors.blackColor,
+                            ),
+                          ),
+                        )
+                      : GradientContainerDesign(
+                          height: 48,
+                          width: 177,
+                          title: "Save Image",
+                          onPressed: () {
+                            setState(() {
+                              isSaved = true;
+                              _savetoGallery(context, widget.index);
+                            });
+                          },
+                          showTrailingIcon: false,
+                          showLeadingWidget: true,
+                          leading: Icon(
+                            Icons.save_alt,
+                            size: 20,
+                            color: AppColors.blackColor,
+                          ),
+                        ),
+                ],
+              ),
+              const SizedBox(
+                width: 16,
+              ),
+              GradientContainerDesign(
+                height: 48,
+                width: 48,
+                title: "",
+                onPressed: () {
+                  _showBottomSheet(context, widget.index);
+                },
+                showLeadingWidget: true,
+                leading: Icon(
+                  Icons.more_horiz_outlined,
+                  color: AppColors.blackColor,
+                  size: 20,
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          height: 16,
+        ),
+      ],
+    );
+  }
+
+  void _showBottomSheet(BuildContext context, int index) async {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (ctz) {
+        return Container(
+          // color: Colors.white,
+          decoration: const BoxDecoration(
+            color: Color(0xFFFFFFFF),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(24.0),
+              topRight: Radius.circular(24.0),
+            ),
+          ),
+          height: 130,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              index == 0
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: InkWell(
+                        onTap: () {
+                          if (purchaseApiController.isPurchased.value) {
+                            Get.to(() => EditScreen(
+                                buttonText: "Enhance",
+                                userImage: widget.userImage!,
+                                index: 0));
+                          } else {
+                            if (LoadAdsHelper.admobRewardAd ||
+                                LoadAdsHelper.applovinRewardAd) {
+                              if (ads.isRewardedAdReady.value) {
+                                ads.rewardedAd!.show(
+                                    onUserEarnedReward: (ad, reward) {
+                                  Get.to(
+                                    () => EditScreen(
+                                        buttonText: "Enhance",
+                                        userImage: widget.userImage!,
+                                        index: 0),
+                                  );
+                                  ads.loadRewardedAd();
+                                });
+                              } else {
+                                FlutterApplovinMax.showRewardVideo(
+                                    (AppLovinAdListener? event) {
+                                  ads.listener(event);
+                                  Get.to(() => EditScreen(
+                                      buttonText: "Enhance",
+                                      userImage: widget.userImage!,
+                                      index: 0));
+                                });
+                              }
+                            } else {
+                              Get.to(() => EditScreen(
+                                  buttonText: "Enhance",
+                                  userImage: widget.userImage!,
+                                  index: 0));
+                            }
+                          }
+                        },
+                        child: SizedBox(
+                          width: 84,
+                          height: 84,
+                          child: Image.asset(
+                            AppImagesPath.enhance,
+                          ),
+                        ),
+                      ),
+                    ),
+              index == 1
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: InkWell(
+                        onTap: () async {
+                          imageFile = File(widget.userImage!.path);
+                          fileName = basename(imageFile!.path);
+                          List<int> bytes = await imageFile!.readAsBytes();
+                          var image = imagelib.decodeImage(bytes);
+                          image = imagelib.copyResize(image!, width: 600);
+                          if (purchaseApiController.isPurchased.value) {
+                            Get.to(
+                              () => PhotoFilterSelector(
+                                title: Text(
+                                  "My Edited Image",
+                                  style: TextStyle(color: AppColors.blackColor),
+                                ),
+                                image: image!,
+                                filters: presetFiltersList,
+                                filename: fileName!,
+                                loader: const SpinKitSpinningLines(
+                                    color: Colors.black),
+                                fit: BoxFit.contain,
+                                userImage: widget.userImage!,
+                              ),
+                            );
+                          } else {
+                            if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
+                                LoadAdsHelper
+                                    .applovinHomeScreeninterstitialAd) {
+                              if (ads.isInterstitialAdReady.value) {
+                                ads.interstitialAd!.show();
+                                ads.loadInterstitialAd();
+                                Get.to(
+                                  () => PhotoFilterSelector(
+                                    title: Text(
+                                      "My Edited Image",
+                                      style: TextStyle(
+                                          color: AppColors.blackColor),
+                                    ),
+                                    image: image!,
+                                    filters: presetFiltersList,
+                                    filename: fileName!,
+                                    loader: const SpinKitSpinningLines(
+                                        color: Colors.black),
+                                    fit: BoxFit.contain,
+                                    userImage: widget.userImage!,
+                                  ),
+                                );
+                              }
+                              FlutterApplovinMax.showInterstitialVideo(
+                                  (AppLovinAdListener? event) {
+                                ads.listener(event);
+                                Get.to(
+                                  () => PhotoFilterSelector(
+                                    title: Text(
+                                      "My Edited Image",
+                                      style: TextStyle(
+                                          color: AppColors.blackColor),
+                                    ),
+                                    image: image!,
+                                    filters: presetFiltersList,
+                                    filename: fileName!,
+                                    loader: const SpinKitSpinningLines(
+                                        color: Colors.black),
+                                    fit: BoxFit.contain,
+                                    userImage: widget.userImage!,
+                                  ),
+                                );
+                              });
+                            } else {
+                              Get.to(
+                                () => PhotoFilterSelector(
+                                  title: Text(
+                                    "My Edited Image",
+                                    style:
+                                        TextStyle(color: AppColors.blackColor),
+                                  ),
+                                  image: image!,
+                                  filters: presetFiltersList,
+                                  filename: fileName!,
+                                  loader: const SpinKitSpinningLines(
+                                      color: Colors.black),
+                                  fit: BoxFit.contain,
+                                  userImage: widget.userImage!,
+                                ),
+                              );
+                            }
+                          }
+                        },
+                        child: SizedBox(
+                          width: 84,
+                          height: 84,
+                          child: Image.asset(
+                            AppImagesPath.filter,
+                          ),
+                        ),
+                      ),
+                    ),
+              index == 2
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: InkWell(
+                        onTap: () {
+                          if (purchaseApiController.isPurchased.value) {
+                            Get.to(() => TextEditorScreen(
+                                  buttonText: "Text Style",
+                                  userImage: widget.userImage!,
+                                  index: 2,
+                                ));
+                          } else {
+                            if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
+                                LoadAdsHelper
+                                    .applovinHomeScreeninterstitialAd) {
+                              if (ads.isInterstitialAdReady.value) {
+                                ads.interstitialAd!.show();
+                                ads.loadInterstitialAd();
+                                Get.to(
+                                  () => TextEditorScreen(
+                                    buttonText: "Text Style",
+                                    userImage: widget.userImage!,
+                                    index: 2,
+                                  ),
+                                );
+                              }
+                              FlutterApplovinMax.showInterstitialVideo(
+                                  (AppLovinAdListener? event) {
+                                ads.listener(event);
+                                Get.to(
+                                  () => TextEditorScreen(
+                                    buttonText: "Text Style",
+                                    userImage: widget.userImage!,
+                                    index: 2,
+                                  ),
+                                );
+                              });
+                            } else {
+                              Get.to(() => TextEditorScreen(
+                                    buttonText: "Text Style",
+                                    userImage: widget.userImage!,
+                                    index: 2,
+                                  ));
+                            }
+                          }
+                        },
+                        child: SizedBox(
+                          width: 84,
+                          height: 84,
+                          child: Image.asset(
+                            AppImagesPath.text,
+                          ),
+                        ),
+                      ),
+                    ),
+              index == 3
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.only(left: 16),
+                      child: InkWell(
+                        onTap: () {
+                          if (purchaseApiController.isPurchased.value) {
+                            Get.to(
+                              () => EditScreen(
+                                  buttonText: "HDR",
+                                  userImage: widget.userImage!,
+                                  index: 3),
+                            );
+                          } else {
+                            if (LoadAdsHelper.admobRewardAd ||
+                                LoadAdsHelper.applovinRewardAd) {
+                              if (ads.isRewardedAdReady.value) {
+                                ads.rewardedAd!.show(
+                                    onUserEarnedReward: (ad, reward) {
+                                  Get.to(
+                                    () => EditScreen(
+                                        buttonText: "HDR",
+                                        userImage: widget.userImage!,
+                                        index: 3),
+                                  );
+                                  ads.loadRewardedAd();
+                                });
+                              } else {
+                                FlutterApplovinMax.showRewardVideo(
+                                    (AppLovinAdListener? event) {
+                                  ads.listener(event);
+                                  Get.to(
+                                    () => EditScreen(
+                                        buttonText: "HDR",
+                                        userImage: widget.userImage!,
+                                        index: 3),
+                                  );
+                                });
+                              }
+                            } else {
+                              Get.to(
+                                () => EditScreen(
+                                    buttonText: "HDR",
+                                    userImage: widget.userImage!,
+                                    index: 3),
+                              );
+                            }
+                          }
+                        },
+                        child: SizedBox(
+                          width: 84,
+                          height: 84,
+                          child: Image.asset(
+                            AppImagesPath.hdr,
+                          ),
+                        ),
+                      ),
+                    ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
+  Widget showImageWidget(int index) {
+    return index == 0
+        ? BeforeAfter(
+            imageHeight: 300,
+            beforeImage: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Image.file(
+                  widget.userImage!,
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.fill,
+                ).blurred(
+                  colorOpacity: 0.2,
+                  blur: 0.1,
+                ),
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: beforeAfterWidget("Before"),
+                ),
+              ],
+            ),
+            afterImage: Stack(
+              alignment: Alignment.topCenter,
+              children: [
+                Image.memory(
+                  Uint8List.fromList(widget.bytes!),
+                  width: double.infinity,
+                  height: double.infinity,
+                  fit: BoxFit.fill,
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: beforeAfterWidget("After"),
+                ),
+              ],
+            ),
+          )
+        : index == 1
+            ? BeforeAfter(
+                beforeImage: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Image.file(
+                      widget.userImage!,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.fill,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: beforeAfterWidget("Before"),
+                    ),
+                  ],
+                ),
+                afterImage: Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Image.file(
+                      widget.filteredImage!,
+                      width: double.infinity,
+                      height: double.infinity,
+                      fit: BoxFit.fill,
+                    ),
+                    Align(
+                      alignment: Alignment.topRight,
+                      child: beforeAfterWidget("After"),
+                    ),
+                  ],
+                ),
+              )
+            : index == 2
+                ? Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                        4,
+                      ),
+                    ),
+                    clipBehavior: Clip.hardEdge,
+                    child: SizedBox(
+                      width: double.infinity,
+                      child: Image.memory(
+                        Uint8List.fromList(widget.bytes!),
+                        width: double.infinity,
+                        height: double.infinity,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  )
+                : index == 3
+                    ? BeforeAfter(
+                        beforeImage: Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            Image.file(
+                              widget.userImage!,
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.fill,
+                            ),
+                            Align(
+                              alignment: Alignment.topLeft,
+                              child: beforeAfterWidget("Before"),
+                            ),
+                          ],
+                        ),
+                        afterImage: Stack(
+                          alignment: Alignment.topCenter,
+                          children: [
+                            Image.memory(
+                              Uint8List.fromList(widget.bytes!),
+                              width: double.infinity,
+                              height: double.infinity,
+                              fit: BoxFit.fill,
+                            ),
+                            Align(
+                              alignment: Alignment.topRight,
+                              child: beforeAfterWidget("After"),
+                            ),
+                          ],
+                        ),
+                      )
+                    : const Text("No Implementation found");
+  }
+
+  Padding beforeAfterWidget(String text) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.black87,
+          borderRadius: BorderRadius.circular(
+            20,
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+          child: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 14,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+//
+//
+//
+
+  File? tempImagePath;
+  Future<File> get _localFile async {
+    final path = await _localPath;
+    tempImagePath = File('$path/filtered_' '${date.millisecond}' '.jpg');
+    return tempImagePath!;
+  }
+
+  Future<String> get _localPath async {
+    final directory = await getApplicationDocumentsDirectory();
+    return directory.path;
+  }
+
+  Future<File> saveFilteredImage() async {
+    var imageFile = await _localFile;
+    await imageFile.writeAsBytes(widget.bytes!);
+
+    return imageFile;
+  }
+
+  void _savetoGallery(BuildContext context, int index) async {
+    if (tempImagePath != null) {
+      GallerySaver.saveImage(tempImagePath!.path);
+      Get.snackbar(
+        "                       Image saved successfully",
+        "",
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    } else {
+      Get.defaultDialog(title: "Alert!", middleText: "Some Error Occurred");
+    }
+  }
+}
