@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "735002856504",
+    "project_id": "photo-enhancer-8fdf2",
+    "storage_bucket": "photo-enhancer-8fdf2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:735002856504:android:92fac1579ab5973b81aacd",
+        "android_client_info": {
+          "package_name": "com.hdphoto.photoshoot.enhance.image.hdr.ai"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "735002856504-mnl5c12mv2t3kf5jpboq91rj1fh954rd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTcfcmpD7mkP6HxL50NvY94h8NrxSqLqg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "735002856504-mnl5c12mv2t3kf5jpboq91rj1fh954rd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

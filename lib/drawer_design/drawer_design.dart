@@ -94,7 +94,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                     onTap: () {
                       StoreRedirect.redirect(
                         androidAppId:
-                            "com.hdphoto.photoshoot.ai.enhance.image.hdr",
+                            "com.hdphoto.photoshoot.enhance.image.hdr.ai",
                         // iOSAppId: "585027354",
                       );
                     },
@@ -115,7 +115,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 ListTile(
                   onTap: () {
                     Share.share(
-                        'https://play.google.com/store/apps/details?id=com.hdphoto.photoshoot.ai.enhance.image.hdr',
+                        'https://play.google.com/store/apps/details?id=com.hdphoto.photoshoot.enhance.image.hdr.ai',
                         subject: 'check out this app');
                   },
                   leading: Icon(

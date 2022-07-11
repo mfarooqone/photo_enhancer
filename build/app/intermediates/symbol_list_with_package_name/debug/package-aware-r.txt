@@ -1,4 +1,4 @@
-com.example.image_enhancer
+com.hdphoto.photoshoot.enhance.image.hdr.ai
 anim abc_fade_in
 anim abc_fade_out
 anim abc_grow_fade_in_from_bottom
@@ -1350,6 +1350,7 @@ menu mediation_debugger_activity_menu
 mipmap ic_launcher
 plurals exo_controls_fastforward_by_amount_description
 plurals exo_controls_rewind_by_amount_description
+raw keep
 raw omsdk_v_1_0
 string abc_action_bar_home_description
 string abc_action_bar_up_description
@@ -1399,6 +1400,7 @@ string common_google_play_services_wear_update_text
 string common_open_on_phone
 string common_signin_button_text
 string common_signin_button_text_long
+string default_web_client_id
 string exo_controls_cc_disabled_description
 string exo_controls_cc_enabled_description
 string exo_controls_custom_playback_speed
@@ -1450,6 +1452,11 @@ string exo_track_surround
 string exo_track_surround_5_point_1
 string exo_track_surround_7_point_1
 string exo_track_unknown
+string gcm_defaultSenderId
+string google_api_key
+string google_app_id
+string google_crash_reporting_api_key
+string google_storage_bucket
 string offline_notification_text
 string offline_notification_title
 string offline_opt_in_confirm
@@ -1457,6 +1464,7 @@ string offline_opt_in_confirmation
 string offline_opt_in_decline
 string offline_opt_in_message
 string offline_opt_in_title
+string project_id
 string s1
 string s2
 string s3

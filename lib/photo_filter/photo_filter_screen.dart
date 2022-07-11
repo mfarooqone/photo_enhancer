@@ -191,7 +191,8 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                       sessionBool: Platform.isAndroid
                           ? SessionController()
                               .admob_banner_filter_screen_android
-                          : SessionController().admob_banner_filter_screen_ios,
+                          : SessionController()
+                              .admob_banner_filter_screen_android,
                       adName: ads.filterScreenBanner!,
                       isPurchased: purchaseApiController.isPurchased.value,
                     ),

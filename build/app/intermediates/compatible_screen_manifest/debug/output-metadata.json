@@ -4,7 +4,7 @@
     "type": "COMPATIBLE_SCREEN_MANIFEST",
     "kind": "Directory"
   },
-  "applicationId": "com.example.image_enhancer",
+  "applicationId": "com.hdphoto.photoshoot.enhance.image.hdr.ai",
   "variantName": "debug",
   "elements": []
 }

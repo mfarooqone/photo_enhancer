@@ -10,7 +10,7 @@ class LoadAdsHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_banner_save_screen_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_banner_save_screen_ios;
+      return SessionController().admob_banner_save_screen_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -23,7 +23,7 @@ class LoadAdsHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_banner_filter_screen_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_banner_filter_screen_ios;
+      return SessionController().admob_banner_filter_screen_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -37,7 +37,7 @@ class LoadAdsHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_interstetial_home_screen_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_interstetial_home_screen_ios;
+      return SessionController().admob_interstetial_home_screen_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -47,7 +47,7 @@ class LoadAdsHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_interstetial_home_screen_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_interstetial_home_screen_ios;
+      return SessionController().admob_interstetial_home_screen_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -57,7 +57,7 @@ class LoadAdsHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_interstetial_home_screen_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_interstetial_home_screen_ios;
+      return SessionController().admob_interstetial_home_screen_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -81,31 +81,11 @@ class LoadAdsHelper {
 /*                           applovin nterstitial Ad                          */
 /* -------------------------------------------------------------------------- */
 
-  static bool get applovinHomeScreeninterstitialAd {
+  static bool get applovininterstitialAd {
     if (Platform.isAndroid) {
-      return SessionController().applovin_interstetial_home_screen_android;
+      return SessionController().applovin_interstetial_android;
     } else if (Platform.isIOS) {
-      return SessionController().applovin_interstetial_home_screen_ios;
-    } else {
-      throw UnsupportedError("Unsupported platform");
-    }
-  }
-
-  static bool get applovinSaveScreeninterstitialAd {
-    if (Platform.isAndroid) {
-      return SessionController().applovin_interstetial_home_screen_android;
-    } else if (Platform.isIOS) {
-      return SessionController().applovin_interstetial_home_screen_ios;
-    } else {
-      throw UnsupportedError("Unsupported platform");
-    }
-  }
-
-  static bool get applovinSelectScreeninterstitialAd {
-    if (Platform.isAndroid) {
-      return SessionController().applovin_interstetial_home_screen_android;
-    } else if (Platform.isIOS) {
-      return SessionController().applovin_interstetial_home_screen_ios;
+      return SessionController().applovin_interstetial_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }

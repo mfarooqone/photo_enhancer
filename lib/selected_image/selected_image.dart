@@ -188,7 +188,7 @@ class _SelectedImageState extends State<SelectedImage> {
                 );
               } else {
                 if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-                    LoadAdsHelper.applovinHomeScreeninterstitialAd) {
+                    LoadAdsHelper.applovininterstitialAd) {
                   if (ads.isInterstitialAdReady.value) {
                     ads.interstitialAd!.show();
                     ads.loadInterstitialAd();
@@ -261,7 +261,7 @@ class _SelectedImageState extends State<SelectedImage> {
                     ));
               } else {
                 if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-                    LoadAdsHelper.applovinHomeScreeninterstitialAd) {
+                    LoadAdsHelper.applovininterstitialAd) {
                   if (ads.isInterstitialAdReady.value) {
                     ads.interstitialAd!.show();
                     ads.loadInterstitialAd();

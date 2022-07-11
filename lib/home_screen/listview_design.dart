@@ -196,7 +196,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
           );
         } else {
           if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-              LoadAdsHelper.applovinHomeScreeninterstitialAd) {
+              LoadAdsHelper.applovininterstitialAd) {
             Get.to(
               () => PhotoFilterSelector(
                 title: Text(
@@ -245,7 +245,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
               ));
         } else {
           if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-              LoadAdsHelper.applovinHomeScreeninterstitialAd) {
+              LoadAdsHelper.applovininterstitialAd) {
             Get.to(() => TextEditorScreen(
                   buttonText: "Text Style",
                   userImage: userImage,

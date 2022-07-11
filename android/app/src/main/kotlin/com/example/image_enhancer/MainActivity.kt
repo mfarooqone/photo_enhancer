@@ -1,4 +1,4 @@
-package com.example.image_enhancer
+package com.hdphoto.photoshoot.enhance.image.hdr.ai
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.image_enhancer"
+    package="com.hdphoto.photoshoot.enhance.image.hdr.ai"
     android:versionCode="1"
     android:versionName="1.0.0" >
 
@@ -49,9 +49,10 @@
     </queries>
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID" /> <!-- Permissions required by Open Measurement SDK -->
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Permissions required by Open Measurement SDK -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
     <uses-permission android:name="com.android.vending.BILLING" />
@@ -63,7 +64,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="Photo Enhancer - PhotoShoot" >
         <activity
-            android:name="com.example.image_enhancer.MainActivity"
+            android:name="com.hdphoto.photoshoot.enhance.image.hdr.ai.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
             android:exported="true"
             android:hardwareAccelerated="true"
@@ -103,14 +104,14 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-6627817022425407~7789740315" />
+            android:value="ca-app-pub-4582858977395538~2910119580" />
         <meta-data
             android:name="applovin.sdk.key"
             android:value="y2s0LfLMHISQOOLHcI6EPSTC8lTvisvRXIn_7z5gvyhm2RnUQyrruf3PcBbHaM_hrVmJhp-I95M8Q1fL-uL1mL" />
 
         <provider
             android:name="io.flutter.plugins.imagepicker.ImagePickerFileProvider"
-            android:authorities="com.example.image_enhancer.flutter.image_provider"
+            android:authorities="com.hdphoto.photoshoot.enhance.image.hdr.ai.flutter.image_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -124,7 +125,7 @@
 
         <provider
             android:name="dev.fluttercommunity.plus.share.ShareFileProvider"
-            android:authorities="com.example.image_enhancer.flutter.share_provider"
+            android:authorities="com.hdphoto.photoshoot.enhance.image.hdr.ai.flutter.share_provider"
             android:exported="false"
             android:grantUriPermissions="true" >
             <meta-data
@@ -142,7 +143,42 @@
             android:required="false" />
         <uses-library
             android:name="androidx.window.sidecar"
-            android:required="false" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
+            android:required="false" />
+
+        <service
+            android:name="com.google.firebase.components.ComponentDiscoveryService"
+            android:directBootAware="true"
+            android:exported="false" >
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.analytics.connector.internal.AnalyticsConnectorRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+            <meta-data
+                android:name="com.google.firebase.components:com.google.firebase.installations.FirebaseInstallationsRegistrar"
+                android:value="com.google.firebase.components.ComponentRegistrar" />
+        </service>
+
+        <provider
+            android:name="com.google.firebase.provider.FirebaseInitProvider"
+            android:authorities="com.hdphoto.photoshoot.enhance.image.hdr.ai.firebaseinitprovider"
+            android:directBootAware="true"
+            android:exported="false"
+            android:initOrder="100" />
+
+        <receiver
+            android:name="com.google.android.gms.measurement.AppMeasurementReceiver"
+            android:enabled="true"
+            android:exported="false" >
+        </receiver>
+
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
+            android:name="com.google.android.gms.measurement.AppMeasurementJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE" /> <!-- Include the AdActivity and InAppPurchaseActivity configChanges and themes. -->
         <activity
             android:name="com.google.android.gms.ads.AdActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
@@ -151,7 +187,7 @@
 
         <provider
             android:name="com.google.android.gms.ads.MobileAdsInitProvider"
-            android:authorities="com.example.image_enhancer.mobileadsinitprovider"
+            android:authorities="com.hdphoto.photoshoot.enhance.image.hdr.ai.mobileadsinitprovider"
             android:exported="false"
             android:initOrder="100" />
 
@@ -162,7 +198,7 @@
 
         <provider
             android:name="com.applovin.sdk.AppLovinInitProvider"
-            android:authorities="com.example.image_enhancer.applovincontentprovider"
+            android:authorities="com.hdphoto.photoshoot.enhance.image.hdr.ai.applovincontentprovider"
             android:exported="false"
             android:grantUriPermissions="true"
             android:initOrder="101" /> <!-- Init order is 101 so we're before Firebase/Google which uses 100 -->
@@ -221,7 +257,7 @@
 
         <provider
             android:name="androidx.startup.InitializationProvider"
-            android:authorities="com.example.image_enhancer.androidx-startup"
+            android:authorities="com.hdphoto.photoshoot.enhance.image.hdr.ai.androidx-startup"
             android:exported="false" >
             <meta-data
                 android:name="androidx.work.WorkManagerInitializer"
@@ -322,7 +358,7 @@
 
         <provider
             android:name="androidx.lifecycle.ProcessLifecycleOwnerInitializer"
-            android:authorities="com.example.image_enhancer.lifecycle-process"
+            android:authorities="com.hdphoto.photoshoot.enhance.image.hdr.ai.lifecycle-process"
             android:exported="false"
             android:multiprocess="true" />
 

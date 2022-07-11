@@ -125,7 +125,7 @@ class _SaveScreenState extends State<SaveScreen> {
           BannerAdWidget(
             sessionBool: Platform.isAndroid
                 ? SessionController().admob_banner_save_screen_android
-                : SessionController().admob_banner_save_screen_ios,
+                : SessionController().admob_banner_save_screen_android,
             adName: ads.saveScreenBanner!,
             isPurchased: purchaseApiController.isPurchased.value,
           ),
@@ -312,8 +312,7 @@ class _SaveScreenState extends State<SaveScreen> {
                             );
                           } else {
                             if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-                                LoadAdsHelper
-                                    .applovinHomeScreeninterstitialAd) {
+                                LoadAdsHelper.applovininterstitialAd) {
                               if (ads.isInterstitialAdReady.value) {
                                 ads.interstitialAd!.show();
                                 ads.loadInterstitialAd();
@@ -397,8 +396,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                 ));
                           } else {
                             if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-                                LoadAdsHelper
-                                    .applovinHomeScreeninterstitialAd) {
+                                LoadAdsHelper.applovininterstitialAd) {
                               if (ads.isInterstitialAdReady.value) {
                                 ads.interstitialAd!.show();
                                 ads.loadInterstitialAd();

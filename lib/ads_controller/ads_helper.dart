@@ -7,7 +7,7 @@ class AdHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_banner_ad_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_banner_ad_ios;
+      return SessionController().admob_banner_ad_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -17,7 +17,7 @@ class AdHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_interstetial_ad_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_interstetial_ad_ios;
+      return SessionController().admob_interstetial_ad_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
@@ -27,7 +27,7 @@ class AdHelper {
     if (Platform.isAndroid) {
       return SessionController().admob_rewarded_ad_android;
     } else if (Platform.isIOS) {
-      return SessionController().admob_rewarded_ad_ios;
+      return SessionController().admob_rewarded_ad_android;
     } else {
       throw UnsupportedError("Unsupported platform");
     }
