@@ -5,8 +5,6 @@ import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/home_screen/home_screen.dart';
 import 'package:image_enhancer/widgets/no_internet_controller.dart';
 
-import '../purchase/purchase_api_controller.dart';
-
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
 
@@ -15,13 +13,13 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  var purchaseApiController = Get.put(PurchaseApiController(), permanent: true);
+  // var purchaseApiController = Get.put(PurchaseApiController(), permanent: true);
   @override
   void initState() {
     Get.put(AdsController(), permanent: true);
     Get.put(InternetConnectionController(), permanent: true);
 
-    purchaseApiController.init();
+    // purchaseApiController.init();
 
     Future.delayed(const Duration(seconds: 4), () {
       Get.to(() => const HomeScreen());

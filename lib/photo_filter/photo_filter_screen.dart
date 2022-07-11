@@ -14,7 +14,6 @@ import 'package:photofilters/filters/filters.dart';
 
 import '../ads_controller/ads_controller.dart';
 import '../ads_controller/load_ads_helper.dart';
-import '../purchase/purchase_api_controller.dart';
 import '../utils/app_colors.dart';
 import '../utils/session_controller.dart';
 import '../widgets/banner_ad_widget.dart';
@@ -98,15 +97,17 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   String? filename = "abc.jpg";
   Map<String, List<int>?> cachedFilters = {};
   AdsController ads = Get.find();
-  PurchaseApiController purchaseApiController = Get.find();
+  // PurchaseApiController purchaseApiController = Get.find();
   Filter? _filter;
   imagelib.Image? image;
   late bool loading;
 
   @override
   void initState() {
-    if (LoadAdsHelper.admobFilterScreenBannerAd &&
-        !purchaseApiController.isPurchased.value) {
+    if (LoadAdsHelper.admobFilterScreenBannerAd
+        // &&
+        //     !purchaseApiController.isPurchased.value
+        ) {
       ads.filterScreenBannerAdLoad();
     }
 
@@ -185,8 +186,10 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  if (LoadAdsHelper.admobFilterScreenBannerAd &&
-                      !purchaseApiController.isPurchased.value)
+                  if (LoadAdsHelper.admobFilterScreenBannerAd
+                  // &&
+                  //     !purchaseApiController.isPurchased.value
+                  )
                     BannerAdWidget(
                       sessionBool: Platform.isAndroid
                           ? SessionController()
@@ -194,7 +197,8 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                           : SessionController()
                               .admob_banner_filter_screen_android,
                       adName: ads.filterScreenBanner!,
-                      isPurchased: purchaseApiController.isPurchased.value,
+                      isPurchased: false,
+                      //  purchaseApiController.isPurchased.value,
                     ),
                   Expanded(
                     flex: 6,

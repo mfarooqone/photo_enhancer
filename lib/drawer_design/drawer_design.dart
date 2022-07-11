@@ -4,13 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../purchase/purchase_api_controller.dart';
-import '../purchase/subscriptions_page.dart';
 
 class DrawerDesign extends StatefulWidget {
   const DrawerDesign({Key? key}) : super(key: key);
@@ -24,7 +20,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
     if (!await launchUrl(url)) throw 'Could not launch $url';
   }
 
-  var purchaseApiController = Get.find<PurchaseApiController>();
+  // var purchaseApiController = Get.find<PurchaseApiController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -45,47 +41,47 @@ class _DrawerDesignState extends State<DrawerDesign> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                ListTile(
-                  onTap: () async {
-                    Get.to(() => const SubscriptionsPage());
-                  },
-                  leading: Icon(
-                    Icons.workspace_premium_rounded,
-                    size: 20,
-                    color: AppColors.blackColor,
-                  ),
-                  title: Text(
-                    "Go Premium",
-                    style: AppTextStyle.black16,
-                  ),
-                ),
+                // ListTile(
+                //   onTap: () async {
+                //     Get.to(() => const SubscriptionsPage());
+                //   },
+                //   leading: Icon(
+                //     Icons.workspace_premium_rounded,
+                //     size: 20,
+                //     color: AppColors.blackColor,
+                //   ),
+                //   title: Text(
+                //     "Go Premium",
+                //     style: AppTextStyle.black16,
+                //   ),
+                // ),
 
                 /* -------------------------------------------------------------------------- */
                 /*                              restore purchase                              */
                 /* -------------------------------------------------------------------------- */
                 const Divider(),
-                ListTile(
-                  onTap: () async {
-                    try {
-                      // PurchaserInfo restoredInfo =
-                      await Purchases.restoreTransactions();
-                      await purchaseApiController.init();
-                      Get.back();
-                    } catch (e) {
-                      Get.snackbar("              Something went wrong", "");
-                    }
-                  },
-                  leading: Icon(
-                    Icons.restore_outlined,
-                    size: 20,
-                    color: AppColors.blackColor,
-                  ),
-                  title: Text(
-                    "Restore Purchase",
-                    style: AppTextStyle.black16,
-                  ),
-                ),
-                Divider(),
+                // ListTile(
+                //   onTap: () async {
+                //     try {
+                //       // PurchaserInfo restoredInfo =
+                //       // await Purchases.restoreTransactions();
+                //       // await purchaseApiController.init();
+                //       Get.back();
+                //     } catch (e) {
+                //       Get.snackbar("              Something went wrong", "");
+                //     }
+                //   },
+                //   leading: Icon(
+                //     Icons.restore_outlined,
+                //     size: 20,
+                //     color: AppColors.blackColor,
+                //   ),
+                //   title: Text(
+                //     "Restore Purchase",
+                //     style: AppTextStyle.black16,
+                //   ),
+                // ),
+                // Divider(),
                 /* -------------------------------------------------------------------------- */
                 /*                                   Rate us                                  */
                 /* -------------------------------------------------------------------------- */

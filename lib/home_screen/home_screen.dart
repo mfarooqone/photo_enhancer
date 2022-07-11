@@ -6,13 +6,11 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/drawer_design/drawer_design.dart';
-import 'package:image_enhancer/purchase/purchase_api_controller.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
 import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
 
 import '../ads_controller/load_ads_helper.dart';
-import '../purchase/subscriptions_page.dart';
 import '../selected_image/selected_image.dart';
 import '../widgets/gradient_container_design.dart';
 import 'listview_design.dart';
@@ -27,12 +25,14 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   AdsController ads = Get.find();
-  PurchaseApiController purchaseApiController = Get.find();
+  // PurchaseApiController purchaseApiController = Get.find();
 
   @override
   void initState() {
-    if (LoadAdsHelper.admobHomeScreeninterstitialAd &&
-        !purchaseApiController.isPurchased.value) {
+    if (LoadAdsHelper.admobHomeScreeninterstitialAd
+        // &&
+        //     !purchaseApiController.isPurchased.value
+        ) {
       ads.loadInterstitialAd();
     }
     if (LoadAdsHelper.admobRewardAd) {
@@ -138,19 +138,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            actions: [
-              IconButton(
-                iconSize: 50,
-                onPressed: () {
-                  Get.to(() => const SubscriptionsPage());
-                },
-                icon: Icon(
-                  Icons.workspace_premium_rounded,
-                  size: 25,
-                  color: AppColors.blackColor,
-                ),
-              )
-            ],
+            // actions: [
+            //   IconButton(
+            //     iconSize: 50,
+            //     onPressed: () {
+            //       Get.to(() => const SubscriptionsPage());
+            //     },
+            //     icon: Icon(
+            //       Icons.workspace_premium_rounded,
+            //       size: 25,
+            //       color: AppColors.blackColor,
+            //     ),
+            //   )
+            // ],
           ),
           body: Stack(
             children: [

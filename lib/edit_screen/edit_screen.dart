@@ -9,7 +9,6 @@ import 'package:image/image.dart' as imagelib;
 import 'package:photofilters/filters/filters.dart';
 import 'package:photofilters/filters/preset_filters.dart';
 
-import '../purchase/purchase_api_controller.dart';
 import '../save_screen/save_screen.dart';
 
 class EditScreen extends StatefulWidget {
@@ -42,7 +41,7 @@ class _EditScreenState extends State<EditScreen> with TickerProviderStateMixin {
     });
   }
 
-  PurchaseApiController purchaseApiController = Get.find();
+  // PurchaseApiController purchaseApiController = Get.find();
 
   @override
   void initState() {
@@ -51,9 +50,7 @@ class _EditScreenState extends State<EditScreen> with TickerProviderStateMixin {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       convertImage();
-      Future.delayed(
-          Duration(seconds: purchaseApiController.isPurchased.value ? 5 : 1),
-          () {
+      Future.delayed(Duration(seconds: 3), () {
         if (widget.index == 3) {
           Get.to(
             () => SaveScreen(
