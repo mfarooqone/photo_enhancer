@@ -194,12 +194,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "flutter_applovin_max",
-      "rootUri": "file:///Users/muhamadfarooq/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_applovin_max-2.1.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "flutter_launcher_icons",
       "rootUri": "file:///Users/muhamadfarooq/FlutterSDK/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.9.3",
       "packageUri": "lib/",
@@ -602,7 +596,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-07-11T08:41:06.010925Z",
+  "generated": "2022-07-12T19:28:34.061679Z",
   "generator": "pub",
   "generatorVersion": "2.17.5"
 }

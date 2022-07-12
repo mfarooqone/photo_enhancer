@@ -1,10 +1,8 @@
-import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:blur/blur.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_applovin_max/flutter_applovin_max.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
@@ -250,42 +248,18 @@ class _SaveScreenState extends State<SaveScreen> {
                       padding: const EdgeInsets.only(left: 16),
                       child: InkWell(
                         onTap: () {
-                          // if (purchaseApiController.isPurchased.value) {
-                          //   Get.to(() => EditScreen(
-                          //       buttonText: "Enhance",
-                          //       userImage: widget.userImage!,
-                          //       index: 0));
-                          // } else {
-                          log("message");
-                          log(LoadAdsHelper.admobRewardAd.toString());
-                          log(LoadAdsHelper.applovinRewardAd.toString());
-                          log(ads.isRewardedAdReady.value.toString());
-
-                          if (LoadAdsHelper.admobRewardAd ||
-                              LoadAdsHelper.applovinRewardAd) {
-                            if (ads.isRewardedAdReady.value) {
-                              ads.rewardedAd!.show(
-                                  onUserEarnedReward: (ad, reward) {
-                                Get.to(
-                                  () => EditScreen(
-                                      buttonText: "Enhance",
-                                      userImage: widget.userImage!,
-                                      index: 0),
-                                );
-                                ads.loadRewardedAd();
-                              });
-                            } else {
-                              FlutterApplovinMax.showRewardVideo(
-                                  (AppLovinAdListener? event) {
-                                ads.listener(event);
-                              });
+                          if (ads.isRewardedAdReady.value &&
+                              LoadAdsHelper.admobRewardAd) {
+                            ads.rewardedAd!.show(
+                                onUserEarnedReward: (ad, reward) {
                               Get.to(
                                 () => EditScreen(
                                     buttonText: "Enhance",
                                     userImage: widget.userImage!,
                                     index: 0),
                               );
-                            }
+                              ads.loadRewardedAd();
+                            });
                           } else {
                             Get.to(() => EditScreen(
                                 buttonText: "Enhance",
@@ -293,7 +267,6 @@ class _SaveScreenState extends State<SaveScreen> {
                                 index: 0));
                           }
                         },
-                        // },
                         child: SizedBox(
                           width: 84,
                           height: 84,
@@ -314,53 +287,15 @@ class _SaveScreenState extends State<SaveScreen> {
                           List<int> bytes = await imageFile!.readAsBytes();
                           var image = imagelib.decodeImage(bytes);
                           image = imagelib.copyResize(image!, width: 600);
-                          // if (purchaseApiController.isPurchased.value) {
-                          //   Get.to(
-                          //     () => PhotoFilterSelector(
-                          //       title: Text(
-                          //         "My Edited Image",
-                          //         style: TextStyle(color: AppColors.blackColor),
-                          //       ),
-                          //       image: image!,
-                          //       filters: presetFiltersList,
-                          //       filename: fileName!,
-                          //       loader: const SpinKitSpinningLines(
-                          //           color: Colors.black),
-                          //       fit: BoxFit.contain,
-                          //       userImage: widget.userImage!,
-                          //     ),
-                          //   );
-                          // } else {
-                          if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-                              LoadAdsHelper.applovininterstitialAd) {
-                            if (ads.isInterstitialAdReady.value) {
-                              ads.interstitialAd!.show();
-                              ads.loadInterstitialAd();
-                              Get.to(
-                                () => PhotoFilterSelector(
-                                  title: Text(
-                                    "My Edited Image",
-                                    style:
-                                        TextStyle(color: AppColors.blackColor),
-                                  ),
-                                  image: image!,
-                                  filters: presetFiltersList,
-                                  filename: fileName!,
-                                  loader: const SpinKitSpinningLines(
-                                      color: Colors.black),
-                                  fit: BoxFit.contain,
-                                  userImage: widget.userImage!,
-                                ),
-                              );
-                            }
-                            FlutterApplovinMax.showInterstitialVideo(
-                                (AppLovinAdListener? event) {
-                              ads.listener(event);
-                            });
+
+                          if (ads.isInterstitialAdReady.value &&
+                              LoadAdsHelper.admobHomeScreeninterstitialAd) {
+                            ads.interstitialAd!.show();
+                            ads.loadInterstitialAd();
                             Get.to(
                               () => PhotoFilterSelector(
                                 title: Text(
-                                  "My Edited Image",
+                                  "Apply Filter",
                                   style: TextStyle(color: AppColors.blackColor),
                                 ),
                                 image: image!,
@@ -376,7 +311,7 @@ class _SaveScreenState extends State<SaveScreen> {
                             Get.to(
                               () => PhotoFilterSelector(
                                 title: Text(
-                                  "My Edited Image",
+                                  "Apply Filter",
                                   style: TextStyle(color: AppColors.blackColor),
                                 ),
                                 image: image!,
@@ -389,7 +324,6 @@ class _SaveScreenState extends State<SaveScreen> {
                               ),
                             );
                           }
-                          // }
                         },
                         child: SizedBox(
                           width: 84,
@@ -406,30 +340,10 @@ class _SaveScreenState extends State<SaveScreen> {
                       padding: const EdgeInsets.only(left: 16),
                       child: InkWell(
                         onTap: () {
-                          // if (purchaseApiController.isPurchased.value) {
-                          //   Get.to(() => TextEditorScreen(
-                          //         buttonText: "Text Style",
-                          //         userImage: widget.userImage!,
-                          //         index: 2,
-                          //       ));
-                          // } else {
-                          if (LoadAdsHelper.admobHomeScreeninterstitialAd ||
-                              LoadAdsHelper.applovininterstitialAd) {
-                            if (ads.isInterstitialAdReady.value) {
-                              ads.interstitialAd!.show();
-                              ads.loadInterstitialAd();
-                              Get.to(
-                                () => TextEditorScreen(
-                                  buttonText: "Text Style",
-                                  userImage: widget.userImage!,
-                                  index: 2,
-                                ),
-                              );
-                            }
-                            FlutterApplovinMax.showInterstitialVideo(
-                                (AppLovinAdListener? event) {
-                              ads.listener(event);
-                            });
+                          if (ads.isInterstitialAdReady.value &&
+                              LoadAdsHelper.admobHomeScreeninterstitialAd) {
+                            ads.interstitialAd!.show();
+                            ads.loadInterstitialAd();
                             Get.to(
                               () => TextEditorScreen(
                                 buttonText: "Text Style",
@@ -445,7 +359,6 @@ class _SaveScreenState extends State<SaveScreen> {
                                 ));
                           }
                         },
-                        // },
                         child: SizedBox(
                           width: 84,
                           height: 84,
@@ -461,39 +374,18 @@ class _SaveScreenState extends State<SaveScreen> {
                       padding: const EdgeInsets.only(left: 16),
                       child: InkWell(
                         onTap: () {
-                          // if (purchaseApiController.isPurchased.value) {
-                          //   Get.to(
-                          //     () => EditScreen(
-                          //         buttonText: "HDR",
-                          //         userImage: widget.userImage!,
-                          //         index: 3),
-                          //   );
-                          // } else {
-                          if (LoadAdsHelper.admobRewardAd ||
-                              LoadAdsHelper.applovinRewardAd) {
-                            if (ads.isRewardedAdReady.value) {
-                              ads.rewardedAd!.show(
-                                  onUserEarnedReward: (ad, reward) {
-                                Get.to(
-                                  () => EditScreen(
-                                      buttonText: "HDR",
-                                      userImage: widget.userImage!,
-                                      index: 3),
-                                );
-                                ads.loadRewardedAd();
-                              });
-                            } else {
-                              FlutterApplovinMax.showRewardVideo(
-                                  (AppLovinAdListener? event) {
-                                ads.listener(event);
-                              });
+                          if (ads.isRewardedAdReady.value &&
+                              LoadAdsHelper.admobRewardAd) {
+                            ads.rewardedAd!.show(
+                                onUserEarnedReward: (ad, reward) {
                               Get.to(
                                 () => EditScreen(
                                     buttonText: "HDR",
                                     userImage: widget.userImage!,
                                     index: 3),
                               );
-                            }
+                              ads.loadRewardedAd();
+                            });
                           } else {
                             Get.to(
                               () => EditScreen(
@@ -502,7 +394,6 @@ class _SaveScreenState extends State<SaveScreen> {
                                   index: 3),
                             );
                           }
-                          // }
                         },
                         child: SizedBox(
                           width: 84,

@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter_applovin_max/flutter_applovin_max.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
@@ -21,24 +20,24 @@ class AdsController extends GetxController {
     return MobileAds.instance.initialize();
   }
 
-  listener(AppLovinAdListener? event) {
-    // log(event);
-    // if (event == AppLovinAdListener.onUserRewarded) {
-    //   log('👍get reward');
-    // }
+  // listener(AppLovinAdListener? event) {
+  //   // log(event);
+  //   // if (event == AppLovinAdListener.onUserRewarded) {
+  //   //   log('👍get reward');
+  //   // }
 
-    if (event == AppLovinAdListener.onUserRewarded) {
-      log('👍get rewarded adddd');
-    }
-    if (event == AppLovinAdListener.onAdDisplayFailed) {
-      FlutterApplovinMax.showInterstitialVideo((AppLovinAdListener? event) {
-        if (event == AppLovinAdListener.onUserRewarded) {
-          log('👍get showInterstitialVideo');
-        }
-      });
-    }
-    update();
-  }
+  //   if (event == AppLovinAdListener.onUserRewarded) {
+  //     log('👍get rewarded adddd');
+  //   }
+  //   if (event == AppLovinAdListener.onAdDisplayFailed) {
+  //     FlutterApplovinMax.showInterstitialVideo((AppLovinAdListener? event) {
+  //       if (event == AppLovinAdListener.onUserRewarded) {
+  //         log('👍get showInterstitialVideo');
+  //       }
+  //     });
+  //   }
+  //   update();
+  // }
 
   // bool isRewardedVideoAvailable = false;
   // bool isInterstitialVideoAvailable = true;

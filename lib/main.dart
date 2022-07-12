@@ -2,7 +2,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_applovin_max/flutter_applovin_max.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_enhancer/splash_screen/splash_screen.dart';
@@ -16,12 +15,12 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   MobileAds.instance.initialize();
-  FlutterApplovinMax.initSDK();
 
   await Firebase.initializeApp();
 
-  FlutterApplovinMax.initInterstitialAd('95ecc9de0b51cb23');
-  FlutterApplovinMax.initRewardAd("eb1a99d6645a3fec");
+  // FlutterApplovinMax.initSDK();
+  // FlutterApplovinMax.initInterstitialAd('95ecc9de0b51cb23');
+  // FlutterApplovinMax.initRewardAd("eb1a99d6645a3fec");
 
   runApp(const MyApp());
 }
@@ -76,11 +75,11 @@ class _MyAppState extends State<MyApp> {
 /*                              applov in setting                             */
 /* -------------------------------------------------------------------------- */
 
-        SessionController().applovin_interstetial_android =
-            result.data()["applovin_interstetial_android"];
+        // SessionController().applovin_interstetial_android =
+        //     result.data()["applovin_interstetial_android"];
 
-        SessionController().applovin_reward_android =
-            result.data()["applovin_reward_android"];
+        // SessionController().applovin_reward_android =
+        //     result.data()["applovin_reward_android"];
       }
     });
   }

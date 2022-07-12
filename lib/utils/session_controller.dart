@@ -37,13 +37,13 @@ class SessionController {
   /*                          applovin interstetial ads                         */
   /* -------------------------------------------------------------------------- */
 
-  bool applovin_interstetial_android = false;
+  // bool applovin_interstetial_android = false;
 
   /* -------------------------------------------------------------------------- */
   /*                               applovin reward                              */
   /* -------------------------------------------------------------------------- */
 
-  bool applovin_reward_android = false;
+  // bool applovin_reward_android = false;
 
   factory SessionController() {
     return _session;

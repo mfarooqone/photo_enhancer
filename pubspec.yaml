@@ -41,7 +41,7 @@ dependencies:
   screenshot: ^1.2.3
   store_redirect: ^2.0.1
   connectivity_plus: ^2.3.5
-  flutter_applovin_max: ^2.1.1
+  # flutter_applovin_max: ^2.1.1
   gallery_saver: ^2.3.2
   photofilters: ^3.0.1
   path_provider: ^2.0.10

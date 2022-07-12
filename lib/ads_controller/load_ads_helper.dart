@@ -81,27 +81,27 @@ class LoadAdsHelper {
 /*                           applovin nterstitial Ad                          */
 /* -------------------------------------------------------------------------- */
 
-  static bool get applovininterstitialAd {
-    if (Platform.isAndroid) {
-      return SessionController().applovin_interstetial_android;
-    } else if (Platform.isIOS) {
-      return SessionController().applovin_interstetial_android;
-    } else {
-      throw UnsupportedError("Unsupported platform");
-    }
-  }
+  // static bool get applovininterstitialAd {
+  //   if (Platform.isAndroid) {
+  //     return SessionController().applovin_interstetial_android;
+  //   } else if (Platform.isIOS) {
+  //     return SessionController().applovin_interstetial_android;
+  //   } else {
+  //     throw UnsupportedError("Unsupported platform");
+  //   }
+  // }
 
   /* -------------------------------------------------------------------------- */
   /*                             applovin reward ad                             */
   /* -------------------------------------------------------------------------- */
 
-  static bool get applovinRewardAd {
-    if (Platform.isAndroid) {
-      return SessionController().admob_reward_android;
-    } else if (Platform.isIOS) {
-      return SessionController().admob_reward_ios;
-    } else {
-      throw UnsupportedError("Unsupported platform");
-    }
-  }
+  // static bool get applovinRewardAd {
+  //   if (Platform.isAndroid) {
+  //     return SessionController().admob_reward_android;
+  //   } else if (Platform.isIOS) {
+  //     return SessionController().admob_reward_ios;
+  //   } else {
+  //     throw UnsupportedError("Unsupported platform");
+  //   }
+  // }
 }
