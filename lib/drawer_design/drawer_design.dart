@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
 import 'package:share_plus/share_plus.dart';
@@ -131,7 +130,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 ListTile(
                   onTap: () {
                     Uri url = Uri.parse(
-                        "https://docs.google.com/document/d/1VSoU4LNtnxS9V_4YeephTCsmnIEi7HrUbqZJ6YUg-vw/edit");
+                        "https://docs.google.com/document/d/1r1Cq41mt7wT6PIHAfFbX09lxwpyddcLrMDJYqA0osIg/edit?usp=sharing");
 
                     _launchUrl(url);
                   },
@@ -148,24 +147,24 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 /* -------------------------------------------------------------------------- */
                 /*                            terms and conditions                            */
                 /* -------------------------------------------------------------------------- */
-                const Divider(),
-                ListTile(
-                  onTap: () {
-                    Uri url = Uri.parse(
-                        "https://docs.google.com/document/d/1SvleJc1JzBNrj_Ji28DmEYOybbX2VN6if0Z-Y_McIZ8/edit");
+                // const Divider(),
+                // ListTile(
+                //   onTap: () {
+                //     Uri url = Uri.parse(
+                //         "https://docs.google.com/document/d/1SvleJc1JzBNrj_Ji28DmEYOybbX2VN6if0Z-Y_McIZ8/edit");
 
-                    _launchUrl(url);
-                  },
-                  leading: Icon(
-                    Icons.privacy_tip_outlined,
-                    size: 20,
-                    color: AppColors.blackColor,
-                  ),
-                  title: Text(
-                    "Terms & Conditions",
-                    style: AppTextStyle.black16,
-                  ),
-                ),
+                //     _launchUrl(url);
+                //   },
+                //   leading: Icon(
+                //     Icons.privacy_tip_outlined,
+                //     size: 20,
+                //     color: AppColors.blackColor,
+                //   ),
+                //   title: Text(
+                //     "Terms & Conditions",
+                //     style: AppTextStyle.black16,
+                //   ),
+                // ),
               ],
             ),
           ),

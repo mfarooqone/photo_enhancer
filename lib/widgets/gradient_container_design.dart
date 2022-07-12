@@ -36,6 +36,7 @@ class GradientContainerDesign extends StatelessWidget {
             colors: [
               AppColors.pinkColor,
               AppColors.redColor,
+              AppColors.orangeColor,
               AppColors.blueColor,
             ],
           ),

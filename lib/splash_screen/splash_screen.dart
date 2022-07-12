@@ -2,8 +2,10 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
-import 'package:image_enhancer/home_screen/home_screen.dart';
+import 'package:image_enhancer/widgets/gradient_container_design.dart';
 import 'package:image_enhancer/widgets/no_internet_controller.dart';
+
+import '../home_screen/home_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -21,9 +23,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
     // purchaseApiController.init();
 
-    Future.delayed(const Duration(seconds: 4), () {
-      Get.to(() => const HomeScreen());
-    });
     super.initState();
   }
 
@@ -36,7 +35,11 @@ class _SplashScreenState extends State<SplashScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisSize: MainAxisSize.max,
           children: [
+            SizedBox(
+              height: 100,
+            ),
             BounceInDown(
               from: 400,
               delay: const Duration(milliseconds: 1000),
@@ -63,6 +66,20 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            SizedBox(
+              height: 150,
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: GradientContainerDesign(
+                title: "Get Started",
+                width: 150,
+                height: 50,
+                onPressed: () {
+                  Get.to(() => const HomeScreen());
+                },
+              ),
+            )
           ],
         ),
       ),

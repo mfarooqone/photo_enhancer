@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -68,6 +69,12 @@ class _SaveScreenState extends State<SaveScreen> {
         //     !purchaseApiController.isPurchased.value
         ) {
       ads.loadInterstitialAd();
+    }
+    if (LoadAdsHelper.admobRewardAd
+        // &&
+        //     !purchaseApiController.isPurchased.value
+        ) {
+      ads.loadRewardedAd();
     }
     saveFilteredImage();
     super.initState();
@@ -249,6 +256,10 @@ class _SaveScreenState extends State<SaveScreen> {
                           //       userImage: widget.userImage!,
                           //       index: 0));
                           // } else {
+                          log("message");
+                          log(LoadAdsHelper.admobRewardAd.toString());
+                          log(LoadAdsHelper.applovinRewardAd.toString());
+                          log(ads.isRewardedAdReady.value.toString());
 
                           if (LoadAdsHelper.admobRewardAd ||
                               LoadAdsHelper.applovinRewardAd) {
@@ -267,11 +278,13 @@ class _SaveScreenState extends State<SaveScreen> {
                               FlutterApplovinMax.showRewardVideo(
                                   (AppLovinAdListener? event) {
                                 ads.listener(event);
-                                Get.to(() => EditScreen(
+                              });
+                              Get.to(
+                                () => EditScreen(
                                     buttonText: "Enhance",
                                     userImage: widget.userImage!,
-                                    index: 0));
-                              });
+                                    index: 0),
+                              );
                             }
                           } else {
                             Get.to(() => EditScreen(
@@ -343,23 +356,22 @@ class _SaveScreenState extends State<SaveScreen> {
                             FlutterApplovinMax.showInterstitialVideo(
                                 (AppLovinAdListener? event) {
                               ads.listener(event);
-                              Get.to(
-                                () => PhotoFilterSelector(
-                                  title: Text(
-                                    "My Edited Image",
-                                    style:
-                                        TextStyle(color: AppColors.blackColor),
-                                  ),
-                                  image: image!,
-                                  filters: presetFiltersList,
-                                  filename: fileName!,
-                                  loader: const SpinKitSpinningLines(
-                                      color: Colors.black),
-                                  fit: BoxFit.contain,
-                                  userImage: widget.userImage!,
-                                ),
-                              );
                             });
+                            Get.to(
+                              () => PhotoFilterSelector(
+                                title: Text(
+                                  "My Edited Image",
+                                  style: TextStyle(color: AppColors.blackColor),
+                                ),
+                                image: image!,
+                                filters: presetFiltersList,
+                                filename: fileName!,
+                                loader: const SpinKitSpinningLines(
+                                    color: Colors.black),
+                                fit: BoxFit.contain,
+                                userImage: widget.userImage!,
+                              ),
+                            );
                           } else {
                             Get.to(
                               () => PhotoFilterSelector(
@@ -417,14 +429,14 @@ class _SaveScreenState extends State<SaveScreen> {
                             FlutterApplovinMax.showInterstitialVideo(
                                 (AppLovinAdListener? event) {
                               ads.listener(event);
-                              Get.to(
-                                () => TextEditorScreen(
-                                  buttonText: "Text Style",
-                                  userImage: widget.userImage!,
-                                  index: 2,
-                                ),
-                              );
                             });
+                            Get.to(
+                              () => TextEditorScreen(
+                                buttonText: "Text Style",
+                                userImage: widget.userImage!,
+                                index: 2,
+                              ),
+                            );
                           } else {
                             Get.to(() => TextEditorScreen(
                                   buttonText: "Text Style",
@@ -474,13 +486,13 @@ class _SaveScreenState extends State<SaveScreen> {
                               FlutterApplovinMax.showRewardVideo(
                                   (AppLovinAdListener? event) {
                                 ads.listener(event);
-                                Get.to(
-                                  () => EditScreen(
-                                      buttonText: "HDR",
-                                      userImage: widget.userImage!,
-                                      index: 3),
-                                );
                               });
+                              Get.to(
+                                () => EditScreen(
+                                    buttonText: "HDR",
+                                    userImage: widget.userImage!,
+                                    index: 3),
+                              );
                             }
                           } else {
                             Get.to(

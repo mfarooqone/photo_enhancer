@@ -39,7 +39,7 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      // getData();
+      getData();
     });
     super.initState();
   }
@@ -54,9 +54,6 @@ class _MyAppState extends State<MyApp> {
         SessionController().admob_banner_ad_android =
             result.data()["admob_banner_ad_android"];
 
-        SessionController().admob_interstetial_ad_android =
-            result.data()["admob_interstetial_ad_android"];
-
         SessionController().admob_rewarded_ad_android =
             result.data()["admob_rewarded_ad_android"];
 
@@ -69,12 +66,8 @@ class _MyAppState extends State<MyApp> {
         SessionController().admob_interstetial_home_screen_android =
             result.data()["admob_interstetial_home_screen_android"];
 
-        SessionController().admob_interstetial_save_screen_android =
-            SessionController().admob_interstetial_select_screen_android =
-                result.data()["admob_interstetial_select_screen_android"];
-
-        SessionController().admob_reward_ios =
-            result.data()["admob_reward_ios"];
+        SessionController().admob_interstetial_select_screen_android =
+            result.data()["admob_interstetial_select_screen_android"];
 
         SessionController().admob_reward_android =
             result.data()["admob_reward_android"];

@@ -14,23 +14,12 @@
     -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Android package visibility setting -->
     <queries>
-        <intent>
-            <action android:name="android.intent.action.VIEW" />
 
-            <data android:scheme="https" />
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.DIAL" />
-
-            <data android:scheme="tel" />
-        </intent>
-        <intent>
-            <action android:name="android.intent.action.SENDTO" />
-
-            <data android:scheme="smsto" />
-        </intent>
         <!-- For browser content -->
         <intent>
             <action android:name="android.intent.action.VIEW" />
@@ -38,20 +27,17 @@
             <category android:name="android.intent.category.BROWSABLE" />
 
             <data android:scheme="https" />
-        </intent> <!-- End of browser content -->
+        </intent>
+        <!-- End of browser content -->
         <!-- For CustomTabsService -->
         <intent>
             <action android:name="android.support.customtabs.action.CustomTabsService" />
         </intent>
+        <!-- End of CustomTabsService -->
         <intent>
             <action android:name="android.media.browse.MediaBrowserService" />
         </intent>
-    </queries>
-
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
-    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" /> <!-- Permissions required by Open Measurement SDK -->
+    </queries> <!-- Permissions required by Open Measurement SDK -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
@@ -94,13 +80,6 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
-
-        <activity
-            android:name="com.yalantis.ucrop.UCropActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4582858977395538~2910119580" />

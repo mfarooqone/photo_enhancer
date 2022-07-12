@@ -1,6 +1,6 @@
 -- Merging decision tree log ---
 application
-INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:18:4-58:19
+INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:4:4-39:19
 MERGED from [:cloud_firestore] /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
 MERGED from [:cloud_firestore] /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
 MERGED from [:firebase_core] /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-15:19
@@ -74,11 +74,11 @@ MERGED from [androidx.room:room-runtime:2.2.5] /Users/muhamadfarooq/.gradle/cach
 	android:name
 		INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml
 manifest
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-59:12
-INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-59:12
-INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-59:12
-INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-59:12
-MERGED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-59:12
+ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-40:12
+INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-40:12
+INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-40:12
+INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-40:12
+MERGED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-40:12
 MERGED from [:store_redirect] /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/build/store_redirect/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-9:12
 MERGED from [:cloud_firestore] /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/build/cloud_firestore/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
 MERGED from [:firebase_core] /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/build/firebase_core/intermediates/merged_manifest/debug/AndroidManifest.xml:2:1-17:12
@@ -181,11 +181,11 @@ INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhance
 		INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/debug/AndroidManifest.xml
 	android:versionName
 		INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-59:12
+		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-40:12
 		INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/debug/AndroidManifest.xml
 	android:versionCode
 		INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml
-		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-59:12
+		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:1-40:12
 		INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/debug/AndroidManifest.xml
 	xmlns:android
 		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:1:11-69
@@ -193,34 +193,6 @@ uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
 ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:3:5-81
 	android:name
 		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:3:22-78
-queries
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:4:5-17:13
-MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:28:5-44:15
-MERGED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:28:5-44:15
-MERGED from [androidx.media:media:1.3.1] /Users/muhamadfarooq/.gradle/caches/transforms-3/0376c3d39e3d1a1659493f895e06784a/transformed/media-1.3.1/AndroidManifest.xml:24:5-28:15
-MERGED from [androidx.media:media:1.3.1] /Users/muhamadfarooq/.gradle/caches/transforms-3/0376c3d39e3d1a1659493f895e06784a/transformed/media-1.3.1/AndroidManifest.xml:24:5-28:15
-intent#action:name:android.intent.action.VIEW+data:scheme:https
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:5:5-8:14
-action#android.intent.action.VIEW
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:6:7-59
-	android:name
-		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:6:15-56
-data
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:7:7-38
-	android:scheme
-		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:7:13-35
-intent#action:name:android.intent.action.DIAL+data:scheme:tel
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:9:5-12:14
-action#android.intent.action.DIAL
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:10:7-59
-	android:name
-		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:10:15-56
-intent#action:name:android.intent.action.SENDTO+data:scheme:smsto
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:13:5-16:14
-action#android.intent.action.SENDTO
-ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:14:7-61
-	android:name
-		ADDED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml:14:15-58
 uses-sdk
 INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/muhamadfarooq/AndroidStudioProjects/desiresol/photo_enhancer/android/app/src/main/AndroidManifest.xml
@@ -649,12 +621,24 @@ ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/muhamadfaro
 		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/muhamadfarooq/.gradle/caches/transforms-3/ffd5ebc44a0246361877da27248d89a8/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:21:19-78
 	android:name
 		ADDED from [com.google.android.gms:play-services-base:18.0.1] /Users/muhamadfarooq/.gradle/caches/transforms-3/ffd5ebc44a0246361877da27248d89a8/transformed/jetified-play-services-base-18.0.1/AndroidManifest.xml:20:19-85
+queries
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:28:5-44:15
+MERGED from [androidx.media:media:1.3.1] /Users/muhamadfarooq/.gradle/caches/transforms-3/0376c3d39e3d1a1659493f895e06784a/transformed/media-1.3.1/AndroidManifest.xml:24:5-28:15
+MERGED from [androidx.media:media:1.3.1] /Users/muhamadfarooq/.gradle/caches/transforms-3/0376c3d39e3d1a1659493f895e06784a/transformed/media-1.3.1/AndroidManifest.xml:24:5-28:15
 intent#action:name:android.intent.action.VIEW+category:name:android.intent.category.BROWSABLE+data:scheme:https
 ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:31:9-37:18
+action#android.intent.action.VIEW
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:32:13-65
+	android:name
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:32:21-62
 category#android.intent.category.BROWSABLE
 ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:34:13-74
 	android:name
 		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:34:23-71
+data
+ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:36:13-44
+	android:scheme
+		ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:36:19-41
 intent#action:name:android.support.customtabs.action.CustomTabsService
 ADDED from [com.google.android.gms:play-services-ads-lite:20.6.0] /Users/muhamadfarooq/.gradle/caches/transforms-3/42f1e12ef0b3db31b4d93a8dd2a74df8/transformed/jetified-play-services-ads-lite-20.6.0/AndroidManifest.xml:40:9-42:18
 action#android.support.customtabs.action.CustomTabsService
