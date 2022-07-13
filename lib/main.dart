@@ -49,6 +49,9 @@ class _MyAppState extends State<MyApp> {
         log("***********************************");
         print(result.data());
         log("***********************************");
+        log(SessionController().admob_banner_ad_android);
+        log(SessionController().admob_interstetial_ad_android);
+        log(SessionController().admob_rewarded_ad_android);
 
         SessionController().admob_banner_ad_android =
             result.data()["admob_banner_ad_android"];

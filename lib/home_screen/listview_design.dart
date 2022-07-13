@@ -1,16 +1,18 @@
+import 'dart:developer';
 import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
-import 'package:image/image.dart' as imagelib;
+import 'package:image_enhancer/edit_screen/edit_screen.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:photofilters/filters/preset_filters.dart';
+// ignore: depend_on_referenced_packages
+import '../ads_controller/ads_controller.dart';
 // ignore: depend_on_referenced_packages
 import 'package:path/path.dart';
-import 'package:image_enhancer/ads_controller/ads_controller.dart';
-import 'package:image_enhancer/edit_screen/edit_screen.dart';
-import 'package:photofilters/filters/preset_filters.dart';
-
+import 'package:image/image.dart' as imagelib;
 import '../ads_controller/load_ads_helper.dart';
 import '../photo_filter/photo_filter_screen.dart';
 import '../text_editor/text_editor.dart';
@@ -124,90 +126,110 @@ class _ListViewDesignState extends State<ListViewDesign> {
 
   void tapped(int index, File? userImage) async {
     if (_userImage != null) {
+      log("this is the index ======= $index");
+      /* -------------------------------------------------------------------------- */
+      /*                                index ==== 0                                */
+      /* -------------------------------------------------------------------------- */
       if (index == 0) {
+        log(LoadAdsHelper.admobRewardAd.toString());
+        log(ads.isRewardedAdReady.value.toString());
+
+        if (ads.isRewardedAdReady.value && LoadAdsHelper.admobRewardAd) {
+          ads.rewardedAd!.show(onUserEarnedReward: (ad, reward) {
+            Get.to(() => EditScreen(
+                buttonText: "Enhance", userImage: userImage, index: index));
+            ads.loadRewardedAd();
+          });
+        } else {
+          Get.to(() => EditScreen(
+              buttonText: "Enhance", userImage: userImage, index: index));
+        }
+      }
+      /* -------------------------------------------------------------------------- */
+      /*                                index ==== 1                                */
+      /* -------------------------------------------------------------------------- */
+      else if (index == 1) {
+        imageFile = File(userImage!.path);
+        fileName = basename(imageFile!.path);
+        List<int> bytes = await imageFile!.readAsBytes();
+        var image = imagelib.decodeImage(bytes);
+        image = imagelib.copyResize(image!, width: 600);
+
+        if (ads.isInterstitialAdReady.value &&
+            LoadAdsHelper.admobHomeScreeninterstitialAd) {
+          ads.interstitialAd!.show();
+          ads.loadInterstitialAd();
+          Get.to(
+            () => PhotoFilterSelector(
+              title: Text(
+                "Select Filter",
+                style: TextStyle(color: AppColors.blackColor),
+              ),
+              image: image!,
+              filters: presetFiltersList,
+              filename: fileName!,
+              loader: const SpinKitSpinningLines(color: Colors.black),
+              fit: BoxFit.contain,
+              userImage: userImage,
+            ),
+          );
+        } else {
+          Get.to(
+            () => PhotoFilterSelector(
+              title: Text(
+                "Select Filter",
+                style: TextStyle(color: AppColors.blackColor),
+              ),
+              image: image!,
+              filters: presetFiltersList,
+              filename: fileName!,
+              loader: const SpinKitSpinningLines(color: Colors.black),
+              fit: BoxFit.contain,
+              userImage: userImage,
+            ),
+          );
+        }
+      }
+      /* -------------------------------------------------------------------------- */
+      /*                                index ==== 2                                */
+      /* -------------------------------------------------------------------------- */
+      else if (index == 2) {
+        if (ads.isInterstitialAdReady.value &&
+            LoadAdsHelper.admobHomeScreeninterstitialAd) {
+          ads.interstitialAd!.show();
+          ads.loadInterstitialAd();
+          Get.to(() => TextEditorScreen(
+                buttonText: "Text Style",
+                userImage: userImage,
+                index: index,
+              ));
+        } else {
+          Get.to(() => TextEditorScreen(
+                buttonText: "Text Style",
+                userImage: userImage,
+                index: index,
+              ));
+        }
+      }
+      /* -------------------------------------------------------------------------- */
+      /*                                index ==== 3                                */
+      /* -------------------------------------------------------------------------- */
+      else if (index == 3) {
         if (ads.isRewardedAdReady.value && LoadAdsHelper.admobRewardAd) {
           ads.rewardedAd!.show(onUserEarnedReward: (ad, reward) {
             ads.loadRewardedAd();
-            Get.to(() => EditScreen(
-                buttonText: "Enhance", userImage: userImage, index: index));
+            Get.to(
+              () => EditScreen(
+                  buttonText: "HDR", userImage: userImage, index: index),
+            );
           });
-        }
-      } else {
-        Get.to(() => EditScreen(
-            buttonText: "Enhance", userImage: userImage, index: index));
-      }
-    } else if (index == 1) {
-      imageFile = File(userImage!.path);
-      fileName = basename(imageFile!.path);
-      List<int> bytes = await imageFile!.readAsBytes();
-      var image = imagelib.decodeImage(bytes);
-      image = imagelib.copyResize(image!, width: 600);
-
-      if (ads.isInterstitialAdReady.value &&
-          LoadAdsHelper.admobHomeScreeninterstitialAd) {
-        ads.interstitialAd!.show();
-        ads.loadInterstitialAd();
-        Get.to(
-          () => PhotoFilterSelector(
-            title: Text(
-              "My Edited Image",
-              style: TextStyle(color: AppColors.blackColor),
-            ),
-            image: image!,
-            filters: presetFiltersList,
-            filename: fileName!,
-            loader: const SpinKitSpinningLines(color: Colors.black),
-            fit: BoxFit.contain,
-            userImage: userImage,
-          ),
-        );
-      } else {
-        Get.to(
-          () => PhotoFilterSelector(
-            title: Text(
-              "My Edited Image",
-              style: TextStyle(color: AppColors.blackColor),
-            ),
-            image: image!,
-            filters: presetFiltersList,
-            filename: fileName!,
-            loader: const SpinKitSpinningLines(color: Colors.black),
-            fit: BoxFit.contain,
-            userImage: userImage,
-          ),
-        );
-      }
-    } else if (index == 2) {
-      if (ads.isInterstitialAdReady.value &&
-          LoadAdsHelper.admobHomeScreeninterstitialAd) {
-        ads.interstitialAd!.show();
-        ads.loadInterstitialAd();
-        Get.to(() => TextEditorScreen(
-              buttonText: "Text Style",
-              userImage: userImage,
-              index: index,
-            ));
-      } else {
-        Get.to(() => TextEditorScreen(
-              buttonText: "Text Style",
-              userImage: userImage,
-              index: index,
-            ));
-      }
-    } else if (index == 3) {
-      if (ads.isRewardedAdReady.value && LoadAdsHelper.admobRewardAd) {
-        ads.rewardedAd!.show(onUserEarnedReward: (ad, reward) {
-          ads.loadRewardedAd();
+        } else {
           Get.to(
             () => EditScreen(
                 buttonText: "HDR", userImage: userImage, index: index),
           );
-        });
+        }
       }
-    } else {
-      Get.to(
-        () => EditScreen(buttonText: "HDR", userImage: userImage, index: index),
-      );
     }
   }
 }

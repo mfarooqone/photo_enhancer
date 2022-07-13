@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,6 @@ import 'package:get/get.dart';
 import 'package:image/image.dart' as imagelib;
 import 'package:photofilters/filters/filters.dart';
 import 'package:photofilters/filters/preset_filters.dart';
-
 import '../save_screen/save_screen.dart';
 
 class EditScreen extends StatefulWidget {

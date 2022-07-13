@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:blurrycontainer/blurrycontainer.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 import 'package:matrix_gesture_detector/matrix_gesture_detector.dart';
 import 'package:image_enhancer/home_screen/home_screen.dart';
@@ -121,16 +122,16 @@ class _TextEditorScreenState extends State<TextEditorScreen> {
   @override
   Widget build(BuildContext context) {
     return Obx(() {
-      return tEController.isLoading.value
-          ? const CircularProgressIndicator()
-          : WillPopScope(
-              onWillPop: _onWillPop,
-              child: Scaffold(
-                resizeToAvoidBottomInset: false,
-                backgroundColor: Colors.white,
-                body: SafeArea(
-                  top: true,
-                  child: Stack(
+      return WillPopScope(
+        onWillPop: _onWillPop,
+        child: Scaffold(
+          resizeToAvoidBottomInset: false,
+          backgroundColor: Colors.white,
+          body: SafeArea(
+            top: true,
+            child: tEController.isLoading.value
+                ? SpinKitSpinningLines(color: Colors.black)
+                : Stack(
                     alignment: Alignment.topCenter,
                     children: [
                       if (tEController.isEdit.value)
@@ -184,6 +185,7 @@ class _TextEditorScreenState extends State<TextEditorScreen> {
                                     IconButton(
                                       onPressed: () {
                                         setState(() {
+                                          tEController.isLoading.value = true;
                                           var wwww = zoomRotateWidget(notifier);
                                           screenshotController
                                               .captureFromWidget(wwww)
@@ -196,6 +198,8 @@ class _TextEditorScreenState extends State<TextEditorScreen> {
                                                 bytes: capturedImage,
                                               ),
                                             );
+                                            tEController.isLoading.value =
+                                                false;
                                           });
                                         });
                                       },
@@ -275,9 +279,9 @@ class _TextEditorScreenState extends State<TextEditorScreen> {
                         ),
                     ],
                   ),
-                ),
-              ),
-            );
+          ),
+        ),
+      );
     });
   }
 

@@ -128,17 +128,13 @@ class _SaveScreenState extends State<SaveScreen> {
   Column bodyWidget(BuildContext context) {
     return Column(
       children: [
-        if (LoadAdsHelper.admobSaveScreenBannerAd
-        // &&
-        //     !purchaseApiController.isPurchased.value
-        )
+        if (LoadAdsHelper.admobSaveScreenBannerAd)
           BannerAdWidget(
             sessionBool: Platform.isAndroid
                 ? SessionController().admob_banner_save_screen_android
                 : SessionController().admob_banner_save_screen_android,
             adName: ads.saveScreenBanner!,
             isPurchased: false,
-            // purchaseApiController.isPurchased.value,
           ),
         Expanded(
           child: Padding(
@@ -252,18 +248,16 @@ class _SaveScreenState extends State<SaveScreen> {
                               LoadAdsHelper.admobRewardAd) {
                             ads.rewardedAd!.show(
                                 onUserEarnedReward: (ad, reward) {
-                              Get.to(
-                                () => EditScreen(
-                                    buttonText: "Enhance",
-                                    userImage: widget.userImage!,
-                                    index: 0),
-                              );
+                              Get.to(() => EditScreen(
+                                  buttonText: "Enhance",
+                                  userImage: widget.userImage,
+                                  index: 0));
                               ads.loadRewardedAd();
                             });
                           } else {
                             Get.to(() => EditScreen(
                                 buttonText: "Enhance",
-                                userImage: widget.userImage!,
+                                userImage: widget.userImage,
                                 index: 0));
                           }
                         },
@@ -295,7 +289,7 @@ class _SaveScreenState extends State<SaveScreen> {
                             Get.to(
                               () => PhotoFilterSelector(
                                 title: Text(
-                                  "Apply Filter",
+                                  "Select Filter",
                                   style: TextStyle(color: AppColors.blackColor),
                                 ),
                                 image: image!,
@@ -311,7 +305,7 @@ class _SaveScreenState extends State<SaveScreen> {
                             Get.to(
                               () => PhotoFilterSelector(
                                 title: Text(
-                                  "Apply Filter",
+                                  "Select Filter",
                                   style: TextStyle(color: AppColors.blackColor),
                                 ),
                                 image: image!,
@@ -344,17 +338,15 @@ class _SaveScreenState extends State<SaveScreen> {
                               LoadAdsHelper.admobHomeScreeninterstitialAd) {
                             ads.interstitialAd!.show();
                             ads.loadInterstitialAd();
-                            Get.to(
-                              () => TextEditorScreen(
-                                buttonText: "Text Style",
-                                userImage: widget.userImage!,
-                                index: 2,
-                              ),
-                            );
+                            Get.to(() => TextEditorScreen(
+                                  buttonText: "Text Style",
+                                  userImage: widget.userImage,
+                                  index: 2,
+                                ));
                           } else {
                             Get.to(() => TextEditorScreen(
                                   buttonText: "Text Style",
-                                  userImage: widget.userImage!,
+                                  userImage: widget.userImage,
                                   index: 2,
                                 ));
                           }
@@ -378,19 +370,19 @@ class _SaveScreenState extends State<SaveScreen> {
                               LoadAdsHelper.admobRewardAd) {
                             ads.rewardedAd!.show(
                                 onUserEarnedReward: (ad, reward) {
+                              ads.loadRewardedAd();
                               Get.to(
                                 () => EditScreen(
                                     buttonText: "HDR",
-                                    userImage: widget.userImage!,
+                                    userImage: widget.userImage,
                                     index: 3),
                               );
-                              ads.loadRewardedAd();
                             });
                           } else {
                             Get.to(
                               () => EditScreen(
                                   buttonText: "HDR",
-                                  userImage: widget.userImage!,
+                                  userImage: widget.userImage,
                                   index: 3),
                             );
                           }

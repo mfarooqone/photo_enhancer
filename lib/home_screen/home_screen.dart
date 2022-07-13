@@ -29,10 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    if (LoadAdsHelper.admobHomeScreeninterstitialAd
-        // &&
-        //     !purchaseApiController.isPurchased.value
-        ) {
+    if (LoadAdsHelper.admobHomeScreeninterstitialAd) {
       ads.loadInterstitialAd();
     }
     if (LoadAdsHelper.admobRewardAd) {
