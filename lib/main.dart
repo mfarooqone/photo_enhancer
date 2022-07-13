@@ -1,4 +1,5 @@
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -46,15 +47,11 @@ class _MyAppState extends State<MyApp> {
   void getData() async {
     await firestoreInstance.collection("ads").get().then((querySnapshot) {
       for (var result in querySnapshot.docs) {
-        log("***********************************");
-        print(result.data());
-        log("***********************************");
-        log(SessionController().admob_banner_ad_android);
-        log(SessionController().admob_interstetial_ad_android);
-        log(SessionController().admob_rewarded_ad_android);
-
         SessionController().admob_banner_ad_android =
             result.data()["admob_banner_ad_android"];
+
+        SessionController().admob_interstetial_ad_android =
+            result.data()["admob_interstetial_ad_android"];
 
         SessionController().admob_rewarded_ad_android =
             result.data()["admob_rewarded_ad_android"];
@@ -73,6 +70,13 @@ class _MyAppState extends State<MyApp> {
 
         SessionController().admob_reward_android =
             result.data()["admob_reward_android"];
+
+        log("***********************************");
+        print(result.data());
+        log("***********************************");
+        log(SessionController().admob_banner_ad_android);
+        log(SessionController().admob_interstetial_ad_android);
+        log(SessionController().admob_rewarded_ad_android);
 
 /* -------------------------------------------------------------------------- */
 /*                              applov in setting                             */

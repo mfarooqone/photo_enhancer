@@ -1,17 +1,12 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/drawer_design/drawer_design.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
-import 'package:shape_of_view_null_safe/shape_of_view_null_safe.dart';
 
 import '../ads_controller/load_ads_helper.dart';
-import '../selected_image/selected_image.dart';
 import '../widgets/gradient_container_design.dart';
 import 'listview_design.dart';
 
@@ -96,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   bool isBotomSheet = false;
-  File? _userImage;
+
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -240,95 +235,5 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
     );
-  }
-
-  Widget bottomSheetDesign() {
-    return Align(
-      alignment: Alignment.bottomCenter,
-      child: Padding(
-        padding: const EdgeInsets.only(bottom: 70),
-        child: ShapeOfView(
-          width: 320,
-          height: 136,
-          elevation: 0.5,
-          shape: BubbleShape(
-            position: BubblePosition.Bottom,
-            arrowPositionPercent: 0.5,
-            borderRadius: 20,
-            arrowHeight: 10,
-            arrowWidth: 20,
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              GradientContainerDesign(
-                height: 48,
-                width: 290,
-                title: "Camera",
-                leading: Image.asset(
-                  "assets/camera.png",
-                  width: 24,
-                  height: 24,
-                ),
-                showLeadingWidget: true,
-                onPressed: () {
-                  Get.back();
-                  _chooseImage(
-                    context,
-                    imageSource: ImageSource.camera,
-                  );
-                },
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              GradientContainerDesign(
-                height: 48,
-                width: 290,
-                title: "Gallery",
-                leading: Image.asset(
-                  "assets/gallery.png",
-                  width: 24,
-                  height: 24,
-                ),
-                showLeadingWidget: true,
-                onPressed: () {
-                  _chooseImage(
-                    context,
-                    imageSource: ImageSource.gallery,
-                  );
-                },
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
-  //
-  //
-  //
-  Future<void> _chooseImage(
-    BuildContext context, {
-    required ImageSource imageSource,
-  }) async {
-    final image = await ImagePicker().pickImage(
-      source: imageSource,
-      maxWidth: 2048.0,
-      maxHeight: 2048.0,
-    );
-    if (image != null) {
-      final imageFile = File(image.path);
-      // setState(() {
-      isBotomSheet = false;
-      _userImage = imageFile;
-
-      Get.to(
-        () => SelectedImage(
-          userImage: _userImage,
-        ),
-      );
-    }
   }
 }

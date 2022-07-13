@@ -38,7 +38,7 @@
                     }
                 },
                 {
-                    "source": "/Users/muhamadfarooq/.gradle/caches/transforms-3/363422dd49bf8a186e16e2e4dca762a9/transformed/jetified-play-services-ads-20.6.0/res/values-ar/values.xml",
+                    "source": "/Users/muhamadfarooq/.gradle/caches/transforms-3/4e6c17a00566b50e076af96fcadc96ea/transformed/jetified-play-services-ads-21.0.0/res/values-ar/values.xml",
                     "from": {
                         "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17",
                         "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0",

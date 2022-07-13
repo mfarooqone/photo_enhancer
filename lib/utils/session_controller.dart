@@ -3,10 +3,9 @@
 class SessionController {
   static final SessionController _session = SessionController._internel();
 
-  String admob_banner_ad_android = "ca-app-pub-3940256099942544/6300978111";
-  String admob_interstetial_ad_android =
-      "ca-app-pub-3940256099942544/1033173712";
-  String admob_rewarded_ad_android = "ca-app-pub-3940256099942544/5224354917";
+  String admob_banner_ad_android = "";
+  String admob_interstetial_ad_android = "";
+  String admob_rewarded_ad_android = "";
   String open_ad_id = "";
 
   /* -------------------------------------------------------------------------- */

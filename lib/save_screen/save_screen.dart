@@ -14,7 +14,6 @@ import 'package:path_provider/path_provider.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/edit_screen/edit_screen.dart';
 import 'package:image_enhancer/home_screen/home_screen.dart';
-import 'package:image_enhancer/utils/app_images.dart';
 import 'package:image_enhancer/widgets/before_after/custom_widget.dart';
 import 'package:photofilters/filters/preset_filters.dart';
 import 'package:share_plus/share_plus.dart';
@@ -53,6 +52,29 @@ class _SaveScreenState extends State<SaveScreen> {
   AdsController ads = Get.find();
   // PurchaseApiController purchaseApiController = Get.find();
   bool isSaved = false;
+
+  List<Widget> iconList = [
+    GradientContainerDesign1(
+      title: "Enhance",
+      width: 84,
+      height: 84,
+    ),
+    GradientContainerDesign1(
+      title: "Filter",
+      width: 84,
+      height: 84,
+    ),
+    GradientContainerDesign1(
+      title: "Text",
+      width: 84,
+      height: 84,
+    ),
+    GradientContainerDesign1(
+      title: "HDR",
+      width: 84,
+      height: 84,
+    ),
+  ];
 
   @override
   void initState() {
@@ -261,13 +283,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                 index: 0));
                           }
                         },
-                        child: SizedBox(
-                          width: 84,
-                          height: 84,
-                          child: Image.asset(
-                            AppImagesPath.enhance,
-                          ),
-                        ),
+                        child: iconList[0],
                       ),
                     ),
               index == 1
@@ -319,13 +335,7 @@ class _SaveScreenState extends State<SaveScreen> {
                             );
                           }
                         },
-                        child: SizedBox(
-                          width: 84,
-                          height: 84,
-                          child: Image.asset(
-                            AppImagesPath.filter,
-                          ),
-                        ),
+                        child: iconList[1],
                       ),
                     ),
               index == 2
@@ -351,13 +361,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                 ));
                           }
                         },
-                        child: SizedBox(
-                          width: 84,
-                          height: 84,
-                          child: Image.asset(
-                            AppImagesPath.text,
-                          ),
-                        ),
+                        child: iconList[2],
                       ),
                     ),
               index == 3
@@ -387,13 +391,7 @@ class _SaveScreenState extends State<SaveScreen> {
                             );
                           }
                         },
-                        child: SizedBox(
-                          width: 84,
-                          height: 84,
-                          child: Image.asset(
-                            AppImagesPath.hdr,
-                          ),
-                        ),
+                        child: iconList[3],
                       ),
                     ),
             ],
@@ -586,5 +584,72 @@ class _SaveScreenState extends State<SaveScreen> {
     } else {
       Get.defaultDialog(title: "Alert!", middleText: "Some Error Occurred");
     }
+  }
+}
+
+class GradientContainerDesign1 extends StatelessWidget {
+  const GradientContainerDesign1({
+    Key? key,
+    required this.title,
+    required this.width,
+    required this.height,
+    this.showTrailingIcon = false,
+    this.showLeadingWidget = false,
+    this.leading = const SizedBox(),
+  }) : super(key: key);
+  final String title;
+  final double width;
+  final double height;
+  final bool showLeadingWidget;
+  final bool showTrailingIcon;
+  final Widget leading;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          colors: [
+            AppColors.pinkColor,
+            AppColors.redColor,
+            AppColors.orangeColor,
+            AppColors.blueColor,
+          ],
+        ),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(2.5),
+        child: Container(
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                !showLeadingWidget ? const SizedBox() : leading,
+                title.isNotEmpty ? const SizedBox(width: 5) : const SizedBox(),
+                Text(
+                  title,
+                  style: AppTextStyle.black14,
+                ),
+                !showTrailingIcon
+                    ? const SizedBox()
+                    : const Icon(
+                        Icons.arrow_forward_ios,
+                        size: 15,
+                      )
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
