@@ -18,7 +18,9 @@ import '../photo_filter/photo_filter_screen.dart';
 import '../text_editor/text_editor.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_images.dart';
+import '../utils/app_textstyle.dart';
 import '../widgets/choose_photo_bottom_sheet.dart';
+import '../widgets/gradient_container_design.dart';
 
 class ListViewDesign extends StatefulWidget {
   const ListViewDesign({Key? key}) : super(key: key);
@@ -135,11 +137,56 @@ class _ListViewDesignState extends State<ListViewDesign> {
         log(ads.isRewardedAdReady.value.toString());
 
         if (ads.isRewardedAdReady.value && LoadAdsHelper.admobRewardAd) {
-          ads.rewardedAd!.show(onUserEarnedReward: (ad, reward) {
-            Get.to(() => EditScreen(
-                buttonText: "Enhance", userImage: userImage, index: index));
-            ads.loadRewardedAd();
-          });
+          Get.defaultDialog(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+            radius: 20,
+            title: "To get it free?",
+            content: Column(
+              children: [
+                Text(
+                  "Watch a video Ad",
+                  style: AppTextStyle.black14,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GradientContainerDesign(
+                      height: 40,
+                      width: 120,
+                      title: "Cancel",
+                      onPressed: () {
+                        Get.back();
+                      },
+                      showTrailingIcon: false,
+                      showLeadingWidget: true,
+                    ),
+                    // const SizedBox(
+                    //   width: 5,
+                    // ),
+                    GradientContainerDesign(
+                      height: 40,
+                      width: 120,
+                      title: "Ok",
+                      onPressed: () {
+                        ads.rewardedAd!.show(onUserEarnedReward: (ad, reward) {
+                          Get.to(() => EditScreen(
+                              buttonText: "Enhance",
+                              userImage: userImage,
+                              index: index));
+                          ads.loadRewardedAd();
+                        });
+                      },
+                      showTrailingIcon: false,
+                      showLeadingWidget: false,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
         } else {
           Get.to(() => EditScreen(
               buttonText: "Enhance", userImage: userImage, index: index));
@@ -216,13 +263,58 @@ class _ListViewDesignState extends State<ListViewDesign> {
       /* -------------------------------------------------------------------------- */
       else if (index == 3) {
         if (ads.isRewardedAdReady.value && LoadAdsHelper.admobRewardAd) {
-          ads.rewardedAd!.show(onUserEarnedReward: (ad, reward) {
-            ads.loadRewardedAd();
-            Get.to(
-              () => EditScreen(
-                  buttonText: "HDR", userImage: userImage, index: index),
-            );
-          });
+          Get.defaultDialog(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+            radius: 20,
+            title: "To get it free?",
+            content: Column(
+              children: [
+                Text(
+                  "Watch a video Ad",
+                  style: AppTextStyle.black14,
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    GradientContainerDesign(
+                      height: 40,
+                      width: 120,
+                      title: "Cancel",
+                      onPressed: () {
+                        Get.back();
+                      },
+                      showTrailingIcon: false,
+                      showLeadingWidget: true,
+                    ),
+                    // const SizedBox(
+                    //   width: 5,
+                    // ),
+                    GradientContainerDesign(
+                      height: 40,
+                      width: 120,
+                      title: "Ok",
+                      onPressed: () {
+                        ads.rewardedAd!.show(onUserEarnedReward: (ad, reward) {
+                          ads.loadRewardedAd();
+                          Get.to(
+                            () => EditScreen(
+                                buttonText: "HDR",
+                                userImage: userImage,
+                                index: index),
+                          );
+                        });
+                      },
+                      showTrailingIcon: false,
+                      showLeadingWidget: false,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          );
         } else {
           Get.to(
             () => EditScreen(

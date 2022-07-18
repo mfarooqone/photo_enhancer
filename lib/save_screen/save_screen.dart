@@ -268,14 +268,59 @@ class _SaveScreenState extends State<SaveScreen> {
                         onTap: () {
                           if (ads.isRewardedAdReady.value &&
                               LoadAdsHelper.admobRewardAd) {
-                            ads.rewardedAd!.show(
-                                onUserEarnedReward: (ad, reward) {
-                              Get.to(() => EditScreen(
-                                  buttonText: "Enhance",
-                                  userImage: widget.userImage,
-                                  index: 0));
-                              ads.loadRewardedAd();
-                            });
+                            Get.defaultDialog(
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              radius: 20,
+                              title: "To get it free?",
+                              content: Column(
+                                children: [
+                                  Text(
+                                    "Watch a video Ad",
+                                    style: AppTextStyle.black14,
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      GradientContainerDesign(
+                                        height: 40,
+                                        width: 120,
+                                        title: "Cancel",
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        showTrailingIcon: false,
+                                        showLeadingWidget: true,
+                                      ),
+                                      // const SizedBox(
+                                      //   width: 5,
+                                      // ),
+                                      GradientContainerDesign(
+                                        height: 40,
+                                        width: 120,
+                                        title: "Ok",
+                                        onPressed: () {
+                                          ads.rewardedAd!.show(
+                                              onUserEarnedReward: (ad, reward) {
+                                            Get.to(() => EditScreen(
+                                                buttonText: "Enhance",
+                                                userImage: widget.userImage,
+                                                index: 0));
+                                            ads.loadRewardedAd();
+                                          });
+                                        },
+                                        showTrailingIcon: false,
+                                        showLeadingWidget: false,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
                           } else {
                             Get.to(() => EditScreen(
                                 buttonText: "Enhance",
@@ -372,16 +417,61 @@ class _SaveScreenState extends State<SaveScreen> {
                         onTap: () {
                           if (ads.isRewardedAdReady.value &&
                               LoadAdsHelper.admobRewardAd) {
-                            ads.rewardedAd!.show(
-                                onUserEarnedReward: (ad, reward) {
-                              ads.loadRewardedAd();
-                              Get.to(
-                                () => EditScreen(
-                                    buttonText: "HDR",
-                                    userImage: widget.userImage,
-                                    index: 3),
-                              );
-                            });
+                            Get.defaultDialog(
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 10),
+                              radius: 20,
+                              title: "To get it free?",
+                              content: Column(
+                                children: [
+                                  Text(
+                                    "Watch a video Ad",
+                                    style: AppTextStyle.black14,
+                                  ),
+                                  const SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      GradientContainerDesign(
+                                        height: 40,
+                                        width: 120,
+                                        title: "Cancel",
+                                        onPressed: () {
+                                          Get.back();
+                                        },
+                                        showTrailingIcon: false,
+                                        showLeadingWidget: true,
+                                      ),
+                                      // const SizedBox(
+                                      //   width: 5,
+                                      // ),
+                                      GradientContainerDesign(
+                                        height: 40,
+                                        width: 120,
+                                        title: "Ok",
+                                        onPressed: () {
+                                          ads.rewardedAd!.show(
+                                              onUserEarnedReward: (ad, reward) {
+                                            ads.loadRewardedAd();
+                                            Get.to(
+                                              () => EditScreen(
+                                                  buttonText: "HDR",
+                                                  userImage: widget.userImage,
+                                                  index: 3),
+                                            );
+                                          });
+                                        },
+                                        showTrailingIcon: false,
+                                        showLeadingWidget: false,
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            );
                           } else {
                             Get.to(
                               () => EditScreen(
@@ -404,17 +494,14 @@ class _SaveScreenState extends State<SaveScreen> {
   Widget showImageWidget(int index) {
     return index == 0
         ? BeforeAfter(
-            imageHeight: 300,
             beforeImage: Stack(
               alignment: Alignment.topCenter,
               children: [
                 Image.file(
                   widget.userImage!,
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ).blurred(
-                  colorOpacity: 0.2,
+                  colorOpacity: 0.1,
                   blur: 0.1,
                 ),
                 Align(
@@ -428,9 +515,7 @@ class _SaveScreenState extends State<SaveScreen> {
               children: [
                 Image.memory(
                   Uint8List.fromList(widget.bytes!),
-                  width: double.infinity,
-                  height: double.infinity,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.contain,
                 ),
                 Align(
                   alignment: Alignment.topRight,
@@ -446,9 +531,7 @@ class _SaveScreenState extends State<SaveScreen> {
                   children: [
                     Image.file(
                       widget.userImage!,
-                      width: double.infinity,
-                      height: double.infinity,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     ),
                     Align(
                       alignment: Alignment.topLeft,
@@ -461,9 +544,7 @@ class _SaveScreenState extends State<SaveScreen> {
                   children: [
                     Image.file(
                       widget.filteredImage!,
-                      width: double.infinity,
-                      height: double.infinity,
-                      fit: BoxFit.fill,
+                      fit: BoxFit.contain,
                     ),
                     Align(
                       alignment: Alignment.topRight,
@@ -474,20 +555,11 @@ class _SaveScreenState extends State<SaveScreen> {
               )
             : index == 2
                 ? Container(
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(
-                        4,
-                      ),
-                    ),
-                    clipBehavior: Clip.hardEdge,
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Image.memory(
-                        Uint8List.fromList(widget.bytes!),
-                        width: double.infinity,
-                        height: double.infinity,
-                        fit: BoxFit.fill,
-                      ),
+                    width: double.infinity,
+                    height: double.infinity,
+                    child: Image.memory(
+                      Uint8List.fromList(widget.bytes!),
+                      fit: BoxFit.contain,
                     ),
                   )
                 : index == 3
@@ -497,9 +569,7 @@ class _SaveScreenState extends State<SaveScreen> {
                           children: [
                             Image.file(
                               widget.userImage!,
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                             Align(
                               alignment: Alignment.topLeft,
@@ -512,9 +582,7 @@ class _SaveScreenState extends State<SaveScreen> {
                           children: [
                             Image.memory(
                               Uint8List.fromList(widget.bytes!),
-                              width: double.infinity,
-                              height: double.infinity,
-                              fit: BoxFit.fill,
+                              fit: BoxFit.contain,
                             ),
                             Align(
                               alignment: Alignment.topRight,
@@ -537,10 +605,10 @@ class _SaveScreenState extends State<SaveScreen> {
           ),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 6, vertical: 6),
+          padding: EdgeInsets.symmetric(horizontal: 6, vertical: 6),
           child: Text(
             text,
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
               fontSize: 14,
             ),
