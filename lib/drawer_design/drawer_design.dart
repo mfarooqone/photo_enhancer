@@ -130,7 +130,8 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 ListTile(
                   onTap: () {
                     Uri url = Uri.parse(
-                        "https://desiresol911.blogspot.com/p/privacy-policy-our-privacy-policy-helps.html"
+                       "https://desiresol911.blogspot.com/p/privacy-policy-our-privacy-policy-helps.html",);
+
                     _launchUrl(url);
                   },
                   leading: Icon(
