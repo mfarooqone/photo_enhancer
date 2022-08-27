@@ -16,6 +16,7 @@ class FirebaseData {
           /* -------------------------------------------------------------------------- */
           /*                                   ads ids                                  */
           /* -------------------------------------------------------------------------- */
+
           SessionController.admob_banner_ad_id =
               result.data()["admob_banner_ad_id"];
 
@@ -41,6 +42,15 @@ class FirebaseData {
           SessionController.admob_banner_filter_screen =
               result.data()["admob_banner_filter_screen"];
 
+          SessionController.admob_interstetial_splash_screen =
+              result.data()["admob_interstetial_splash_screen"];
+
+          SessionController.admob_interstetial_privacy_screen =
+              result.data()["admob_interstetial_privacy_screen"];
+
+          SessionController.admob_interstetial_save_screen =
+              result.data()["admob_interstetial_save_screen"];
+
           SessionController.admob_interstetial_home_screen =
               result.data()["admob_interstetial_home_screen"];
 
@@ -49,40 +59,13 @@ class FirebaseData {
 
           SessionController.admob_reward = result.data()["admob_reward"];
 
-          log("***********************************");
-          log(result.data().toString());
-          log("***********************************");
+          // log("***********************************");
+          // log(result.data().toString());
+          // log("***********************************");
         }
       });
     } catch (e) {
       log(e.toString());
     }
-  }
-}
-
-class SetSessionData {
-  /* -------------------------------------------------------------------------- */
-/*                              set session data                              */
-/* -------------------------------------------------------------------------- */
-
-  void setSessionData() async {
-    SessionController.admob_banner_ad_id = "";
-    SessionController.admob_interstetial_ad_id = "";
-    SessionController.admob_rewarded_ad_id = "";
-    SessionController.open_ad_id = "";
-
-    /* -------------------------------------------------------------------------- */
-    /*                               stop admob ads                               */
-    /* -------------------------------------------------------------------------- */
-
-    /* -------------------------------------------------------------------------- */
-    /*                                 banner ads                                 */
-    /* -------------------------------------------------------------------------- */
-
-    SessionController.admob_banner_save_screen = false;
-    SessionController.admob_banner_filter_screen = false;
-    SessionController.admob_interstetial_home_screen = false;
-    SessionController.admob_interstetial_select_screen = false;
-    SessionController.admob_reward = false;
   }
 }
