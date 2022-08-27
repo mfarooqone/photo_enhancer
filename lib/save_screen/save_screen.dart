@@ -55,23 +55,19 @@ class _SaveScreenState extends State<SaveScreen> {
   List<Widget> iconList = [
     GradientContainerDesign1(
       title: "Enhance",
-      width: 84,
-      height: 84,
+      imagePath: "assets/enhance.png",
     ),
     GradientContainerDesign1(
       title: "Filter",
-      width: 84,
-      height: 84,
+      imagePath: "assets/filter.png",
     ),
     GradientContainerDesign1(
       title: "Text",
-      width: 84,
-      height: 84,
+      imagePath: "assets/text.png",
     ),
     GradientContainerDesign1(
       title: "HDR",
-      width: 84,
-      height: 84,
+      imagePath: "assets/hdr.png",
     ),
   ];
 
@@ -586,24 +582,16 @@ class GradientContainerDesign1 extends StatelessWidget {
   const GradientContainerDesign1({
     Key? key,
     required this.title,
-    required this.width,
-    required this.height,
-    this.showTrailingIcon = false,
-    this.showLeadingWidget = false,
-    this.leading = const SizedBox(),
+    required this.imagePath,
   }) : super(key: key);
   final String title;
-  final double width;
-  final double height;
-  final bool showLeadingWidget;
-  final bool showTrailingIcon;
-  final Widget leading;
+  final String imagePath;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: width,
-      height: height,
+      width: 84,
+      height: 84,
       decoration: BoxDecoration(
         gradient: LinearGradient(
           begin: Alignment.topRight,
@@ -618,33 +606,28 @@ class GradientContainerDesign1 extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Padding(
-        padding: const EdgeInsets.all(2.5),
-        child: Container(
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-          ),
-          child: Center(
-            child: Row(
+          padding: const EdgeInsets.all(2.5),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                !showLeadingWidget ? const SizedBox() : leading,
-                title.isNotEmpty ? const SizedBox(width: 5) : const SizedBox(),
-                Text(
-                  title,
-                  style: AppTextStyle.black14,
+                Image.asset(
+                  imagePath,
+                  width: 30,
+                  height: 30,
+                  fit: BoxFit.fill,
                 ),
-                !showTrailingIcon
-                    ? const SizedBox()
-                    : const Icon(
-                        Icons.arrow_forward_ios,
-                        size: 15,
-                      )
+                SizedBox(
+                  height: 2,
+                ),
+                Text(title)
               ],
             ),
-          ),
-        ),
-      ),
+          )),
     );
   }
 }

@@ -25,6 +25,12 @@ class FirebaseData {
           SessionController.admob_rewarded_ad_id =
               result.data()["admob_rewarded_ad_id"];
 
+          SessionController.open_ad_id = result.data()["open_ad_id"];
+
+          /* -------------------------------------------------------------------------- */
+          /*                               stop admob ads                               */
+          /* -------------------------------------------------------------------------- */
+
           /* -------------------------------------------------------------------------- */
           /*                                 banner ads                                 */
           /* -------------------------------------------------------------------------- */
@@ -51,5 +57,32 @@ class FirebaseData {
     } catch (e) {
       log(e.toString());
     }
+  }
+}
+
+class SetSessionData {
+  /* -------------------------------------------------------------------------- */
+/*                              set session data                              */
+/* -------------------------------------------------------------------------- */
+
+  void setSessionData() async {
+    SessionController.admob_banner_ad_id = "";
+    SessionController.admob_interstetial_ad_id = "";
+    SessionController.admob_rewarded_ad_id = "";
+    SessionController.open_ad_id = "";
+
+    /* -------------------------------------------------------------------------- */
+    /*                               stop admob ads                               */
+    /* -------------------------------------------------------------------------- */
+
+    /* -------------------------------------------------------------------------- */
+    /*                                 banner ads                                 */
+    /* -------------------------------------------------------------------------- */
+
+    SessionController.admob_banner_save_screen = false;
+    SessionController.admob_banner_filter_screen = false;
+    SessionController.admob_interstetial_home_screen = false;
+    SessionController.admob_interstetial_select_screen = false;
+    SessionController.admob_reward = false;
   }
 }

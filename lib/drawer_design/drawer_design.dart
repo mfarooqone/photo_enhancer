@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,10 +38,29 @@ class _DrawerDesignState extends State<DrawerDesign> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                const Divider(),
+                Image.asset(
+                  "assets/drawer.png",
+                ),
+                SizedBox(
+                  height: 20,
+                ),
 
+                GradientText(
+                  "Photo Enhancer AI\nPhotoShoot",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24.0,
+                  ),
+                  colors: [
+                    AppColors.pinkColor,
+                    AppColors.redColor,
+                    AppColors.blueColor,
+                    AppColors.orangeColor,
+                  ],
+                ),
+                const Divider(),
                 /* -------------------------------------------------------------------------- */
                 /*                                   Rate us                                  */
                 /* -------------------------------------------------------------------------- */
@@ -105,6 +125,7 @@ class _DrawerDesignState extends State<DrawerDesign> {
                     style: AppTextStyle.black16,
                   ),
                 ),
+                const Divider(),
                 /* -------------------------------------------------------------------------- */
                 /*                            terms and conditions                            */
                 /* -------------------------------------------------------------------------- */

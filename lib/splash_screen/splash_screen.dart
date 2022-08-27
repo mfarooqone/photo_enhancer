@@ -31,8 +31,10 @@ class _SplashScreenState extends State<SplashScreen> {
   bool splashLoading = true;
   void checkPurchase() async {
     FirebaseData().getFirebaseData().then((value) {
-      ads.loadInterstitialAd();
       Future.delayed(Duration(seconds: 3), () {
+        if (SessionController.admob_interstetial_splash_screen) {
+          ads.loadInterstitialAd();
+        }
         setState(() {
           splashLoading = false;
         });
