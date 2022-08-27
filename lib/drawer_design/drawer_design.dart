@@ -19,7 +19,6 @@ class _DrawerDesignState extends State<DrawerDesign> {
     if (!await launchUrl(url)) throw 'Could not launch $url';
   }
 
-  // var purchaseApiController = Get.find<PurchaseApiController>();
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -40,47 +39,8 @@ class _DrawerDesignState extends State<DrawerDesign> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // ListTile(
-                //   onTap: () async {
-                //     Get.to(() => const SubscriptionsPage());
-                //   },
-                //   leading: Icon(
-                //     Icons.workspace_premium_rounded,
-                //     size: 20,
-                //     color: AppColors.blackColor,
-                //   ),
-                //   title: Text(
-                //     "Go Premium",
-                //     style: AppTextStyle.black16,
-                //   ),
-                // ),
-
-                /* -------------------------------------------------------------------------- */
-                /*                              restore purchase                              */
-                /* -------------------------------------------------------------------------- */
                 const Divider(),
-                // ListTile(
-                //   onTap: () async {
-                //     try {
-                //       // PurchaserInfo restoredInfo =
-                //       // await Purchases.restoreTransactions();
-                //       // await purchaseApiController.init();
-                //       Get.back();
-                //     } catch (e) {
-                //       Get.snackbar("              Something went wrong", "");
-                //     }
-                //   },
-                //   leading: Icon(
-                //     Icons.restore_outlined,
-                //     size: 20,
-                //     color: AppColors.blackColor,
-                //   ),
-                //   title: Text(
-                //     "Restore Purchase",
-                //     style: AppTextStyle.black16,
-                //   ),
-                // ),
-                // Divider(),
+
                 /* -------------------------------------------------------------------------- */
                 /*                                   Rate us                                  */
                 /* -------------------------------------------------------------------------- */
@@ -130,7 +90,8 @@ class _DrawerDesignState extends State<DrawerDesign> {
                 ListTile(
                   onTap: () {
                     Uri url = Uri.parse(
-                       "https://desiresol911.blogspot.com/p/privacy-policy-our-privacy-policy-helps.html",);
+                      "https://desiresol911.blogspot.com/p/privacy-policy-our-privacy-policy-helps.html",
+                    );
 
                     _launchUrl(url);
                   },

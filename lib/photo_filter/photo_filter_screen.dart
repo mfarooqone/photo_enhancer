@@ -8,15 +8,14 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:image/image.dart' as imagelib;
-import 'package:path_provider/path_provider.dart';
 import 'package:image_enhancer/save_screen/save_screen.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photofilters/filters/filters.dart';
 
 import '../ads_controller/ads_controller.dart';
-import '../ads_controller/load_ads_helper.dart';
+import '../ads_controller/banner_ad_widget.dart';
 import '../utils/app_colors.dart';
 import '../utils/session_controller.dart';
-import '../widgets/banner_ad_widget.dart';
 
 class PhotoFilterScreen extends StatelessWidget {
   final imagelib.Image image;
@@ -97,20 +96,12 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
   String? filename = "abc.jpg";
   Map<String, List<int>?> cachedFilters = {};
   AdsController ads = Get.find();
-  // PurchaseApiController purchaseApiController = Get.find();
   Filter? _filter;
   imagelib.Image? image;
   late bool loading;
 
   @override
   void initState() {
-    if (LoadAdsHelper.admobFilterScreenBannerAd
-        // &&
-        //     !purchaseApiController.isPurchased.value
-        ) {
-      ads.filterScreenBannerAdLoad();
-    }
-
     loading = false;
     _filter = widget.filters[0];
     filename = widget.filename;
@@ -186,20 +177,9 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
               child: Column(
                 mainAxisSize: MainAxisSize.max,
                 children: [
-                  if (LoadAdsHelper.admobFilterScreenBannerAd
-                  // &&
-                  //     !purchaseApiController.isPurchased.value
-                  )
-                    BannerAdWidget(
-                      sessionBool: Platform.isAndroid
-                          ? SessionController()
-                              .admob_banner_filter_screen_android
-                          : SessionController()
-                              .admob_banner_filter_screen_android,
-                      adName: ads.filterScreenBanner!,
-                      isPurchased: false,
-                      //  purchaseApiController.isPurchased.value,
-                    ),
+                  BannerAdWidget(
+                    helperValue: SessionController.admob_banner_filter_screen,
+                  ),
                   Expanded(
                     flex: 6,
                     child: Container(

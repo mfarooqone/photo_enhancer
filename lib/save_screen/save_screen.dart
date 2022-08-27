@@ -8,23 +8,23 @@ import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
 // ignore: depend_on_referenced_packages
 import 'package:image/image.dart' as imagelib;
-// ignore: depend_on_referenced_packages
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/edit_screen/edit_screen.dart';
 import 'package:image_enhancer/home_screen/home_screen.dart';
 import 'package:image_enhancer/widgets/before_after/custom_widget.dart';
+// ignore: depend_on_referenced_packages
+import 'package:path/path.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:photofilters/filters/preset_filters.dart';
 import 'package:share_plus/share_plus.dart';
 
-import '../ads_controller/load_ads_helper.dart';
+import '../ads_controller/banner_ad_widget.dart';
+import '../ads_controller/load_ads_function.dart';
 import '../photo_filter/photo_filter_screen.dart';
 import '../text_editor/text_editor.dart';
 import '../utils/app_colors.dart';
 import '../utils/app_textstyle.dart';
 import '../utils/session_controller.dart';
-import '../widgets/banner_ad_widget.dart';
 import '../widgets/gradient_container_design.dart';
 
 class SaveScreen extends StatefulWidget {
@@ -50,7 +50,6 @@ class _SaveScreenState extends State<SaveScreen> {
   File? imageFile;
   var date = DateTime.now();
   AdsController ads = Get.find();
-  // PurchaseApiController purchaseApiController = Get.find();
   bool isSaved = false;
 
   List<Widget> iconList = [
@@ -78,24 +77,6 @@ class _SaveScreenState extends State<SaveScreen> {
 
   @override
   void initState() {
-    if (LoadAdsHelper.admobSaveScreenBannerAd
-        // &&
-        //     !purchaseApiController.isPurchased.value
-        ) {
-      ads.saveScreenBannerAdLoad();
-    }
-    if (LoadAdsHelper.admobSaveScreeninterstitialAd
-        // &&
-        //     !purchaseApiController.isPurchased.value
-        ) {
-      ads.loadInterstitialAd();
-    }
-    if (LoadAdsHelper.admobRewardAd
-        // &&
-        //     !purchaseApiController.isPurchased.value
-        ) {
-      ads.loadRewardedAd();
-    }
     saveFilteredImage();
     super.initState();
   }
@@ -150,14 +131,9 @@ class _SaveScreenState extends State<SaveScreen> {
   Column bodyWidget(BuildContext context) {
     return Column(
       children: [
-        if (LoadAdsHelper.admobSaveScreenBannerAd)
-          BannerAdWidget(
-            sessionBool: Platform.isAndroid
-                ? SessionController().admob_banner_save_screen_android
-                : SessionController().admob_banner_save_screen_android,
-            adName: ads.saveScreenBanner!,
-            isPurchased: false,
-          ),
+        BannerAdWidget(
+          helperValue: SessionController.admob_banner_save_screen,
+        ),
         Expanded(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 23),
@@ -266,67 +242,56 @@ class _SaveScreenState extends State<SaveScreen> {
                       padding: const EdgeInsets.only(left: 16),
                       child: InkWell(
                         onTap: () {
-                          if (ads.isRewardedAdReady.value &&
-                              LoadAdsHelper.admobRewardAd) {
-                            Get.defaultDialog(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              radius: 20,
-                              title: "To get it free?",
-                              content: Column(
-                                children: [
-                                  Text(
-                                    "Watch a video Ad",
-                                    style: AppTextStyle.black14,
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      GradientContainerDesign(
-                                        height: 40,
-                                        width: 120,
-                                        title: "Cancel",
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        showTrailingIcon: false,
-                                        showLeadingWidget: true,
-                                      ),
-                                      // const SizedBox(
-                                      //   width: 5,
-                                      // ),
-                                      GradientContainerDesign(
-                                        height: 40,
-                                        width: 120,
-                                        title: "Ok",
-                                        onPressed: () {
-                                          ads.rewardedAd!.show(
-                                              onUserEarnedReward: (ad, reward) {
-                                            Get.to(() => EditScreen(
-                                                buttonText: "Enhance",
-                                                userImage: widget.userImage,
-                                                index: 0));
-                                            ads.loadRewardedAd();
-                                          });
-                                        },
-                                        showTrailingIcon: false,
-                                        showLeadingWidget: false,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          } else {
-                            Get.to(() => EditScreen(
-                                buttonText: "Enhance",
-                                userImage: widget.userImage,
-                                index: 0));
-                          }
+                          Get.defaultDialog(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 10),
+                            radius: 20,
+                            title: "To get it free?",
+                            content: Column(
+                              children: [
+                                Text(
+                                  "Watch a video Ad",
+                                  style: AppTextStyle.black14,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Cancel",
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: true,
+                                    ),
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Ok",
+                                      onPressed: () async {
+                                        LoadAdClass()
+                                            .rewardAd(
+                                                SessionController.admob_reward)
+                                            .then((value) => Get.to(() =>
+                                                EditScreen(
+                                                    buttonText: "Enhance",
+                                                    userImage: widget.userImage,
+                                                    index: 0)));
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: false,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         child: iconList[0],
                       ),
@@ -343,42 +308,24 @@ class _SaveScreenState extends State<SaveScreen> {
                           var image = imagelib.decodeImage(bytes);
                           image = imagelib.copyResize(image!, width: 600);
 
-                          if (ads.isInterstitialAdReady.value &&
-                              LoadAdsHelper.admobHomeScreeninterstitialAd) {
-                            ads.interstitialAd!.show();
-                            ads.loadInterstitialAd();
-                            Get.to(
-                              () => PhotoFilterSelector(
-                                title: Text(
-                                  "Select Filter",
-                                  style: TextStyle(color: AppColors.blackColor),
-                                ),
-                                image: image!,
-                                filters: presetFiltersList,
-                                filename: fileName!,
-                                loader: const SpinKitSpinningLines(
-                                    color: Colors.black),
-                                fit: BoxFit.contain,
-                                userImage: widget.userImage!,
+                          LoadAdClass().interstetialAd(
+                              SessionController.admob_interstetial_save_screen);
+
+                          Get.to(
+                            () => PhotoFilterSelector(
+                              title: Text(
+                                "Select Filter",
+                                style: TextStyle(color: AppColors.blackColor),
                               ),
-                            );
-                          } else {
-                            Get.to(
-                              () => PhotoFilterSelector(
-                                title: Text(
-                                  "Select Filter",
-                                  style: TextStyle(color: AppColors.blackColor),
-                                ),
-                                image: image!,
-                                filters: presetFiltersList,
-                                filename: fileName!,
-                                loader: const SpinKitSpinningLines(
-                                    color: Colors.black),
-                                fit: BoxFit.contain,
-                                userImage: widget.userImage!,
-                              ),
-                            );
-                          }
+                              image: image!,
+                              filters: presetFiltersList,
+                              filename: fileName!,
+                              loader: const SpinKitSpinningLines(
+                                  color: Colors.black),
+                              fit: BoxFit.contain,
+                              userImage: widget.userImage!,
+                            ),
+                          );
                         },
                         child: iconList[1],
                       ),
@@ -389,22 +336,14 @@ class _SaveScreenState extends State<SaveScreen> {
                       padding: const EdgeInsets.only(left: 16),
                       child: InkWell(
                         onTap: () {
-                          if (ads.isInterstitialAdReady.value &&
-                              LoadAdsHelper.admobHomeScreeninterstitialAd) {
-                            ads.interstitialAd!.show();
-                            ads.loadInterstitialAd();
-                            Get.to(() => TextEditorScreen(
-                                  buttonText: "Text Style",
-                                  userImage: widget.userImage,
-                                  index: 2,
-                                ));
-                          } else {
-                            Get.to(() => TextEditorScreen(
-                                  buttonText: "Text Style",
-                                  userImage: widget.userImage,
-                                  index: 2,
-                                ));
-                          }
+                          LoadAdClass().interstetialAd(
+                              SessionController.admob_interstetial_save_screen);
+
+                          Get.to(() => TextEditorScreen(
+                                buttonText: "Text Style",
+                                userImage: widget.userImage,
+                                index: 2,
+                              ));
                         },
                         child: iconList[2],
                       ),
@@ -415,71 +354,59 @@ class _SaveScreenState extends State<SaveScreen> {
                       padding: const EdgeInsets.only(left: 16),
                       child: InkWell(
                         onTap: () {
-                          if (ads.isRewardedAdReady.value &&
-                              LoadAdsHelper.admobRewardAd) {
-                            Get.defaultDialog(
-                              contentPadding:
-                                  const EdgeInsets.symmetric(horizontal: 10),
-                              radius: 20,
-                              title: "To get it free?",
-                              content: Column(
-                                children: [
-                                  Text(
-                                    "Watch a video Ad",
-                                    style: AppTextStyle.black14,
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      GradientContainerDesign(
-                                        height: 40,
-                                        width: 120,
-                                        title: "Cancel",
-                                        onPressed: () {
-                                          Get.back();
-                                        },
-                                        showTrailingIcon: false,
-                                        showLeadingWidget: true,
-                                      ),
-                                      // const SizedBox(
-                                      //   width: 5,
-                                      // ),
-                                      GradientContainerDesign(
-                                        height: 40,
-                                        width: 120,
-                                        title: "Ok",
-                                        onPressed: () {
-                                          ads.rewardedAd!.show(
-                                              onUserEarnedReward: (ad, reward) {
-                                            ads.loadRewardedAd();
-                                            Get.to(
-                                              () => EditScreen(
-                                                  buttonText: "HDR",
-                                                  userImage: widget.userImage,
-                                                  index: 3),
+                          Get.defaultDialog(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 10),
+                            radius: 20,
+                            title: "To get it free?",
+                            content: Column(
+                              children: [
+                                Text(
+                                  "Watch a video Ad",
+                                  style: AppTextStyle.black14,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Cancel",
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: true,
+                                    ),
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Ok",
+                                      onPressed: () async {
+                                        LoadAdClass()
+                                            .rewardAd(
+                                                SessionController.admob_reward)
+                                            .then(
+                                              (value) => Get.to(() =>
+                                                  EditScreen(
+                                                      buttonText: "HDR",
+                                                      userImage:
+                                                          widget.userImage,
+                                                      index: 3)),
                                             );
-                                          });
-                                        },
-                                        showTrailingIcon: false,
-                                        showLeadingWidget: false,
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            );
-                          } else {
-                            Get.to(
-                              () => EditScreen(
-                                  buttonText: "HDR",
-                                  userImage: widget.userImage,
-                                  index: 3),
-                            );
-                          }
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: false,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         child: iconList[3],
                       ),

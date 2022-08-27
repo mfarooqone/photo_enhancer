@@ -1,20 +1,15 @@
 import 'dart:developer';
 
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-
-import 'ads_helper.dart';
+import 'package:image_enhancer/utils/session_controller.dart';
 
 class AdsController extends GetxController {
-  BannerAd? saveScreenBanner;
-  BannerAd? filterScreenBanner;
   RewardedAd? rewardedAd;
-
   InterstitialAd? interstitialAd;
-  RxBool isBannerAdReady = false.obs;
-  RxBool isInterstitialAdReady = false.obs;
+
   RxBool isRewardedAdReady = false.obs;
+  RxBool isInterstitialAdReady = false.obs;
 
   Future<InitializationStatus> initGoogleMobileAds() {
     return MobileAds.instance.initialize();
@@ -39,81 +34,32 @@ class AdsController extends GetxController {
   //   update();
   // }
 
-  // bool isRewardedVideoAvailable = false;
-  // bool isInterstitialVideoAvailable = true;
-
-  void saveScreenBannerAdLoad() {
-    saveScreenBanner = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.fullBanner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          isBannerAdReady.value = true;
-          update();
-        },
-        onAdFailedToLoad: (ad, err) {
-          if (kDebugMode) {
-            log('Failed to load a banner ad: ${err.message}');
-          }
-          isBannerAdReady.value = false;
-          ad.dispose();
-        },
-      ),
-    );
-    saveScreenBanner?.load();
-    update();
-  }
-
-  void filterScreenBannerAdLoad() {
-    filterScreenBanner = BannerAd(
-      adUnitId: AdHelper.bannerAdUnitId,
-      request: const AdRequest(),
-      size: AdSize.fullBanner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          isBannerAdReady.value = true;
-          update();
-        },
-        onAdFailedToLoad: (ad, err) {
-          if (kDebugMode) {
-            log('Failed to load a banner ad: ${err.message}');
-          }
-          isBannerAdReady.value = false;
-          ad.dispose();
-        },
-      ),
-    );
-    filterScreenBanner?.load();
-    update();
-  }
-
   void loadInterstitialAd() {
     InterstitialAd.load(
-        adUnitId: AdHelper.interstitialAdUnitId,
+        adUnitId: SessionController.admob_interstetial_ad_id,
         request: const AdRequest(),
         adLoadCallback: InterstitialAdLoadCallback(
           onAdLoaded: (InterstitialAd ad) {
-            log('$ad loaded');
+            print('$ad loaded');
             interstitialAd = ad;
             interstitialAd!.setImmersiveMode(true);
             isInterstitialAdReady.value = true;
             update();
           },
           onAdFailedToLoad: (LoadAdError error) {
-            log('InterstitialAd failed to load: $error');
+            print('InterstitialAd failed to load: $error');
             isInterstitialAdReady.value = false;
             interstitialAd = null;
-
             update();
           },
         ));
+
     update();
   }
 
   void loadRewardedAd() {
     RewardedAd.load(
-      adUnitId: AdHelper.rewardedAdUnitId,
+      adUnitId: SessionController.admob_rewarded_ad_id,
       request: const AdRequest(),
       rewardedAdLoadCallback: RewardedAdLoadCallback(
         onAdLoaded: (ad) {
@@ -142,7 +88,6 @@ class AdsController extends GetxController {
   @override
   void dispose() {
     super.dispose();
-    saveScreenBanner?.dispose();
     interstitialAd?.dispose();
     rewardedAd!.dispose();
   }

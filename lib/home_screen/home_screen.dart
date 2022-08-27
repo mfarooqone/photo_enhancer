@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/drawer_design/drawer_design.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
-import 'package:image_enhancer/utils/app_textstyle.dart';
+import 'package:image_enhancer/utils/session_controller.dart';
 
-import '../ads_controller/load_ads_helper.dart';
-import '../widgets/gradient_container_design.dart';
+import '../splash_screen/exit_screen.dart';
 import 'listview_design.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -20,74 +18,17 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   AdsController ads = Get.find();
-  // PurchaseApiController purchaseApiController = Get.find();
 
   @override
   void initState() {
-    if (LoadAdsHelper.admobHomeScreeninterstitialAd) {
-      ads.loadInterstitialAd();
-    }
-    if (LoadAdsHelper.admobRewardAd) {
+    if (SessionController.admob_reward) {
       ads.loadRewardedAd();
     }
     super.initState();
   }
 
   Future<bool> _onWillPop() async {
-    return (await Get.defaultDialog(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 10),
-            radius: 20,
-            title: "Exit App",
-            content: Column(
-              children: [
-                Text(
-                  "Are you sure you want to exit?",
-                  style: AppTextStyle.black14,
-                ),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    GradientContainerDesign(
-                      height: 40,
-                      width: 120,
-                      title: "Cancel",
-                      onPressed: () {
-                        Get.back();
-                      },
-                      showTrailingIcon: false,
-                      showLeadingWidget: true,
-                      leading: Icon(
-                        Icons.close_rounded,
-                        size: 15,
-                        color: AppColors.blackColor,
-                      ),
-                    ),
-                    // const SizedBox(
-                    //   width: 5,
-                    // ),
-                    GradientContainerDesign(
-                      height: 40,
-                      width: 120,
-                      title: "Exit",
-                      onPressed: () {
-                        SystemNavigator.pop();
-                      },
-                      showTrailingIcon: false,
-                      showLeadingWidget: true,
-                      leading: Icon(
-                        Icons.exit_to_app_outlined,
-                        size: 15,
-                        color: AppColors.blackColor,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ))) ??
-        false;
+    return (await Get.to(() => ExitScreen())) ?? false;
   }
 
   bool isBotomSheet = false;
@@ -110,7 +51,7 @@ class _HomeScreenState extends State<HomeScreen> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              "Photo Enhancer",
+              "Photo Enhancer AI",
               style: TextStyle(
                 color: AppColors.blackColor,
                 fontSize: 16,
