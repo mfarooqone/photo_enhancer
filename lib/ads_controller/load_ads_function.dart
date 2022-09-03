@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:fgx_applovin/flutter_applovin_max.dart';
 import 'package:get/get.dart';
 
@@ -6,7 +8,7 @@ import 'ads_controller.dart';
 class LoadAdClass {
   final AdsController ads = Get.find();
   Future<void> interstetialAd(
-      bool admobHelper, applovinHelper, fbHelper) async {
+      bool admobHelper, bool applovinHelper, bool fbHelper) async {
     if (admobHelper) {
       ads.loadInterstitialAd();
       if (ads.isInterstitialAdReady.value) {
@@ -22,7 +24,8 @@ class LoadAdClass {
     }
   }
 
-  Future<void> rewardAd(bool admobHelper, applovinHelper, fbHelper) async {
+  Future<void> rewardAd(
+      bool admobHelper, bool applovinHelper, bool fbHelper) async {
     if (admobHelper) {
       ads.loadRewardedAd();
       if (ads.isRewardedAdReady.value) {
@@ -31,8 +34,10 @@ class LoadAdClass {
     } else if (fbHelper) {
       // ads.showFacebookRewardedAd();
     } else if (applovinHelper) {
+      log(applovinHelper.toString());
       FlutterApplovinMax.showRewardVideo((AppLovinAdListener? event) {
         print(event);
+        log(event.toString());
         ads.listener(event);
       });
     }
