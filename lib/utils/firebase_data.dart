@@ -67,5 +67,72 @@ class FirebaseData {
     } catch (e) {
       log(e.toString());
     }
+
+/* -------------------------------------------------------------------------- */
+/*                           applovin firebase data                           */
+/* -------------------------------------------------------------------------- */
+
+    try {
+      await firestoreInstance
+          .collection("applovin")
+          .get()
+          .then((querySnapshot) {
+        for (var result in querySnapshot.docs) {
+          /* -------------------------------------------------------------------------- */
+          /*                                   ads ids                                  */
+          /* -------------------------------------------------------------------------- */
+
+          SessionController.applovin_banner_ad_id =
+              result.data()["applovin_banner_ad_id"];
+
+          SessionController.applovin_interstetial_ad_id =
+              result.data()["applovin_interstetial_ad_id"];
+
+          SessionController.applovin_rewarded_ad_id =
+              result.data()["applovin_rewarded_ad_id"];
+          SessionController.applovin_native_ad_id =
+              result.data()["applovin_native_ad_id"];
+
+          /* -------------------------------------------------------------------------- */
+          /*                               stop applovin ads                               */
+          /* -------------------------------------------------------------------------- */
+
+          /* -------------------------------------------------------------------------- */
+          /*                                 banner ads                                 */
+          /* -------------------------------------------------------------------------- */
+
+          SessionController.applovin_banner_save_screen =
+              result.data()["applovin_banner_save_screen"];
+
+          SessionController.applovin_banner_filter_screen =
+              result.data()["applovin_banner_filter_screen"];
+
+          SessionController.applovin_interstetial_splash_screen =
+              result.data()["applovin_interstetial_splash_screen"];
+
+          SessionController.applovin_interstetial_privacy_screen =
+              result.data()["applovin_interstetial_privacy_screen"];
+
+          SessionController.applovin_interstetial_save_screen =
+              result.data()["applovin_interstetial_save_screen"];
+
+          SessionController.applovin_interstetial_home_screen =
+              result.data()["applovin_interstetial_home_screen"];
+
+          SessionController.applovin_interstetial_select_screen =
+              result.data()["applovin_interstetial_select_screen"];
+
+          SessionController.applovin_reward = result.data()["applovin_reward"];
+          SessionController.applovin_native_ad =
+              result.data()["applovin_native_ad"];
+
+          log("***********************************");
+          log(result.data().toString());
+          log("***********************************");
+        }
+      });
+    } catch (e) {
+      log(e.toString());
+    }
   }
 }

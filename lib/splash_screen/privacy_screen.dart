@@ -138,8 +138,11 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                       onPressed: () async {
                         final prefs = await SharedPreferences.getInstance();
                         await prefs.setBool('isPrivacyScreen', true);
-                        LoadAdClass().interstetialAd(SessionController
-                            .admob_interstetial_privacy_screen);
+                        LoadAdClass().interstetialAd(
+                          SessionController.admob_interstetial_privacy_screen,
+                          SessionController
+                              .applovin_interstetial_privacy_screen,
+                        );
                         Get.to(() => HomeScreen());
                       }),
                 ),

@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.hdphoto.photoshoot.enhance.image.hdr.ai">
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="com.google.android.gms.permission.AD_ID"/>
     <uses-permission android:name="com.android.vending.BILLING" />
@@ -38,7 +39,7 @@
          <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
             android:value="ca-app-pub-4582858977395538~7378008866"/>
-            <!-- <meta-data android:name="applovin.sdk.key"
-            android:value="y2s0LfLMHISQOOLHcI6EPSTC8lTvisvRXIn_7z5gvyhm2RnUQyrruf3PcBbHaM_hrVmJhp-I95M8Q1fL-uL1mL"/> -->
+            <meta-data android:name="applovin.sdk.key"
+            android:value="45kT4VQU0UG7_N0y2rQ4Afnrbd-xTh-F27IktAuD0E4nt7oBTCRLOyzDIbt8bMFlwk3wQXWiT092k2wwsZNTxW"/>
     </application>
 </manifest>

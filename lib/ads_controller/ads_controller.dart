@@ -1,8 +1,11 @@
 import 'dart:developer';
 
+import 'package:fgx_applovin/flutter_applovin_max.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_enhancer/utils/session_controller.dart';
+
+enum AdLoadState { notLoaded, loading, loaded }
 
 class AdsController extends GetxController {
   RewardedAd? rewardedAd;
@@ -14,25 +17,6 @@ class AdsController extends GetxController {
   Future<InitializationStatus> initGoogleMobileAds() {
     return MobileAds.instance.initialize();
   }
-
-  // listener(AppLovinAdListener? event) {
-  //   // log(event);
-  //   // if (event == AppLovinAdListener.onUserRewarded) {
-  //   //   log('👍get reward');
-  //   // }
-
-  //   if (event == AppLovinAdListener.onUserRewarded) {
-  //     log('👍get rewarded adddd');
-  //   }
-  //   if (event == AppLovinAdListener.onAdDisplayFailed) {
-  //     FlutterApplovinMax.showInterstitialVideo((AppLovinAdListener? event) {
-  //       if (event == AppLovinAdListener.onUserRewarded) {
-  //         log('👍get showInterstitialVideo');
-  //       }
-  //     });
-  //   }
-  //   update();
-  // }
 
   void loadInterstitialAd() {
     InterstitialAd.load(
@@ -76,12 +60,34 @@ class AdsController extends GetxController {
           isRewardedAdReady.value = true;
         },
         onAdFailedToLoad: (err) {
-          log('Failed to load a rewarded ad: ${err.message}');
           isRewardedAdReady.value = false;
           update();
         },
       ),
     );
+    update();
+  }
+
+  /* -------------------------------------------------------------------------- */
+  /*                           applovin ads controller                          */
+  /* -------------------------------------------------------------------------- */
+
+  listener(AppLovinAdListener? event) {
+    print(event);
+    // if (event == AppLovinAdListener.onUserRewarded) {
+    //   print('👍get reward');
+    // }
+
+    if (event == AppLovinAdListener.onUserRewarded) {
+      log('👍get rewarded adddd');
+    }
+    if (event == AppLovinAdListener.onAdDisplayFailed) {
+      FlutterApplovinMax.showInterstitialVideo((AppLovinAdListener? event) {
+        if (event == AppLovinAdListener.onUserRewarded) {
+          print('👍get showInterstitialVideo');
+        }
+      });
+    }
     update();
   }
 

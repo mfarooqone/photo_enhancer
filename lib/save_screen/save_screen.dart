@@ -273,7 +273,9 @@ class _SaveScreenState extends State<SaveScreen> {
                                       onPressed: () async {
                                         LoadAdClass()
                                             .rewardAd(
-                                                SessionController.admob_reward)
+                                                SessionController.admob_reward,
+                                                SessionController
+                                                    .applovin_reward)
                                             .then((value) => Get.to(() =>
                                                 EditScreen(
                                                     buttonText: "Enhance",
@@ -305,7 +307,9 @@ class _SaveScreenState extends State<SaveScreen> {
                           image = imagelib.copyResize(image!, width: 600);
 
                           LoadAdClass().interstetialAd(
-                              SessionController.admob_interstetial_save_screen);
+                            SessionController.admob_interstetial_save_screen,
+                            SessionController.applovin_interstetial_save_screen,
+                          );
 
                           Get.to(
                             () => PhotoFilterSelector(
@@ -333,7 +337,9 @@ class _SaveScreenState extends State<SaveScreen> {
                       child: InkWell(
                         onTap: () {
                           LoadAdClass().interstetialAd(
-                              SessionController.admob_interstetial_save_screen);
+                            SessionController.admob_interstetial_save_screen,
+                            SessionController.applovin_interstetial_save_screen,
+                          );
 
                           Get.to(() => TextEditorScreen(
                                 buttonText: "Text Style",
@@ -385,7 +391,9 @@ class _SaveScreenState extends State<SaveScreen> {
                                       onPressed: () async {
                                         LoadAdClass()
                                             .rewardAd(
-                                                SessionController.admob_reward)
+                                              SessionController.admob_reward,
+                                              SessionController.applovin_reward,
+                                            )
                                             .then(
                                               (value) => Get.to(() =>
                                                   EditScreen(

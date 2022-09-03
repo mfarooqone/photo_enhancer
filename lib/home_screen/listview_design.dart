@@ -164,7 +164,10 @@ class _ListViewDesignState extends State<ListViewDesign> {
                     title: "Ok",
                     onPressed: () async {
                       LoadAdClass()
-                          .rewardAd(SessionController.admob_reward)
+                          .rewardAd(
+                            SessionController.admob_reward,
+                            SessionController.applovin_reward,
+                          )
                           .then(
                             (value) => Get.to(() => EditScreen(
                                 buttonText: "Enhance",
@@ -191,8 +194,9 @@ class _ListViewDesignState extends State<ListViewDesign> {
         var image = imagelib.decodeImage(bytes);
         image = imagelib.copyResize(image!, width: 600);
 
-        LoadAdClass()
-            .interstetialAd(SessionController.admob_interstetial_home_screen);
+        LoadAdClass().interstetialAd(
+            SessionController.admob_interstetial_home_screen,
+            SessionController.applovin_interstetial_home_screen);
 
         Get.to(
           () => PhotoFilterSelector(
@@ -213,8 +217,10 @@ class _ListViewDesignState extends State<ListViewDesign> {
       /*                                index ==== 2                                */
       /* -------------------------------------------------------------------------- */
       else if (index == 2) {
-        LoadAdClass()
-            .interstetialAd(SessionController.admob_interstetial_home_screen);
+        LoadAdClass().interstetialAd(
+          SessionController.admob_interstetial_home_screen,
+          SessionController.applovin_interstetial_home_screen,
+        );
         Get.to(() => TextEditorScreen(
               buttonText: "Text Style",
               userImage: userImage,
@@ -260,7 +266,8 @@ class _ListViewDesignState extends State<ListViewDesign> {
                     title: "Ok",
                     onPressed: () async {
                       LoadAdClass()
-                          .rewardAd(SessionController.admob_reward)
+                          .rewardAd(SessionController.admob_reward,
+                              SessionController.applovin_reward)
                           .then((value) => Get.to(
                                 () => EditScreen(
                                     buttonText: "HDR",

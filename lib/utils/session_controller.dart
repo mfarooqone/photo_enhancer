@@ -14,16 +14,25 @@ class SessionController {
   static bool admob_interstetial_select_screen = false;
   static bool admob_reward = false;
   /* -------------------------------------------------------------------------- */
-  /*                          applovin interstetial ads                         */
+  /*                          applovin  ads                                      */
   /* -------------------------------------------------------------------------- */
 
-  // static bool applovin_interstetial = false;
-
-  /* -------------------------------------------------------------------------- */
-  /*                               applovin reward                              */
-  /* -------------------------------------------------------------------------- */
-
-  // static bool applovin_reward = false;
+  static String applovin_sdk_key =
+      "45kT4VQU0UG7_N0y2rQ4Afnrbd-xTh-F27IktAuD0E4nt7oBTCRLOyzDIbt8bMFlwk3wQXWiT092k2wwsZNTxW";
+  static String applovin_banner_ad_id = "8e37149c086fd15f";
+  static String applovin_interstetial_ad_id = "66077cfa48467aca";
+  static String applovin_rewarded_ad_id = "5f301c02d7e213a0";
+  static String applovin_open_ad_id = "";
+  static String applovin_native_ad_id = "2e9df280265f50aa";
+  static bool applovin_banner_save_screen = false;
+  static bool applovin_banner_filter_screen = false;
+  static bool applovin_interstetial_splash_screen = false;
+  static bool applovin_interstetial_privacy_screen = false;
+  static bool applovin_interstetial_home_screen = false;
+  static bool applovin_interstetial_save_screen = false;
+  static bool applovin_interstetial_select_screen = false;
+  static bool applovin_reward = false;
+  static bool applovin_native_ad = false;
 
   factory SessionController() {
     return _session;

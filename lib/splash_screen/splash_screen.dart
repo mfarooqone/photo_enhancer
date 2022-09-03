@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/splash_screen/privacy_screen.dart';
 import 'package:image_enhancer/widgets/no_internet_controller.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../ads_controller/load_ads_function.dart';
 import '../home_screen/home_screen.dart';
@@ -23,10 +22,10 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final AdsController ads = Get.put(AdsController(), permanent: true);
   bool isPrivacyScreen = false;
-  getPreferencesData() async {
-    final prefs = await SharedPreferences.getInstance();
-    isPrivacyScreen = await prefs.getBool('isPrivacyScreen') ?? false;
-  }
+  // getPreferencesData() async {
+  //   final prefs = await SharedPreferences.getInstance();
+  //   isPrivacyScreen = await prefs.getBool('isPrivacyScreen') ?? false;
+  // }
 
   bool splashLoading = true;
   void checkPurchase() async {
@@ -35,13 +34,14 @@ class _SplashScreenState extends State<SplashScreen> {
         if (SessionController.admob_interstetial_splash_screen) {
           ads.loadInterstitialAd();
         }
+
         setState(() {
           splashLoading = false;
         });
       });
     });
 
-    getPreferencesData();
+    // getPreferencesData();
   }
 
   Future<bool> _onWillPop() async {
@@ -114,7 +114,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     if (splashLoading) {
                     } else {
                       LoadAdClass().interstetialAd(
-                          SessionController.admob_interstetial_splash_screen);
+                        SessionController.admob_interstetial_splash_screen,
+                        SessionController.applovin_interstetial_splash_screen,
+                      );
                       !isPrivacyScreen
                           ? Get.to(() => PrivacyScreen())
                           : Get.off(() => HomeScreen());
