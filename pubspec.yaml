@@ -52,6 +52,7 @@ dependencies:
   shared_preferences: ^2.0.15
   simple_gradient_text: ^1.2.3
   fgx_applovin: ^1.0.1
+  # facebook_audience_network: ^1.0.1
 
 
   # The following adds the Cupertino Icons font to your application.

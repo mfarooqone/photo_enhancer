@@ -85,10 +85,35 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
     return Column(
       children: [
         SizedBox(
-          height: 60,
-          width: double.infinity,
-          child: AdWidget(ad: bannerAd!),
-        ),
+            height: 60,
+            width: double.infinity,
+            child:
+                // widget.helperValue
+                //     ?
+                AdWidget(ad: bannerAd!)
+            // :
+            // FacebookBannerAd(
+            //     placementId:
+            //         "IMG_16_9_APP_INSTALL#820972062394062_820979879059947",
+            //     bannerSize: BannerSize.STANDARD,
+            //     listener: (result, value) {
+            //       switch (result) {
+            //         case BannerAdResult.ERROR:
+            //           print("Error: $value");
+            //           break;
+            //         case BannerAdResult.LOADED:
+            //           print("Loaded: $value");
+            //           break;
+            //         case BannerAdResult.CLICKED:
+            //           print("Clicked: $value");
+            //           break;
+            //         case BannerAdResult.LOGGING_IMPRESSION:
+            //           print("Logging Impression: $value");
+            //           break;
+            //       }
+            //     },
+            //   ),
+            ),
         SizedBox(
           height: 5,
         )

@@ -34,6 +34,24 @@ class SessionController {
   static bool applovin_reward = false;
   static bool applovin_native_ad = false;
 
+  /* -------------------------------------------------------------------------- */
+  /*                                  facebook                                  */
+  /* -------------------------------------------------------------------------- */
+
+  static String fb_banner_ad_id = "8e37149c086fd15f";
+  static String fb_interstetial_ad_id = "66077cfa48467aca";
+  static String fb_rewarded_ad_id = "5f301c02d7e213a0";
+  static String fb_native_ad_id = "2e9df280265f50aa";
+  static bool fb_banner_save_screen = false;
+  static bool fb_banner_filter_screen = false;
+  static bool fb_interstetial_splash_screen = false;
+  static bool fb_interstetial_privacy_screen = false;
+  static bool fb_interstetial_home_screen = false;
+  static bool fb_interstetial_save_screen = false;
+  static bool fb_interstetial_select_screen = false;
+  static bool fb_reward = false;
+  static bool fb_native_ad = false;
+
   factory SessionController() {
     return _session;
   }

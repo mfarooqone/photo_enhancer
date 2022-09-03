@@ -126,6 +126,69 @@ class FirebaseData {
           SessionController.applovin_native_ad =
               result.data()["applovin_native_ad"];
 
+          // log("***********************************");
+          // log(result.data().toString());
+          // log("***********************************");
+        }
+      });
+    } catch (e) {
+      log(e.toString());
+    }
+
+    /* -------------------------------------------------------------------------- */
+    /*                                facebook data                               */
+    /* -------------------------------------------------------------------------- */
+    try {
+      await firestoreInstance
+          .collection("facebook")
+          .get()
+          .then((querySnapshot) {
+        for (var result in querySnapshot.docs) {
+          /* -------------------------------------------------------------------------- */
+          /*                                   ads ids                                  */
+          /* -------------------------------------------------------------------------- */
+
+          SessionController.fb_banner_ad_id = result.data()["fb_banner_ad_id"];
+
+          SessionController.fb_interstetial_ad_id =
+              result.data()["fb_interstetial_ad_id"];
+
+          SessionController.fb_rewarded_ad_id =
+              result.data()["fb_rewarded_ad_id"];
+          SessionController.fb_native_ad_id = result.data()["fb_native_ad_id"];
+
+          /* -------------------------------------------------------------------------- */
+          /*                               stop fb ads                               */
+          /* -------------------------------------------------------------------------- */
+
+          /* -------------------------------------------------------------------------- */
+          /*                                 banner ads                                 */
+          /* -------------------------------------------------------------------------- */
+
+          SessionController.fb_banner_save_screen =
+              result.data()["fb_banner_save_screen"];
+
+          SessionController.fb_banner_filter_screen =
+              result.data()["fb_banner_filter_screen"];
+
+          SessionController.fb_interstetial_splash_screen =
+              result.data()["fb_interstetial_splash_screen"];
+
+          SessionController.fb_interstetial_privacy_screen =
+              result.data()["fb_interstetial_privacy_screen"];
+
+          SessionController.fb_interstetial_save_screen =
+              result.data()["fb_interstetial_save_screen"];
+
+          SessionController.fb_interstetial_home_screen =
+              result.data()["fb_interstetial_home_screen"];
+
+          SessionController.fb_interstetial_select_screen =
+              result.data()["fb_interstetial_select_screen"];
+
+          SessionController.fb_reward = result.data()["fb_reward"];
+          SessionController.fb_native_ad = result.data()["fb_native_ad"];
+
           log("***********************************");
           log(result.data().toString());
           log("***********************************");

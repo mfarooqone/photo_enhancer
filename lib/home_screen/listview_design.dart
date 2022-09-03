@@ -167,6 +167,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
                           .rewardAd(
                             SessionController.admob_reward,
                             SessionController.applovin_reward,
+                            SessionController.fb_reward,
                           )
                           .then(
                             (value) => Get.to(() => EditScreen(
@@ -195,8 +196,10 @@ class _ListViewDesignState extends State<ListViewDesign> {
         image = imagelib.copyResize(image!, width: 600);
 
         LoadAdClass().interstetialAd(
-            SessionController.admob_interstetial_home_screen,
-            SessionController.applovin_interstetial_home_screen);
+          SessionController.admob_interstetial_home_screen,
+          SessionController.applovin_interstetial_home_screen,
+          SessionController.fb_interstetial_home_screen,
+        );
 
         Get.to(
           () => PhotoFilterSelector(
@@ -220,6 +223,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
         LoadAdClass().interstetialAd(
           SessionController.admob_interstetial_home_screen,
           SessionController.applovin_interstetial_home_screen,
+          SessionController.fb_interstetial_home_screen,
         );
         Get.to(() => TextEditorScreen(
               buttonText: "Text Style",
@@ -266,8 +270,11 @@ class _ListViewDesignState extends State<ListViewDesign> {
                     title: "Ok",
                     onPressed: () async {
                       LoadAdClass()
-                          .rewardAd(SessionController.admob_reward,
-                              SessionController.applovin_reward)
+                          .rewardAd(
+                            SessionController.admob_reward,
+                            SessionController.applovin_reward,
+                            SessionController.fb_reward,
+                          )
                           .then((value) => Get.to(
                                 () => EditScreen(
                                     buttonText: "HDR",

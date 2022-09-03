@@ -34,6 +34,10 @@ class _SplashScreenState extends State<SplashScreen> {
         if (SessionController.admob_interstetial_splash_screen) {
           ads.loadInterstitialAd();
         }
+        // ads.initializeServices();
+
+        // ads.loadFacebookInterstitialAd();
+        // ads.loadFacebookRewardedVideoAd();
 
         setState(() {
           splashLoading = false;
@@ -116,6 +120,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       LoadAdClass().interstetialAd(
                         SessionController.admob_interstetial_splash_screen,
                         SessionController.applovin_interstetial_splash_screen,
+                        SessionController.fb_interstetial_splash_screen,
                       );
                       !isPrivacyScreen
                           ? Get.to(() => PrivacyScreen())

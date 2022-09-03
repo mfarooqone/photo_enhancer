@@ -14,6 +14,9 @@ class AdsController extends GetxController {
   RxBool isRewardedAdReady = false.obs;
   RxBool isInterstitialAdReady = false.obs;
 
+  // bool isFBInterstitialAdLoaded = false;
+  // bool isFBRewardedAdLoaded = false;
+
   Future<InitializationStatus> initGoogleMobileAds() {
     return MobileAds.instance.initialize();
   }
@@ -67,6 +70,69 @@ class AdsController extends GetxController {
     );
     update();
   }
+
+  /* -------------------------------------------------------------------------- */
+  /*                                facebook ads                                */
+  /* -------------------------------------------------------------------------- */
+
+  // initializeServices() {
+  //   // FacebookAudienceNetwork.init(
+  //   //     testingId: "820972062394062", //optional
+  //   //     iOSAdvertiserTrackingEnabled: true //default false
+  //   //     );
+  // }
+
+  // loadFacebookInterstitialAd() {
+  //   FacebookInterstitialAd.loadInterstitialAd(
+  //     placementId: "IMG_16_9_APP_INSTALL#820972062394062_820980109059924",
+  //     // placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
+  //     // placementId: SessionController().facebook_interstetial_placement_id,
+  //     listener: (result, value) {
+  //       log(">> FAN > Interstitial Ad: $result --> $value");
+  //       if (result == InterstitialAdResult.LOADED) {
+  //         isFBInterstitialAdLoaded = true;
+  //       }
+  //       if (result == InterstitialAdResult.DISMISSED &&
+  //           value["invalidated"] == true) {
+  //         isFBInterstitialAdLoaded = false;
+  //         loadFacebookInterstitialAd();
+  //       }
+  //     },
+  //   );
+  // }
+
+  // showFacebookInterstitialAd() {
+  //   if (isFBInterstitialAdLoaded == true) {
+  //     FacebookInterstitialAd.showInterstitialAd();
+  //   } else {
+  //     loadFacebookInterstitialAd();
+  //     log("Interstial Ad not yet loaded!");
+  //   }
+  // }
+
+  // void loadFacebookRewardedVideoAd() {
+  //   FacebookRewardedVideoAd.loadRewardedVideoAd(
+  //     placementId: "IMG_16_9_APP_INSTALL#820972062394062_820981025726499",
+  //     // placementId: "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID",
+  //     listener: (result, value) {
+  //       print("Rewarded Ad: $result --> $value");
+  //       if (result == RewardedVideoAdResult.LOADED) isFBRewardedAdLoaded = true;
+  //       if (result == RewardedVideoAdResult.VIDEO_COMPLETE) if (result ==
+  //               RewardedVideoAdResult.VIDEO_CLOSED &&
+  //           (value == true || value["invalidated"] == true)) {
+  //         isFBRewardedAdLoaded = false;
+  //         loadFacebookRewardedVideoAd();
+  //       }
+  //     },
+  //   );
+  // }
+
+  // showFacebookRewardedAd() {
+  //   if (isFBRewardedAdLoaded == true)
+  //     FacebookRewardedVideoAd.showRewardedVideoAd();
+  //   else
+  //     log("Rewarded Ad not yet loaded!");
+  // }
 
   /* -------------------------------------------------------------------------- */
   /*                           applovin ads controller                          */

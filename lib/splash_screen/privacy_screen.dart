@@ -142,6 +142,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                           SessionController.admob_interstetial_privacy_screen,
                           SessionController
                               .applovin_interstetial_privacy_screen,
+                          SessionController.fb_interstetial_privacy_screen,
                         );
                         Get.to(() => HomeScreen());
                       }),

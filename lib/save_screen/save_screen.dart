@@ -273,9 +273,10 @@ class _SaveScreenState extends State<SaveScreen> {
                                       onPressed: () async {
                                         LoadAdClass()
                                             .rewardAd(
-                                                SessionController.admob_reward,
-                                                SessionController
-                                                    .applovin_reward)
+                                              SessionController.admob_reward,
+                                              SessionController.applovin_reward,
+                                              SessionController.fb_reward,
+                                            )
                                             .then((value) => Get.to(() =>
                                                 EditScreen(
                                                     buttonText: "Enhance",
@@ -309,6 +310,7 @@ class _SaveScreenState extends State<SaveScreen> {
                           LoadAdClass().interstetialAd(
                             SessionController.admob_interstetial_save_screen,
                             SessionController.applovin_interstetial_save_screen,
+                            SessionController.fb_banner_save_screen,
                           );
 
                           Get.to(
@@ -339,6 +341,7 @@ class _SaveScreenState extends State<SaveScreen> {
                           LoadAdClass().interstetialAd(
                             SessionController.admob_interstetial_save_screen,
                             SessionController.applovin_interstetial_save_screen,
+                            SessionController.fb_banner_save_screen,
                           );
 
                           Get.to(() => TextEditorScreen(
@@ -393,6 +396,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                             .rewardAd(
                                               SessionController.admob_reward,
                                               SessionController.applovin_reward,
+                                              SessionController.fb_reward,
                                             )
                                             .then(
                                               (value) => Get.to(() =>
