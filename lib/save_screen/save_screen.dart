@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:gallery_saver/gallery_saver.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 // ignore: depend_on_referenced_packages
 import 'package:image/image.dart' as imagelib;
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
@@ -128,11 +129,12 @@ class _SaveScreenState extends State<SaveScreen> {
     return Column(
       children: [
         BannerAdWidget(
+          adSize: AdSize.fullBanner,
           helperValue: SessionController.admob_banner_save_screen,
         ),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 23),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 0),
             child: Center(
               child: Container(
                   alignment: Alignment.topCenter,

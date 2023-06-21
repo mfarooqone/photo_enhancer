@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 // ignore: depend_on_referenced_packages
 import 'package:image/image.dart' as imagelib;
 import 'package:image_enhancer/save_screen/save_screen.dart';
@@ -178,6 +179,7 @@ class _PhotoFilterSelectorState extends State<PhotoFilterSelector> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   BannerAdWidget(
+                    adSize: AdSize.fullBanner,
                     helperValue: SessionController.admob_banner_filter_screen,
                   ),
                   Expanded(

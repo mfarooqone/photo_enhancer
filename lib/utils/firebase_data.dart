@@ -189,9 +189,9 @@ class FirebaseData {
           SessionController.fb_reward = result.data()["fb_reward"];
           SessionController.fb_native_ad = result.data()["fb_native_ad"];
 
-          log("***********************************");
-          log(result.data().toString());
-          log("***********************************");
+          // log("***********************************");
+          // log(result.data().toString());
+          // log("***********************************");
         }
       });
     } catch (e) {

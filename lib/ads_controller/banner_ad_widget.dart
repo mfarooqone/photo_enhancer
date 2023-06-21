@@ -5,7 +5,10 @@ import '../utils/session_controller.dart';
 
 class BannerAdWidget extends StatefulWidget {
   final bool helperValue;
-  const BannerAdWidget({Key? key, required this.helperValue}) : super(key: key);
+  final AdSize adSize;
+  const BannerAdWidget(
+      {Key? key, required this.helperValue, required this.adSize})
+      : super(key: key);
   @override
   State<BannerAdWidget> createState() => _BannerAdWidgetState();
 }
@@ -25,7 +28,7 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
       bannerAd = BannerAd(
         adUnitId: SessionController.admob_banner_ad_id,
         request: const AdRequest(),
-        size: AdSize.fullBanner,
+        size: widget.adSize,
         listener: BannerAdListener(
           onAdLoaded: (_) {
             setState(() {
@@ -66,8 +69,8 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
               width: 2,
             ),
           ),
-          height: 60.0,
-          width: MediaQuery.of(context).size.width,
+          height: bannerAd?.size.height.toDouble(),
+          width: bannerAd?.size.width.toDouble(),
           child: Center(
             child: Text(
               "Loading Ad...",
@@ -85,8 +88,8 @@ class _BannerAdWidgetState extends State<BannerAdWidget> {
     return Column(
       children: [
         SizedBox(
-            height: 60,
-            width: double.infinity,
+            height: bannerAd?.size.height.toDouble(),
+            width: bannerAd?.size.width.toDouble(),
             child:
                 // widget.helperValue
                 //     ?
