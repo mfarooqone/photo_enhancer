@@ -42,6 +42,9 @@ class FirebaseData {
           SessionController.admob_banner_filter_screen =
               result.data()["admob_banner_filter_screen"];
 
+          SessionController.admob_banner_privacy_screen =
+              result.data()["admob_banner_privacy_screen"];
+
           SessionController.admob_interstetial_splash_screen =
               result.data()["admob_interstetial_splash_screen"];
 

@@ -7,6 +7,7 @@ class SessionController {
   static String open_ad_id = "";
   static bool admob_banner_save_screen = false;
   static bool admob_banner_filter_screen = false;
+  static bool admob_banner_privacy_screen = false;
   static bool admob_interstetial_splash_screen = false;
   static bool admob_interstetial_privacy_screen = false;
   static bool admob_interstetial_home_screen = false;

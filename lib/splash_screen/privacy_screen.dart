@@ -62,7 +62,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
             children: [
               BannerAdWidget(
                 adSize: AdSize.mediumRectangle,
-                helperValue: true,
+                helperValue: SessionController.admob_banner_privacy_screen,
               ),
               Image.asset(
                 "assets/privacy.png",
