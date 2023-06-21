@@ -195,24 +195,73 @@ class _ListViewDesignState extends State<ListViewDesign> {
         var image = imagelib.decodeImage(bytes);
         image = imagelib.copyResize(image!, width: 600);
 
-        LoadAdClass().interstetialAd(
-          SessionController.admob_interstetial_home_screen,
-          SessionController.applovin_interstetial_home_screen,
-          SessionController.fb_interstetial_home_screen,
-        );
+        // LoadAdClass().interstetialAd(
+        //   SessionController.admob_interstetial_home_screen,
+        //   SessionController.applovin_interstetial_home_screen,
+        //   SessionController.fb_interstetial_home_screen,
+        // );
 
-        Get.to(
-          () => PhotoFilterSelector(
-            title: Text(
-              "Select Filter",
-              style: TextStyle(color: AppColors.blackColor),
-            ),
-            image: image!,
-            filters: presetFiltersList,
-            filename: fileName!,
-            loader: const SpinKitSpinningLines(color: Colors.black),
-            fit: BoxFit.contain,
-            userImage: userImage,
+        Get.defaultDialog(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          radius: 20,
+          title: "To get it free?",
+          content: Column(
+            children: [
+              Text(
+                "Watch a video Ad",
+                style: AppTextStyle.black14,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GradientContainerDesign(
+                    height: 40,
+                    width: 120,
+                    title: "Cancel",
+                    onPressed: () {
+                      Get.back();
+                    },
+                    showTrailingIcon: false,
+                    showLeadingWidget: true,
+                  ),
+                  GradientContainerDesign(
+                    height: 40,
+                    width: 120,
+                    title: "Ok",
+                    onPressed: () async {
+                      LoadAdClass()
+                          .rewardAd(
+                            SessionController.admob_reward,
+                            SessionController.applovin_reward,
+                            SessionController.fb_reward,
+                          )
+                          .then(
+                            (value) => Get.to(
+                              () => PhotoFilterSelector(
+                                title: Text(
+                                  "Select Filter",
+                                  style: TextStyle(color: AppColors.blackColor),
+                                ),
+                                image: image!,
+                                filters: presetFiltersList,
+                                filename: fileName!,
+                                loader: const SpinKitSpinningLines(
+                                    color: Colors.black),
+                                fit: BoxFit.contain,
+                                userImage: userImage,
+                              ),
+                            ),
+                          );
+                    },
+                    showTrailingIcon: false,
+                    showLeadingWidget: false,
+                  ),
+                ],
+              ),
+            ],
           ),
         );
       }
@@ -220,16 +269,67 @@ class _ListViewDesignState extends State<ListViewDesign> {
       /*                                index ==== 2                                */
       /* -------------------------------------------------------------------------- */
       else if (index == 2) {
-        LoadAdClass().interstetialAd(
-          SessionController.admob_interstetial_home_screen,
-          SessionController.applovin_interstetial_home_screen,
-          SessionController.fb_interstetial_home_screen,
+        // LoadAdClass().interstetialAd(
+        //   SessionController.admob_interstetial_home_screen,
+        //   SessionController.applovin_interstetial_home_screen,
+        //   SessionController.fb_interstetial_home_screen,
+        // );
+
+        Get.defaultDialog(
+          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+          radius: 20,
+          title: "To get it free?",
+          content: Column(
+            children: [
+              Text(
+                "Watch a video Ad",
+                style: AppTextStyle.black14,
+              ),
+              const SizedBox(
+                height: 20,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                children: [
+                  GradientContainerDesign(
+                    height: 40,
+                    width: 120,
+                    title: "Cancel",
+                    onPressed: () {
+                      Get.back();
+                    },
+                    showTrailingIcon: false,
+                    showLeadingWidget: true,
+                  ),
+                  GradientContainerDesign(
+                    height: 40,
+                    width: 120,
+                    title: "Ok",
+                    onPressed: () async {
+                      LoadAdClass()
+                          .rewardAd(
+                            SessionController.admob_reward,
+                            SessionController.applovin_reward,
+                            SessionController.fb_reward,
+                          )
+                          .then(
+                            (value) => Get.to(
+                              () => TextEditorScreen(
+                                buttonText: "Text Style",
+                                userImage: userImage,
+                                index: index,
+                              ),
+                            ),
+                          );
+                    },
+                    showTrailingIcon: false,
+                    showLeadingWidget: false,
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
-        Get.to(() => TextEditorScreen(
-              buttonText: "Text Style",
-              userImage: userImage,
-              index: index,
-            ));
       }
       /* -------------------------------------------------------------------------- */
       /*                                index ==== 3                                */

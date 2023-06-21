@@ -107,7 +107,7 @@ class _SaveScreenState extends State<SaveScreen> {
               padding: const EdgeInsets.only(right: 15),
               child: InkWell(
                 onTap: () {
-                  Share.shareFiles([(tempImagePath!.path)],
+                  Share.shareXFiles([XFile(tempImagePath!.path)],
                       text: 'Great picture');
                 },
                 child: Icon(
@@ -307,25 +307,78 @@ class _SaveScreenState extends State<SaveScreen> {
                           var image = imagelib.decodeImage(bytes);
                           image = imagelib.copyResize(image!, width: 600);
 
-                          LoadAdClass().interstetialAd(
-                            SessionController.admob_interstetial_save_screen,
-                            SessionController.applovin_interstetial_save_screen,
-                            SessionController.fb_banner_save_screen,
-                          );
+                          // LoadAdClass().interstetialAd(
+                          //   SessionController.admob_interstetial_save_screen,
+                          //   SessionController.applovin_interstetial_save_screen,
+                          //   SessionController.fb_banner_save_screen,
+                          // );
 
-                          Get.to(
-                            () => PhotoFilterSelector(
-                              title: Text(
-                                "Select Filter",
-                                style: TextStyle(color: AppColors.blackColor),
-                              ),
-                              image: image!,
-                              filters: presetFiltersList,
-                              filename: fileName!,
-                              loader: const SpinKitSpinningLines(
-                                  color: Colors.black),
-                              fit: BoxFit.contain,
-                              userImage: widget.userImage!,
+                          Get.defaultDialog(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 10),
+                            radius: 20,
+                            title: "To get it free?",
+                            content: Column(
+                              children: [
+                                Text(
+                                  "Watch a video Ad",
+                                  style: AppTextStyle.black14,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Cancel",
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: true,
+                                    ),
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Ok",
+                                      onPressed: () async {
+                                        LoadAdClass()
+                                            .rewardAd(
+                                              SessionController.admob_reward,
+                                              SessionController.applovin_reward,
+                                              SessionController.fb_reward,
+                                            )
+                                            .then(
+                                              (value) => Get.to(
+                                                () => PhotoFilterSelector(
+                                                  title: Text(
+                                                    "Select Filter",
+                                                    style: TextStyle(
+                                                        color: AppColors
+                                                            .blackColor),
+                                                  ),
+                                                  image: image!,
+                                                  filters: presetFiltersList,
+                                                  filename: fileName!,
+                                                  loader:
+                                                      const SpinKitSpinningLines(
+                                                          color: Colors.black),
+                                                  fit: BoxFit.contain,
+                                                  userImage: widget.userImage!,
+                                                ),
+                                              ),
+                                            );
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: false,
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           );
                         },
@@ -338,17 +391,69 @@ class _SaveScreenState extends State<SaveScreen> {
                       padding: const EdgeInsets.only(left: 16),
                       child: InkWell(
                         onTap: () {
-                          LoadAdClass().interstetialAd(
-                            SessionController.admob_interstetial_save_screen,
-                            SessionController.applovin_interstetial_save_screen,
-                            SessionController.fb_banner_save_screen,
-                          );
+                          // LoadAdClass().interstetialAd(
+                          //   SessionController.admob_interstetial_save_screen,
+                          //   SessionController.applovin_interstetial_save_screen,
+                          //   SessionController.fb_banner_save_screen,
+                          // );
 
-                          Get.to(() => TextEditorScreen(
-                                buttonText: "Text Style",
-                                userImage: widget.userImage,
-                                index: 2,
-                              ));
+                          Get.defaultDialog(
+                            contentPadding:
+                                const EdgeInsets.symmetric(horizontal: 10),
+                            radius: 20,
+                            title: "To get it free?",
+                            content: Column(
+                              children: [
+                                Text(
+                                  "Watch a video Ad",
+                                  style: AppTextStyle.black14,
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Cancel",
+                                      onPressed: () {
+                                        Get.back();
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: true,
+                                    ),
+                                    GradientContainerDesign(
+                                      height: 40,
+                                      width: 120,
+                                      title: "Ok",
+                                      onPressed: () async {
+                                        LoadAdClass()
+                                            .rewardAd(
+                                              SessionController.admob_reward,
+                                              SessionController.applovin_reward,
+                                              SessionController.fb_reward,
+                                            )
+                                            .then(
+                                              (value) => Get.to(
+                                                () => TextEditorScreen(
+                                                  buttonText: "Text Style",
+                                                  userImage: widget.userImage,
+                                                  index: 2,
+                                                ),
+                                              ),
+                                            );
+                                      },
+                                      showTrailingIcon: false,
+                                      showLeadingWidget: false,
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          );
                         },
                         child: iconList[2],
                       ),
