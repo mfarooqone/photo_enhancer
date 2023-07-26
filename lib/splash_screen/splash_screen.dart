@@ -55,6 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Get.put(InternetConnectionController(), permanent: true);
+
     checkPurchase();
     super.initState();
   }

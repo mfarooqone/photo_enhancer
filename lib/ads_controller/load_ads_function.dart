@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:fgx_applovin/flutter_applovin_max.dart';
 import 'package:get/get.dart';
 
 import 'ads_controller.dart';
@@ -16,12 +13,7 @@ class LoadAdClass {
       }
     } else if (fbHelper) {
       // ads.showFacebookInterstitialAd();
-    } else if (applovinHelper) {
-      FlutterApplovinMax.showInterstitialVideo((AppLovinAdListener? event) {
-        print(event);
-        ads.listener(event);
-      });
-    }
+    } else if (applovinHelper) {}
   }
 
   Future<void> rewardAd(
@@ -33,13 +25,6 @@ class LoadAdClass {
       }
     } else if (fbHelper) {
       // ads.showFacebookRewardedAd();
-    } else if (applovinHelper) {
-      log(applovinHelper.toString());
-      FlutterApplovinMax.showRewardVideo((AppLovinAdListener? event) {
-        print(event);
-        log(event.toString());
-        ads.listener(event);
-      });
-    }
+    } else if (applovinHelper) {}
   }
 }

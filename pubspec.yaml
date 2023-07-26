@@ -48,10 +48,13 @@ dependencies:
   url_launcher: ^6.1.3
   google_mobile_ads: ^3.0.0
   cloud_firestore: ^4.8.1
-  firebase_core: ^2.14.0
   shared_preferences: ^2.0.15
   simple_gradient_text: ^1.2.3
-  fgx_applovin: ^1.0.1
+  flutter_local_notifications: ^15.1.0+1
+  flutter_tts: ^3.7.0
+  firebase_messaging: ^14.6.5
+  firebase_core: ^2.15.0
+  permission_handler: ^10.4.3
   # facebook_audience_network: ^1.0.1
 
 

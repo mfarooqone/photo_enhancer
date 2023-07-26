@@ -33,8 +33,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   bool isBotomSheet = false;
 
+  // void getToken() async {
+  //   final token = await NotificationSetup().getToken();
+  //   log(token ?? "");
+  // }
+
   @override
   Widget build(BuildContext context) {
+    // getToken();
     return WillPopScope(
       onWillPop: _onWillPop,
       child: GestureDetector(

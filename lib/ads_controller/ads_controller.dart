@@ -1,6 +1,3 @@
-import 'dart:developer';
-
-import 'package:fgx_applovin/flutter_applovin_max.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_enhancer/utils/session_controller.dart';
@@ -133,29 +130,6 @@ class AdsController extends GetxController {
   //   else
   //     log("Rewarded Ad not yet loaded!");
   // }
-
-  /* -------------------------------------------------------------------------- */
-  /*                           applovin ads controller                          */
-  /* -------------------------------------------------------------------------- */
-
-  listener(AppLovinAdListener? event) {
-    print(event);
-    // if (event == AppLovinAdListener.onUserRewarded) {
-    //   print('👍get reward');
-    // }
-
-    if (event == AppLovinAdListener.onUserRewarded) {
-      log('👍get rewarded adddd');
-    }
-    if (event == AppLovinAdListener.onAdDisplayFailed) {
-      FlutterApplovinMax.showInterstitialVideo((AppLovinAdListener? event) {
-        if (event == AppLovinAdListener.onUserRewarded) {
-          print('👍get showInterstitialVideo');
-        }
-      });
-    }
-    update();
-  }
 
   @override
   void dispose() {

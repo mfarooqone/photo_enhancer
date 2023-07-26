@@ -1,27 +1,25 @@
-import 'package:fgx_applovin/flutter_applovin_max.dart';
+import 'dart:developer';
+
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_enhancer/splash_screen/splash_screen.dart';
 import 'package:image_enhancer/utils/app_colors.dart';
 import 'package:image_enhancer/utils/app_textstyle.dart';
-import 'package:image_enhancer/utils/session_controller.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import 'app_bindings.dart';
+import 'notification_setup/notification_setup.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  MobileAds.instance.initialize();
-
   await Firebase.initializeApp();
-  WidgetsFlutterBinding.ensureInitialized();
-  FlutterApplovinMax.initSDK();
-
-  FlutterApplovinMax.initRewardAd(SessionController.applovin_rewarded_ad_id);
-  FlutterApplovinMax.initInterstitialAd(
-      SessionController.applovin_interstetial_ad_id);
+  await NotificationService().initNotification();
+  await MobileAds.instance.initialize();
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   // FacebookAudienceNetwork.init(
   //   testingId: "944eede3-cd5c-4fee-84cd-9bca73588acf",
@@ -40,11 +38,29 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   void initState() {
+    NotificationService().initNotification();
+    requestPermission();
     super.initState();
+  }
+
+  void requestPermission() async {
+    PermissionStatus status = await Permission.notification.request();
+    if (status.isGranted) {
+      // notification permission is granted
+    } else {
+      Permission.notification;
+      // Open settings to enable notification permission
+    }
+  }
+
+  void getToken() async {
+    final token = await FirebaseMessaging.instance.getToken();
+    log(token ?? "");
   }
 
   @override
   Widget build(BuildContext context) {
+    getToken();
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Photo Enhance',
