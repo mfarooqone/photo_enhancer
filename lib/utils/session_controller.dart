@@ -21,10 +21,12 @@ class SessionController {
   static String vungle_app_id = "64c136d3beec0a16719b8cc3";
   static String vungle_interstitial_id = "";
   static String vungle_reward_id = "";
+  static String vungle_banner_id = "";
 
   ///
   static bool vungle_reward = false;
   static bool vungle_interstitial = false;
+  static bool vungle_banner = false;
 
   /* -------------------------------------------------------------------------- */
   /*                                  facebook                                  */

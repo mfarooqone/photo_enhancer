@@ -86,14 +86,19 @@ class FirebaseData {
           SessionController.vungle_interstitial_id =
               result.data()["vungle_interstitial_id"];
 
+          SessionController.vungle_banner_id =
+              result.data()["vungle_banner_id"];
+
           SessionController.vungle_reward = result.data()["vungle_reward"];
 
           SessionController.vungle_interstitial =
               result.data()["vungle_interstitial"];
 
-          // log("***********************************");
-          // log(result.data().toString());
-          // log("***********************************");
+          SessionController.vungle_banner = result.data()["vungle_banner"];
+
+          log("***********************************");
+          log(result.data().toString());
+          log("***********************************");
         }
       });
     } catch (e) {
