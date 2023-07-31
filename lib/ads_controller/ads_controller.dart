@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:image_enhancer/utils/session_controller.dart';
+import 'package:vungle/vungle.dart';
 
 enum AdLoadState { notLoaded, loading, loaded }
 
@@ -66,6 +67,59 @@ class AdsController extends GetxController {
       ),
     );
     update();
+  }
+
+  ///
+  ///
+  ///
+  ///
+  RxBool sdkInit = false.obs;
+  RxBool adLoaded = false.obs;
+
+  void vungleAdsInit() {
+    Vungle.onInitilizeListener = () {
+      sdkInit.value = true;
+    };
+    Vungle.onAdPlayableListener = (placementId, playable) {
+      if (playable) {
+        adLoaded.value = true;
+      }
+    };
+    Vungle.onAdStartedListener = (placementId) {
+      print('ad started');
+    };
+    Vungle.onAdFinishedListener = (placementId, isCTAClicked, completedView) {
+      print(
+          'ad finished, isCTAClicked:($isCTAClicked), completedView:($completedView)');
+      adLoaded.value = false;
+    };
+  }
+
+  ///
+  ///
+  ///
+  void vungleInit() {
+    Vungle.init(SessionController.vungle_app_id);
+  }
+
+  void onLoadAd({required String placementId}) {
+    Vungle.loadAd(placementId);
+  }
+
+  void vungleInterstitialAd() async {
+    if (await Vungle.isAdPlayable(SessionController.vungle_interstitial_id)) {
+      Vungle.playAd(SessionController.vungle_interstitial_id);
+    } else {
+      print('The ad is not ready to play');
+    }
+  }
+
+  void vungleRewardAd() async {
+    if (await Vungle.isAdPlayable(SessionController.vungle_reward_id)) {
+      Vungle.playAd(SessionController.vungle_reward_id);
+    } else {
+      print('The ad is not ready to play');
+    }
   }
 
   /* -------------------------------------------------------------------------- */

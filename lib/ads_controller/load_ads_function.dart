@@ -5,7 +5,7 @@ import 'ads_controller.dart';
 class LoadAdClass {
   final AdsController ads = Get.find();
   Future<void> interstetialAd(
-      bool admobHelper, bool applovinHelper, bool fbHelper) async {
+      bool admobHelper, bool vungleHelper, bool fbHelper) async {
     if (admobHelper) {
       ads.loadInterstitialAd();
       if (ads.isInterstitialAdReady.value) {
@@ -13,11 +13,13 @@ class LoadAdClass {
       }
     } else if (fbHelper) {
       // ads.showFacebookInterstitialAd();
-    } else if (applovinHelper) {}
+    } else if (vungleHelper) {
+      ads.vungleInterstitialAd();
+    }
   }
 
   Future<void> rewardAd(
-      bool admobHelper, bool applovinHelper, bool fbHelper) async {
+      bool admobHelper, bool vungleHelper, bool fbHelper) async {
     if (admobHelper) {
       ads.loadRewardedAd();
       if (ads.isRewardedAdReady.value) {
@@ -25,6 +27,8 @@ class LoadAdClass {
       }
     } else if (fbHelper) {
       // ads.showFacebookRewardedAd();
-    } else if (applovinHelper) {}
+    } else if (vungleHelper) {
+      ads.vungleRewardAd();
+    }
   }
 }

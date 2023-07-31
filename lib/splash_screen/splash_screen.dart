@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/splash_screen/privacy_screen.dart';
 import 'package:image_enhancer/widgets/no_internet_controller.dart';
-import 'package:vungle/vungle.dart';
 
 import '../ads_controller/load_ads_function.dart';
 import '../home_screen/home_screen.dart';
@@ -42,12 +41,11 @@ class _SplashScreenState extends State<SplashScreen> {
 
         if (SessionController.vungle_interstitial ||
             SessionController.vungle_reward) {
-          vungleInit();
-          if (SessionController.vungle_interstitial) {
-            onLoadAd(placementId: SessionController.vungle_interstitial_id);
-          } else {
-            onLoadAd(placementId: SessionController.vungle_reward_id);
-          }
+          ads.vungleAdsInit();
+          ads.onLoadAd(
+              placementId: SessionController.vungle_interstitial
+                  ? SessionController.vungle_interstitial_id
+                  : SessionController.vungle_reward_id);
         }
 
         setState(() {
@@ -63,57 +61,12 @@ class _SplashScreenState extends State<SplashScreen> {
     return (await Get.to(() => ExitScreen())) ?? false;
   }
 
-  bool sdkInit = false;
-  bool adLoaded = false;
-
   @override
   void initState() {
     Get.put(InternetConnectionController(), permanent: true);
 
     checkPurchase();
     super.initState();
-
-    Vungle.onInitilizeListener = () {
-      setState(() {
-        sdkInit = true;
-      });
-    };
-
-    Vungle.onAdPlayableListener = (placementId, playable) {
-      if (playable) {
-        setState(() {
-          adLoaded = true;
-        });
-      }
-    };
-
-    Vungle.onAdStartedListener = (placementId) {
-      print('ad started');
-    };
-
-    Vungle.onAdFinishedListener = (placementId, isCTAClicked, completedView) {
-      print(
-          'ad finished, isCTAClicked:($isCTAClicked), completedView:($completedView)');
-      setState(() {
-        adLoaded = false;
-      });
-    };
-  }
-
-  void vungleInit() {
-    Vungle.init(SessionController.vungle_app_id);
-  }
-
-  void onLoadAd({required String placementId}) {
-    Vungle.loadAd(placementId);
-  }
-
-  void onPlayAd({required String placementId}) async {
-    if (await Vungle.isAdPlayable(placementId)) {
-      Vungle.playAd(placementId);
-    } else {
-      print('The ad is not ready to play');
-    }
   }
 
   @override
@@ -160,21 +113,6 @@ class _SplashScreenState extends State<SplashScreen> {
                   const SizedBox(
                     height: 100,
                   ),
-                  ElevatedButton(
-                      child: SessionController.vungle_interstitial
-                          ? Text(
-                              'Play Ad - ${SessionController.vungle_interstitial_id}')
-                          : Text(
-                              'Play Ad - ${SessionController.vungle_reward_id}'),
-                      onPressed: () {
-                        SessionController.vungle_interstitial
-                            ? onPlayAd(
-                                placementId:
-                                    SessionController.vungle_interstitial_id)
-                            : onPlayAd(
-                                placementId:
-                                    SessionController.vungle_reward_id);
-                      }),
                 ],
               ),
             ),
