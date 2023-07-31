@@ -102,8 +102,24 @@ class AdsController extends GetxController {
     Vungle.init(SessionController.vungle_app_id);
   }
 
-  void onLoadAd({required String placementId}) {
-    Vungle.loadAd(placementId);
+  void vungleInterstitialAdLoad() {
+    Vungle.loadAd(SessionController.vungle_interstitial_id);
+  }
+
+  void vungleRewardLoad() {
+    Vungle.loadAd(SessionController.vungle_reward_id);
+  }
+
+  void vungleBannerAdLoad() {
+    Vungle.loadAd(SessionController.vungle_banner_id);
+  }
+
+  void vungleRewardedAd() async {
+    if (await Vungle.isAdPlayable(SessionController.vungle_reward_id)) {
+      Vungle.playAd(SessionController.vungle_reward_id);
+    } else {
+      print(' vungle_reward_id The ad is not ready to play');
+    }
   }
 
   void vungleInterstitialAd() async {

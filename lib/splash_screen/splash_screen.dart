@@ -39,13 +39,20 @@ class _SplashScreenState extends State<SplashScreen> {
         // ads.loadFacebookInterstitialAd();
         // ads.loadFacebookRewardedVideoAd();
 
-        if (SessionController.vungle_interstitial ||
+        if (SessionController.vungle_banner ||
+            SessionController.vungle_interstitial ||
             SessionController.vungle_reward) {
           ads.vungleAdsInit();
-          ads.onLoadAd(
-              placementId: SessionController.vungle_interstitial
-                  ? SessionController.vungle_interstitial_id
-                  : SessionController.vungle_reward_id);
+
+          if (SessionController.vungle_banner) {
+            ads.vungleBannerAdLoad();
+          }
+          if (SessionController.vungle_interstitial) {
+            ads.vungleInterstitialAdLoad();
+          }
+          if (SessionController.vungle_reward) {
+            ads.vungleRewardLoad();
+          }
         }
 
         setState(() {
