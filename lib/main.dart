@@ -25,6 +25,10 @@ void main() async {
   //   testingId: "944eede3-cd5c-4fee-84cd-9bca73588acf",
   //   iOSAdvertiserTrackingEnabled: true,
   // );
+  ///
+  ///
+  ///
+
   runApp(const MyApp());
 }
 
@@ -36,6 +40,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  ///
+  ///
+  ///
+
   @override
   void initState() {
     NotificationService().initNotification();

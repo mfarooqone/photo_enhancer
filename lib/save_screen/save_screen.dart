@@ -276,7 +276,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                         LoadAdClass()
                                             .rewardAd(
                                               SessionController.admob_reward,
-                                              SessionController.applovin_reward,
+                                              SessionController.vungle_reward,
                                               SessionController.fb_reward,
                                             )
                                             .then((value) => Get.to(() =>
@@ -351,7 +351,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                         LoadAdClass()
                                             .rewardAd(
                                               SessionController.admob_reward,
-                                              SessionController.applovin_reward,
+                                              SessionController.vungle_reward,
                                               SessionController.fb_reward,
                                             )
                                             .then(
@@ -435,7 +435,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                         LoadAdClass()
                                             .rewardAd(
                                               SessionController.admob_reward,
-                                              SessionController.applovin_reward,
+                                              SessionController.vungle_reward,
                                               SessionController.fb_reward,
                                             )
                                             .then(
@@ -502,7 +502,7 @@ class _SaveScreenState extends State<SaveScreen> {
                                         LoadAdClass()
                                             .rewardAd(
                                               SessionController.admob_reward,
-                                              SessionController.applovin_reward,
+                                              SessionController.vungle_reward,
                                               SessionController.fb_reward,
                                             )
                                             .then(

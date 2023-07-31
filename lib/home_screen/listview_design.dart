@@ -166,7 +166,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
                       LoadAdClass()
                           .rewardAd(
                             SessionController.admob_reward,
-                            SessionController.applovin_reward,
+                            SessionController.vungle_reward,
                             SessionController.fb_reward,
                           )
                           .then(
@@ -235,7 +235,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
                       LoadAdClass()
                           .rewardAd(
                             SessionController.admob_reward,
-                            SessionController.applovin_reward,
+                            SessionController.vungle_reward,
                             SessionController.fb_reward,
                           )
                           .then(
@@ -309,7 +309,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
                       LoadAdClass()
                           .rewardAd(
                             SessionController.admob_reward,
-                            SessionController.applovin_reward,
+                            SessionController.vungle_reward,
                             SessionController.fb_reward,
                           )
                           .then(
@@ -372,7 +372,7 @@ class _ListViewDesignState extends State<ListViewDesign> {
                       LoadAdClass()
                           .rewardAd(
                             SessionController.admob_reward,
-                            SessionController.applovin_reward,
+                            SessionController.vungle_reward,
                             SessionController.fb_reward,
                           )
                           .then((value) => Get.to(

@@ -76,58 +76,20 @@ class FirebaseData {
 /* -------------------------------------------------------------------------- */
 
     try {
-      await firestoreInstance
-          .collection("applovin")
-          .get()
-          .then((querySnapshot) {
+      await firestoreInstance.collection("vungle").get().then((querySnapshot) {
         for (var result in querySnapshot.docs) {
-          /* -------------------------------------------------------------------------- */
-          /*                                   ads ids                                  */
-          /* -------------------------------------------------------------------------- */
+          SessionController.vungle_app_id = result.data()["vungle_app_id"];
 
-          SessionController.applovin_banner_ad_id =
-              result.data()["applovin_banner_ad_id"];
+          SessionController.vungle_reward_id =
+              result.data()["vungle_reward_id"];
 
-          SessionController.applovin_interstetial_ad_id =
-              result.data()["applovin_interstetial_ad_id"];
+          SessionController.vungle_interstitial_id =
+              result.data()["vungle_interstitial_id"];
 
-          SessionController.applovin_rewarded_ad_id =
-              result.data()["applovin_rewarded_ad_id"];
-          SessionController.applovin_native_ad_id =
-              result.data()["applovin_native_ad_id"];
+          SessionController.vungle_reward = result.data()["vungle_reward"];
 
-          /* -------------------------------------------------------------------------- */
-          /*                               stop applovin ads                               */
-          /* -------------------------------------------------------------------------- */
-
-          /* -------------------------------------------------------------------------- */
-          /*                                 banner ads                                 */
-          /* -------------------------------------------------------------------------- */
-
-          SessionController.applovin_banner_save_screen =
-              result.data()["applovin_banner_save_screen"];
-
-          SessionController.applovin_banner_filter_screen =
-              result.data()["applovin_banner_filter_screen"];
-
-          SessionController.applovin_interstetial_splash_screen =
-              result.data()["applovin_interstetial_splash_screen"];
-
-          SessionController.applovin_interstetial_privacy_screen =
-              result.data()["applovin_interstetial_privacy_screen"];
-
-          SessionController.applovin_interstetial_save_screen =
-              result.data()["applovin_interstetial_save_screen"];
-
-          SessionController.applovin_interstetial_home_screen =
-              result.data()["applovin_interstetial_home_screen"];
-
-          SessionController.applovin_interstetial_select_screen =
-              result.data()["applovin_interstetial_select_screen"];
-
-          SessionController.applovin_reward = result.data()["applovin_reward"];
-          SessionController.applovin_native_ad =
-              result.data()["applovin_native_ad"];
+          SessionController.vungle_interstitial =
+              result.data()["vungle_interstitial"];
 
           // log("***********************************");
           // log(result.data().toString());

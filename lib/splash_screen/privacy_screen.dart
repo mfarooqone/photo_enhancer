@@ -110,7 +110,7 @@ class _PrivacyScreenState extends State<PrivacyScreen> {
                     await prefs.setBool('isPrivacyScreen', true);
                     LoadAdClass().interstetialAd(
                       SessionController.admob_interstetial_privacy_screen,
-                      SessionController.applovin_interstetial_privacy_screen,
+                      SessionController.vungle_reward,
                       SessionController.fb_interstetial_privacy_screen,
                     );
                     Get.to(() => HomeScreen());

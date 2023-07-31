@@ -941,6 +941,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.3.3"
+  vungle:
+    dependency: "direct main"
+    description:
+      name: vungle
+      sha256: "2bc6dc20182d99dbfddf52522927c4eafe1a7e18f07bdb4aa946ac0b5ab9c938"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.6.12"
   webview_flutter:
     dependency: transitive
     description:

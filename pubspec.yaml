@@ -55,6 +55,7 @@ dependencies:
   firebase_messaging: ^14.6.5
   firebase_core: ^2.15.0
   permission_handler: ^10.4.3
+  vungle: ^0.6.12
   # facebook_audience_network: ^1.0.1
 
 
