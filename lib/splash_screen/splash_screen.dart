@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:image_enhancer/ads_controller/ads_controller.dart';
 import 'package:image_enhancer/splash_screen/privacy_screen.dart';
 import 'package:image_enhancer/widgets/no_internet_controller.dart';
+import 'package:vungle/vungle.dart';
 
 import '../ads_controller/load_ads_function.dart';
 import '../home_screen/home_screen.dart';
@@ -30,31 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
   bool splashLoading = true;
   void checkPurchase() async {
     FirebaseData().getFirebaseData().then((value) async {
-      Future.delayed(Duration(seconds: 3), () {
-        // if (SessionController.admob_interstetial_splash_screen) {
-        //   ads.loadInterstitialAd();
-        // }
-        // ads.initializeServices();
-
-        // ads.loadFacebookInterstitialAd();
-        // ads.loadFacebookRewardedVideoAd();
-
-        if (SessionController.vungle_banner ||
-            SessionController.vungle_interstitial ||
-            SessionController.vungle_reward) {
-          ads.vungleAdsInit();
-
-          if (SessionController.vungle_banner) {
-            ads.vungleBannerAdLoad();
-          }
-          if (SessionController.vungle_interstitial) {
-            ads.vungleInterstitialAdLoad();
-          }
-          if (SessionController.vungle_reward) {
-            ads.vungleRewardLoad();
-          }
-        }
-
+      Future.delayed(Duration(seconds: 3), () async {
         setState(() {
           splashLoading = false;
         });
@@ -71,9 +48,46 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Get.put(InternetConnectionController(), permanent: true);
-
     checkPurchase();
+    ads.vungleInit();
+    vungleInitSettings();
     super.initState();
+  }
+
+  bool sdkInit = false;
+  bool adLoaded = false;
+  String sdkVersion = "";
+
+  void vungleInitSettings() {
+    Vungle.getSDKVersion().then((value) => setState(() {
+          sdkVersion = value;
+        }));
+
+    Vungle.onInitilizeListener = () {
+      setState(() {
+        sdkInit = true;
+      });
+    };
+
+    Vungle.onAdPlayableListener = (placementId, playable) {
+      if (playable) {
+        setState(() {
+          adLoaded = true;
+        });
+      }
+    };
+
+    Vungle.onAdStartedListener = (placementId) {
+      print('ad started');
+    };
+
+    Vungle.onAdFinishedListener = (placementId, isCTAClicked, completedView) {
+      print(
+          'ad finished, isCTAClicked:($isCTAClicked), completedView:($completedView)');
+      setState(() {
+        adLoaded = false;
+      });
+    };
   }
 
   @override

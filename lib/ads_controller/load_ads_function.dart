@@ -28,7 +28,7 @@ class LoadAdClass {
     } else if (fbHelper) {
       // ads.showFacebookRewardedAd();
     } else if (vungleHelper) {
-      ads.vungleRewardAd();
+      ads.vungleRewardLoad();
     }
   }
 }

@@ -73,53 +73,47 @@ class AdsController extends GetxController {
   ///
   ///
   ///
-  RxBool sdkInit = false.obs;
-  RxBool adLoaded = false.obs;
+  // RxBool sdkInit = false.obs;
+  // RxBool adLoaded = false.obs;
+  // RxString sdkVersion = "".obs;
 
-  void vungleAdsInit() {
-    Vungle.onInitilizeListener = () {
-      sdkInit.value = true;
-    };
-    Vungle.onAdPlayableListener = (placementId, playable) {
-      if (playable) {
-        adLoaded.value = true;
-      }
-    };
-    Vungle.onAdStartedListener = (placementId) {
-      print('ad started');
-    };
-    Vungle.onAdFinishedListener = (placementId, isCTAClicked, completedView) {
-      print(
-          'ad finished, isCTAClicked:($isCTAClicked), completedView:($completedView)');
-      adLoaded.value = false;
-    };
-  }
+  // void vungleAdsInit() {
+  //   Vungle.getSDKVersion().then((value) => () {
+  //         sdkVersion.value = value;
+  //       });
+  //   Vungle.onInitilizeListener = () {
+  //     sdkInit.value = true;
+  //   };
+
+  //   Vungle.onAdPlayableListener = (placementId, playable) {
+  //     if (playable) {
+  //       adLoaded.value = true;
+  //     }
+  //   };
+
+  //   Vungle.onAdStartedListener = (placementId) {
+  //     print('ad started');
+  //   };
+
+  //   Vungle.onAdFinishedListener = (placementId, isCTAClicked, completedView) {
+  //     print(
+  //         'ad finished, isCTAClicked:($isCTAClicked), completedView:($completedView)');
+
+  //     adLoaded.value = false;
+  //   };
+  //   update();
+  // }
 
   ///
   ///
   ///
   void vungleInit() {
     Vungle.init(SessionController.vungle_app_id);
+    // vungleAdsInit();
   }
 
   void vungleInterstitialAdLoad() {
     Vungle.loadAd(SessionController.vungle_interstitial_id);
-  }
-
-  void vungleRewardLoad() {
-    Vungle.loadAd(SessionController.vungle_reward_id);
-  }
-
-  void vungleBannerAdLoad() {
-    Vungle.loadAd(SessionController.vungle_banner_id);
-  }
-
-  void vungleBannerdAd() async {
-    if (await Vungle.isAdPlayable(SessionController.vungle_banner_id)) {
-      Vungle.playAd(SessionController.vungle_banner_id);
-    } else {
-      print(' vungle_banner_id The ad is not ready to play');
-    }
   }
 
   void vungleInterstitialAd() async {
@@ -128,6 +122,11 @@ class AdsController extends GetxController {
     } else {
       print('The ad is not ready to play');
     }
+  }
+
+  void vungleRewardLoad() {
+    Vungle.loadAd(SessionController.vungle_reward_id);
+    vungleRewardAd();
   }
 
   void vungleRewardAd() async {
